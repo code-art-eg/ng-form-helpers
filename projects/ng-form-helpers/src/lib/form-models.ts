@@ -6,11 +6,11 @@ import { TypedFormControl } from './typed-form-control';
 import { TypedFormGroup } from './typed-form-group';
 
 export interface FormState<T> {
-    value: T;
+    value: T|null;
     disabled: boolean;
 }
 
-export type ValueOrFormState<T> = FormState<T> | T;
+export type ValueOrFormState<T> = FormState<T> | T | null;
 export type FormArrayState<T> = Array<ValueOrFormState<T>>;
 export type FormGroupState<T extends object> = {
     [P in keyof T]: FormState<T[P]>;

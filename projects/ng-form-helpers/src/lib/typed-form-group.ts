@@ -8,8 +8,9 @@ export class TypedFormGroup<T extends object> extends FormGroup {
     // The following 2 fields are defined in the base class but redefined here to make them strongly typed.
     public readonly value!: T;
     public readonly valueChanges!: Observable<T>;
+    public readonly controls!: FormGroupConfig<T>;
 
-    constructor(public controls: FormGroupConfig<T>,
+    constructor(controls: FormGroupConfig<T>,
                 validatorOrOpts?: TypedValidators<T>,
                 asyncValidator?: TypedAsyncValidators<T>) {
         super(controls,
