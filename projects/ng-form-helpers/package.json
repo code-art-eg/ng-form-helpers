@@ -1,6 +1,6 @@
 {
   "name": "@code-art/ng-form-helpers",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": false,
   "description": "Directives and classes to for Angular 6 to make creating forms easier.",
   "repository": {

@@ -4,7 +4,6 @@ import { TypedFormGroup, TypedFormControl, TypedFormArray } from '@code-art/ng-f
 import { Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-typed-form-example',
   templateUrl: './typed-form-example.component.html',
   styleUrls: ['./typed-form-example.component.scss']
 })
