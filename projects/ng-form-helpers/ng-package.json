@@ -2,6 +2,12 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ng-form-helpers",
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "src/public_api.ts",
+    "umdModuleIds": {
+      "@code-art/angular-globalize": "codeArt.angularGlobalize",
+      "@code-art/rx-helpers": "codeArt.rxHelpers"
+    },
+    "amdId": "@code-art/ng-form-helpers",
+    "umdId": "codeArt.ngFormHelpers"
   }
 }
