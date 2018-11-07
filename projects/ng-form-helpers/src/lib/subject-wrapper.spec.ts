@@ -16,7 +16,7 @@ describe('SubjectWrapper', () => {
             ngOnDestroy: () => {},
         };
         const s = new SubjectWrapper<number>(1, component);
-        let n: number|null = null;
+        let n = null as null | number;
         s.observable
             .pipe(takeUntilDestroyed(component))
             .subscribe((v) => {
@@ -31,13 +31,13 @@ describe('SubjectWrapper', () => {
             ngOnDestroy: () => {},
         };
         const s = new SubjectWrapper<number|undefined>(undefined, component);
-        let n: number|undefined|null = null;
+        let n = null as null | number | undefined;
         s.observable
             .pipe(takeUntilDestroyed(component))
             .subscribe((v) => {
                 n = v;
             });
-        expect(n).toBe(undefined);
+        expect(n).toBeUndefined();
         component.ngOnDestroy();
     });
 
@@ -46,7 +46,7 @@ describe('SubjectWrapper', () => {
             ngOnDestroy: () => {},
         };
         const s = new SubjectWrapper<number>(1, component);
-        let n: number|null = null;
+        let n = null as null | number;
         s.observable
             .pipe(takeUntilDestroyed(component))
             .subscribe((v) => {
@@ -77,7 +77,7 @@ describe('SubjectWrapper', () => {
             ngOnDestroy: () => {},
         };
         const s = new SubjectWrapper<number>(1, component);
-        let n: number|null = null;
+        let n = null as null | number;
         let count = 0;
         s.observable
             .pipe(takeUntilDestroyed(component))
