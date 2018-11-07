@@ -1,0 +1,54 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../node_modules/bootstrap/scss/grid";
+@import "../../../../node_modules/bootstrap/scss/forms";
+@import "../../../../node_modules/bootstrap/scss/buttons";
+@import "../../../../node_modules/bootstrap/scss/utilities";
+
+label {
+    @extend .col-sm-2;
+    @extend .col-md-2;
+    @extend .col-form-label;
+    text-align: right;
+}
+
+.control-container {
+    @extend .col-sm-10;
+    @extend .col-md-10;
+}
+
+.form-group {
+    @extend .row;
+}
+
+.product-form {
+    position: relative;
+    border-bottom: 1px gray solid;
+    @extend .mt-2;
+    div.form-group {
+        width: 80%;
+
+        label {
+            @extend .col-sm-4;
+            @extend .col-md-4;
+            @extend .col-form-label;
+            text-align: right;
+        }
+        
+        .control-container {
+            @extend .col-sm-8;
+            @extend .col-md-8;
+        }
+    }
+    div.button-container {
+        width: 20%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        button {
+            @extend .btn;
+            @extend .btn-danger;
+        }
+    }
+}

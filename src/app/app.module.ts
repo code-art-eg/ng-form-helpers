@@ -3,16 +3,37 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TypedFormExampleComponent } from './components/typed-form-example/typed-form-example.component';
+import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES } from '@code-art/angular-globalize';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import 'globalize/currency';
+import 'globalize/date';
+import 'globalize/number';
+import { loadGlobalizeData } from 'projects/ng-form-helpers/src/test/globalize-data-loader';
+import { NgFormHelpersModule } from '@code-art/ng-form-helpers';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TypedFormExampleComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularGlobalizeModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    NgFormHelpersModule,
   ],
-  providers: [],
+  providers: [{
+      provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'de', 'ar-EG']
+    },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    loadGlobalizeData();
+  }
+}
