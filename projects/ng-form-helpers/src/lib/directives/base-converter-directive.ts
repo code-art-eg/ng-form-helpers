@@ -136,8 +136,9 @@ export abstract class BaseConverterDirective<T>
                     return;
                 }
                 const [, val] = v;
+                let coercedValue: T|undefined|null;
                 if (typeof val === 'string') {
-                    const coercedValue = this.coerceValue(val);
+                    coercedValue = this.coerceValue(val);
                     if (coercedValue !== undefined && coercedValue !== val) {
                         this.value = coercedValue;
                     } else if (this._controlValue !== val) {
@@ -150,7 +151,7 @@ export abstract class BaseConverterDirective<T>
                         this._controlValueAccessor.writeValue('');
                     }
                 } else {
-                    const coercedValue = this.coerceValue(this._controlValue);
+                    coercedValue = this.coerceValue(this._controlValue);
                     if (coercedValue === undefined || !this.valuesAreEqual(coercedValue, val)) {
                         this._controlValue = this.formatValue(val);
                         this._controlValueAccessor.writeValue(this._controlValue);
