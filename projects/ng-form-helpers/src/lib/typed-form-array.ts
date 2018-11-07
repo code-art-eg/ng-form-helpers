@@ -5,7 +5,6 @@ import {
     FormArrayState, FormControlFactory, FormControlType,
     SetValueOptions, TypedAsyncValidators, TypedValidators, ValueOrFormState,
 } from './form-models';
-import { TypedFormControl } from './typed-form-control';
 
 export class TypedFormArray<T> extends FormArray {
     // The following 3 fields are defined in the base class but redefined here to make them strongly typed.
