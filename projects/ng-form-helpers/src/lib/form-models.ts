@@ -30,13 +30,18 @@ export type FormGroupConfig<T> = {
     [P in keyof T]: FormControlType<T[P]>;
 };
 
+export interface ControlType {
+    _control?: undefined;
+}
+
 export type FormControlType<T> =
     T extends number ? TypedFormControl<number> :
     T extends string ? TypedFormControl<string> :
     T extends boolean ? TypedFormControl<boolean> :
     T extends Date ? TypedFormControl<Date> :
-    T extends any[] ? TypedFormControl<T> | TypedFormArray<T[number]> :
-    T extends object ? TypedFormGroup<T> | TypedFormControl<T> :
+    T extends any[] ? TypedFormArray<T[number]> :
+    T extends ControlType ? TypedFormControl<T> :
+    T extends object ? TypedFormGroup<T> :
     never;
 
 export type FormControlFactory<T> = (v?: ValueOrFormState<T>) => FormControlType<T>;
