@@ -1,5 +1,8 @@
 import { Directive, ElementRef, OnInit } from '@angular/core';
 
+/**
+ * @deprecated Should not use except in very special cases, prefer to use component with attribute selector.
+ */
 @Directive({
   selector: '[frmRemoveHost]',
 })

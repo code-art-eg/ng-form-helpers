@@ -2,6 +2,9 @@ import { OnDestroy } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { takeUntilDestroyed } from '@code-art/rx-helpers';
 
+/**
+ * @deprecated Use BehaviorSubject from rxjs
+ */
 export class SubjectWrapper<T> {
     public readonly observable: Observable<T>;
     private readonly _subject: ReplaySubject<T>;
