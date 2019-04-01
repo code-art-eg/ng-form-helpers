@@ -10,3 +10,5 @@ export * from './lib/form-models';
 export * from './lib/typed-form-array';
 export * from './lib/typed-form-group';
 export * from './lib/typed-form-control';
+
+export * from './lib/services';

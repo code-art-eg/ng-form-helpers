@@ -5,12 +5,15 @@ import { ToNullDirective } from './directives/to-null.directive';
 import { ToNumberDirective } from './directives/to-number.directive';
 import { ToIntegerDirective } from './directives/to-integer.directive';
 import { RemoveHostDirective } from './directives/remove-host.directive';
+import { ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/translation/validation-messages';
+import { TranslationServiceInjectionToken, DefaultTranslationService } from './services/translation/translation.service';
 
 @NgModule({
   declarations: [
     ToNullDirective,
     ToNumberDirective,
     ToIntegerDirective,
+// tslint:disable-next-line: deprecation
     RemoveHostDirective
   ],
   imports: [
@@ -20,7 +23,12 @@ import { RemoveHostDirective } from './directives/remove-host.directive';
     ToNullDirective,
     ToNumberDirective,
     ToIntegerDirective,
+// tslint:disable-next-line: deprecation
     RemoveHostDirective
+  ],
+  providers: [
+    { provide: ValidationMessagesInjectionToken, useValue: DEFAULT_VALIDATION_MESSAGES, multi: true },
+    { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService, }
   ]
 })
 export class NgFormHelpersModule { }

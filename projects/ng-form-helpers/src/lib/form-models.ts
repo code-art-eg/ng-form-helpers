@@ -51,3 +51,17 @@ export type TypedAsyncValidatorFn<T> = (c: FormControlType<T>) =>
         Promise<ValidationErrors | null> | Observable<ValidationErrors | null>;
 export type TypedValidators<T> = TypedValidatorFn<T> | Array<TypedValidatorFn<T>> | AbstractControlOptions | null;
 export type TypedAsyncValidators<T> = TypedAsyncValidatorFn<T> | Array<TypedAsyncValidatorFn<T>> | null;
+
+export interface ParameterizedMessage {
+  messageKey: string;
+  context?: string;
+  parameters?: Dictionary<any>;
+}
+
+export const FormValidationContext = 'formValidation';
+export const FormFieldContext = 'formField';
+export interface Dictionary<T> {
+  [key: string]: T;
+}
+
+export type StringDictionary = Dictionary<string>;
