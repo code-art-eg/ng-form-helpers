@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { TypedFormGroup } from '../../typed-form-group';
-import { TypedFormControl } from '../../typed-form-control';
-import { TypedFormArray } from '../../typed-form-array';
-import { FormHelpers } from './form-helpers';
+
+import { TypedFormGroup, TypedFormArray, TypedFormControl, FormHelpers } from '../src/public_api';
 
 export interface TestChildModel {
   name: string;

@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule, CurrentCultureService } from '@code-art/angular-globalize';
 
-import { ToIntegerDirective } from './to-integer.directive';
+import { ToIntegerDirective } from '../../src/lib/directives/to-integer.directive';
 import { loadGlobalizeData } from '../../test/globalize-data-loader';
 
 @Component({

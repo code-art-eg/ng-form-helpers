@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { StringDictionary } from '../../form-models';
+import { StringDictionary } from '../form-models';
 
 export const DEFAULT_VALIDATION_MESSAGES: StringDictionary = {
   'min': 'Value of {key} must be greater than or equal to {min}.',

@@ -4,7 +4,7 @@ import { Observable, isObservable, of, combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { TranslationServiceInjectionToken, ITranslationService } from './translation.service';
-import { ParameterizedMessage, Dictionary } from '../../form-models';
+import { ParameterizedMessage, Dictionary } from '../form-models';
 const formatMatchRx = /(?<!\{)(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
 @Injectable({
   providedIn: 'root',

@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@ang
 import { Component } from '@angular/core';
 import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService } from '@code-art/angular-globalize';
 import { By } from '@angular/platform-browser';
-import { ToNumberDirective } from './to-number.directive';
+import { ToNumberDirective } from '../../src/lib/directives/to-number.directive';
 import { loadGlobalizeData } from '../../test/globalize-data-loader';
 
 @Component({

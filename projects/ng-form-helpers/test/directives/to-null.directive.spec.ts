@@ -1,6 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
-import { ToNullDirective } from './to-null.directive';
+import { ToNullDirective } from '../../src/lib/directives/to-null.directive';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { AngularGlobalizeModule } from '@code-art/angular-globalize';

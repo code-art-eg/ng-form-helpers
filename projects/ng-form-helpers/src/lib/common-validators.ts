@@ -1,5 +1,5 @@
-import { Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { XRegExp } from 'xregexp';
+import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import XRegExp from 'xregexp';
 
 const letterExpression = '(?:\\s|\\p{Ll}|\\p{Lu}|\\p{Lt}|\\p{Lo}|\\p{Lm})';
 const nameRx = XRegExp(`^${letterExpression}+(?:-|'|${letterExpression})*$`);

@@ -4,7 +4,7 @@ import { sentenceCase } from 'change-case';
 import { Dictionary } from '@code-art/angular-globalize/lib/models';
 
 import { ValidationMessagesInjectionToken } from './validation-messages';
-import { FormValidationContext, StringDictionary } from '../../form-models';
+import { FormValidationContext, StringDictionary } from '../form-models';
 
 
 export interface ITranslationService {

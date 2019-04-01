@@ -1,5 +1,6 @@
-import { SubjectWrapper } from './subject-wrapper';
 import { takeUntilDestroyed } from '@code-art/rx-helpers';
+import { SubjectWrapper } from '../src/public_api';
+// tslint:disable: deprecation
 
 describe('SubjectWrapper', () => {
     it('initializes with default value', () => {

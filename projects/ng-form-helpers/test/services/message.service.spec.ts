@@ -1,13 +1,16 @@
-import { MessageService } from './message.service';
 import { TestBed } from '@angular/core/testing';
 import { sentenceCase } from 'change-case';
 import { first } from 'rxjs/operators';
 import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
 
-import { loadGlobalizeData } from '../../../test/globalize-data-loader';
-import { NgFormHelpersModule } from '../../ng-form-helpers.module';
-import { FormValidationContext, FormFieldContext } from '../../form-models';
-import { DEFAULT_VALIDATION_MESSAGES } from './validation-messages';
+import {
+  NgFormHelpersModule,
+  FormValidationContext,
+  FormFieldContext,
+  MessageService,
+  DEFAULT_VALIDATION_MESSAGES,
+} from '../../src/public_api';
+import { loadGlobalizeData } from '../globalize-data-loader';
 
 describe('MessageService', () => {
   let service: MessageService;
