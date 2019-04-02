@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ToNullDirective } from './directives/to-null.directive';
-import { ToNumberDirective } from './directives/to-number.directive';
-import { ToIntegerDirective } from './directives/to-integer.directive';
-import { RemoveHostDirective } from './directives/remove-host.directive';
+
 import { ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
 import { TranslationServiceInjectionToken, DefaultTranslationService } from './services/translation.service';
+import { ToNullDirective, ToNumberDirective, ToIntegerDirective, RemoveHostDirective, ToDateDirective } from './directives';
 
 @NgModule({
   declarations: [
     ToNullDirective,
     ToNumberDirective,
     ToIntegerDirective,
+    ToDateDirective,
 // tslint:disable-next-line: deprecation
     RemoveHostDirective
   ],
@@ -23,6 +22,7 @@ import { TranslationServiceInjectionToken, DefaultTranslationService } from './s
     ToNullDirective,
     ToNumberDirective,
     ToIntegerDirective,
+    ToDateDirective,
 // tslint:disable-next-line: deprecation
     RemoveHostDirective
   ],
