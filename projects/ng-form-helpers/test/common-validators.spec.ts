@@ -267,7 +267,7 @@ describe('CommonValidators', () => {
         const res = f('b')(a);
         if (error) {
           const e: Dictionary<any> = {};
-          e[name] = {
+          e[name + (aVal instanceof Date ? 'Date' : '')] = {
             'otherKey': {
               messageKey: 'b',
               context: FormFieldContext,

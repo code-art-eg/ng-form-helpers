@@ -171,6 +171,9 @@ export class CommonValidators {
       if (compareResult === null || oper(compareResult)) {
         return null;
       }
+      if (c.value instanceof Date) {
+        name += 'Date';
+      }
       const res: Dictionary<any> = {};
       res[name] = {
         otherKey: {
