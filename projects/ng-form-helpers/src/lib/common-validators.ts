@@ -1,11 +1,11 @@
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import XRegExp from 'xregexp';
 
-const letterExpression = '(?:\\s|\\p{Ll}|\\p{Lu}|\\p{Lt}|\\p{Lo}|\\p{Lm})';
-const nameRx = XRegExp(`^${letterExpression}+(?:-|'|${letterExpression})*$`);
+const letterExpression = '(?:\\p{M}|\\p{Ll}|\\p{Lu}|\\p{Lt}|\\p{Lo}|\\p{Lm})';
+const nameRx = XRegExp(`^${letterExpression}+(?:-|'| |${letterExpression})*$`);
 
 function isEmptyValue(value: any): boolean {
-  return value === null || value === undefined || value === '' || typeof value === 'string' && /\s+/.test(value);
+  return value === null || value === undefined || value === '' || typeof value === 'string' && /^\s+$/.test(value);
 }
 
 export class CommonValidators {
@@ -45,7 +45,7 @@ export class CommonValidators {
     if (isEmptyValue(v)) {
       return null;
     }
-    if (typeof v !== 'number' || !isNaN(v) || !isFinite(v) || Math.round(v) !== v) {
+    if (typeof v !== 'number' || isNaN(v) || !isFinite(v) || Math.round(v) !== v) {
       return { integer: true};
     }
     return null;
@@ -56,7 +56,7 @@ export class CommonValidators {
     if (isEmptyValue(v)) {
       return null;
     }
-    if (typeof v !== 'number' || !isNaN(v) || !isFinite(v)) {
+    if (typeof v !== 'number' || isNaN(v) || !isFinite(v)) {
       return { numeric: true};
     }
     return null;
@@ -64,13 +64,19 @@ export class CommonValidators {
 
   public static ageRange(minAge: number, maxAge: number): ValidatorFn {
     return (c: AbstractControl) => {
+      if (isEmptyValue(c.value)) {
+        return null;
+      }
       if (c.value instanceof Date) {
-        const diff = (new Date().valueOf() - c.value.valueOf()) / 1000 / 3600 / 24 / 365;
+        const diff = Math.floor((new Date().valueOf() - c.value.valueOf()) / 1000 / 3600 / 24 / 365);
         if (diff < minAge || diff > maxAge) {
           return { ageRange: { minAge: minAge, maxAge: maxAge, actual: diff } };
         }
+      } else {
+        return { ageRange: { minAge: minAge, maxAge: maxAge, actual: c.value } };
       }
       return null;
     };
   }
+
 }
