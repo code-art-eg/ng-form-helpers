@@ -27,7 +27,7 @@ export class ToNumberDirective extends BaseConverterDirective<number> {
     return this.typeConverter.convertToString(v) as string;
   }
 
-  protected valuesAreEqual(v1: number, v2: number): boolean {
+  protected valuesAreEqual(v1: number|null, v2: number|null): boolean {
     return v1 === v2;
   }
 }
