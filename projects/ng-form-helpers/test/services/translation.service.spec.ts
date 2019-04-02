@@ -1,6 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DefaultTranslationService, StringDictionary, NgFormHelpersModule, ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES, FormValidationContext, TranslationServiceInjectionToken } from '../../src/public_api';
+import {
+  DefaultTranslationService,
+  StringDictionary,
+  NgFormHelpersModule,
+  ValidationMessagesInjectionToken,
+  DEFAULT_VALIDATION_MESSAGES,
+  FormValidationContext,
+  TranslationServiceInjectionToken
+} from '../../src/public_api';
 
 describe('DefaultTranslationService', () => {
   let service: DefaultTranslationService;

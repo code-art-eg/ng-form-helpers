@@ -1,10 +1,9 @@
 import { OnDestroy, OnInit, Injector, Injectable } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { combineLatest } from 'rxjs';
+import { combineLatest, BehaviorSubject } from 'rxjs';
 
 import { takeUntilDestroyed } from '@code-art/rx-helpers';
 import { CurrentCultureService, TypeConverterService } from '@code-art/angular-globalize';
-import { SubjectWrapper } from '../subject-wrapper';
 
 @Injectable()
 export abstract class BaseConverterDirective<T>
@@ -15,7 +14,7 @@ export abstract class BaseConverterDirective<T>
     private readonly _ontouch: Array<() => void> = [];
     private _controlValue: any = undefined;
     private _disabled = false;
-    private _valueSubject: SubjectWrapper<T | null | string> = new SubjectWrapper<T | null | string>(null, this);
+    private _valueSubject: BehaviorSubject<T | null | string> = new BehaviorSubject<T | null | string>(null);
 
     constructor(private readonly injector: Injector,
         protected readonly typeConverter: TypeConverterService,
@@ -38,12 +37,13 @@ export abstract class BaseConverterDirective<T>
         } else if (typeof this._valueSubject.value !== 'string' && this.valuesAreEqual(val, this._valueSubject.value)) {
             return;
         }
-        this._valueSubject.value = val;
+        this._valueSubject.next(val);
         this.raiseOnChange(val);
     }
 
     public ngOnDestroy(): void {
         this.setAccessor(undefined);
+        this._valueSubject.complete();
     }
 
     public registerOnChange(fn: any): void {
@@ -129,7 +129,7 @@ export abstract class BaseConverterDirective<T>
             }
         }
 
-        combineLatest(this.cultureService.cultureObservable, this._valueSubject.observable)
+        combineLatest(this.cultureService.cultureObservable, this._valueSubject)
             .pipe(takeUntilDestroyed(this))
             .subscribe((v) => {
                 if (!this._controlValueAccessor) {
