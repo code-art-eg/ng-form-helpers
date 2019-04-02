@@ -1,5 +1,6 @@
-import { CommonValidators } from '../src/public_api';
-import { FormControl } from '@angular/forms';
+import { CommonValidators, FormFieldContext } from '../src/public_api';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Dictionary } from '@code-art/angular-globalize/lib/models';
 
 describe('CommonValidators', () => {
 
@@ -80,6 +81,131 @@ describe('CommonValidators', () => {
       () => { expect(CommonValidators.integer(new FormControl(-5))).toBeNull(); });
   });
 
+  describe('date', () => {
+    it('should not error on an empty string',
+      () => { expect(CommonValidators.date(new FormControl(''))).toBeNull(); });
+    it('should not error on null',
+      () => { expect(CommonValidators.date(new FormControl(null))).toBeNull(); });
+    it('should not error on undefined',
+      () => { expect(CommonValidators.date(new FormControl(undefined))).toBeNull(); });
+
+    it('should error if not a date',
+      () => { expect(CommonValidators.date(new FormControl('aa'))).toEqual({ 'date': true }); });
+    it('should not error if a date',
+      () => {
+        expect(CommonValidators.date(new FormControl(new Date()))).toBeNull();
+      });
+
+  });
+
+  describe('minDate', () => {
+    it('should not error on an empty string',
+      () => { expect(CommonValidators.minDate(new Date())(new FormControl(''))).toBeNull(); });
+    it('should not error on null',
+      () => { expect(CommonValidators.minDate(new Date())(new FormControl(null))).toBeNull(); });
+    it('should not error on undefined',
+      () => { expect(CommonValidators.minDate(new Date())(new FormControl(undefined))).toBeNull(); });
+
+    it('should not error if not a date',
+      () => { expect(CommonValidators.minDate(new Date())(new FormControl('aa'))).toBeNull(); });
+    it('should error if before min date',
+      () => {
+        expect(CommonValidators.minDate(new Date(2000, 0, 1))(new FormControl(new Date(1999, 0, 1)))).toEqual(
+          {
+            minDate: {
+              minDate: new Date(2000, 0, 1),
+              actual: new Date(1999, 0, 1)
+            },
+          }
+        );
+      });
+    it('should not error if same as min date',
+      () => {
+        expect(CommonValidators.minDate(new Date(1999, 0, 1))(new FormControl(new Date(1999, 0, 1)))).toBe(null);
+      });
+    it('should not error if after min date',
+      () => {
+        expect(CommonValidators.minDate(new Date(1999, 0, 1))(new FormControl(new Date(2000, 0, 1)))).toBe(null);
+      });
+  });
+
+  describe('maxDate', () => {
+    it('should not error on an empty string',
+      () => { expect(CommonValidators.maxDate(new Date())(new FormControl(''))).toBeNull(); });
+    it('should not error on null',
+      () => { expect(CommonValidators.maxDate(new Date())(new FormControl(null))).toBeNull(); });
+    it('should not error on undefined',
+      () => { expect(CommonValidators.maxDate(new Date())(new FormControl(undefined))).toBeNull(); });
+
+    it('should not error if not a date',
+      () => { expect(CommonValidators.maxDate(new Date())(new FormControl('aa'))).toBeNull(); });
+    it('should error if after max date',
+      () => {
+        expect(CommonValidators.maxDate(new Date(1999, 0, 1))(new FormControl(new Date(2000, 0, 1)))).toEqual(
+          {
+            maxDate: {
+              maxDate: new Date(1999, 0, 1),
+              actual: new Date(2000, 0, 1)
+            },
+          }
+        );
+      });
+    it('should not error if same as max date',
+      () => {
+        expect(CommonValidators.maxDate(new Date(1999, 0, 1))(new FormControl(new Date(1999, 0, 1)))).toBe(null);
+      });
+    it('should not error if before max date',
+      () => {
+        expect(CommonValidators.maxDate(new Date(2000, 0, 1))(new FormControl(new Date(1999, 0, 1)))).toBe(null);
+      });
+  });
+
+  describe('future', () => {
+    it('should not error on an empty string',
+      () => { expect(CommonValidators.future(new FormControl(''))).toBeNull(); });
+    it('should not error on null',
+      () => { expect(CommonValidators.future(new FormControl(null))).toBeNull(); });
+    it('should not error on undefined',
+      () => { expect(CommonValidators.future(new FormControl(undefined))).toBeNull(); });
+
+    it('should not error if not a date',
+      () => { expect(CommonValidators.future(new FormControl('aa'))).toBeNull(); });
+    it('should error if past date',
+      () => {
+        expect(CommonValidators.future(new FormControl(new Date(2000, 0, 1)))).toEqual({
+            future: true,
+          }
+        );
+      });
+    it('should not error if future date',
+      () => {
+        expect(CommonValidators.future(new FormControl(new Date(3999, 0, 1)))).toBe(null);
+      });
+  });
+
+  describe('past', () => {
+    it('should not error on an empty string',
+      () => { expect(CommonValidators.past(new FormControl(''))).toBeNull(); });
+    it('should not error on null',
+      () => { expect(CommonValidators.past(new FormControl(null))).toBeNull(); });
+    it('should not error on undefined',
+      () => { expect(CommonValidators.past(new FormControl(undefined))).toBeNull(); });
+
+    it('should not error if not a date',
+      () => { expect(CommonValidators.past(new FormControl('aa'))).toBeNull(); });
+    it('should error if future date',
+      () => {
+        expect(CommonValidators.past(new FormControl(new Date(3999, 0, 1)))).toEqual({
+          past: true,
+          }
+        );
+      });
+    it('should not error if past date',
+      () => {
+        expect(CommonValidators.past(new FormControl(new Date(2000, 0, 1)))).toBe(null);
+      });
+  });
+
   describe('email', () => {
     it('should not error on an empty string',
       () => expect(CommonValidators.email(new FormControl(''))).toBeNull());
@@ -116,11 +242,145 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.ageRange(1, 2)(new FormControl(null))).toBeNull());
 
     it('should error on non date',
-      () => expect(CommonValidators.ageRange(1, 100)(new FormControl(88))).toEqual({ 'ageRange': { minAge: 1, maxAge: 100, actual: 88 } }));
+      () => expect(CommonValidators.ageRange(1, 100)(new FormControl(88))).toEqual(
+        { 'ageRange': { minAge: 1, maxAge: 100, actual: 88 } }));
     it('should not error on valid age',
       () => expect(CommonValidators.ageRange(20, 30)(new FormControl(new Date(new Date().getFullYear() - 25, 1, 1)))).toBeNull());
     it('should error on invalid age',
       () => expect(CommonValidators.ageRange(20, 30)(new FormControl(new Date(new Date().getFullYear()
-         - 31, new Date().getMonth(), new Date().getDate())))).toEqual({'ageRange': { minAge: 20, maxAge: 30, actual: 31 } }));
+        - 31, new Date().getMonth(), new Date().getDate())))).toEqual({ 'ageRange': { minAge: 20, maxAge: 30, actual: 31 } }));
+  });
+
+  describe('compareValidators', () => {
+    const form = new FormGroup({
+      a: new FormControl(),
+      b: new FormControl(),
+    });
+    const a = form.controls['a'];
+    const b = form.controls['b'];
+    function test(name: string, desc: string, aVal: any, bVal: any, error: boolean) {
+      it(desc, () => {
+        a.setValue(aVal);
+        b.setValue(bVal);
+        let f = (CommonValidators as any)[name] as Function;
+        f = f.bind(CommonValidators);
+        const res = f('b')(a);
+        if (error) {
+          const e: Dictionary<any> = {};
+          e[name] = {
+            'otherKey': {
+              messageKey: 'b',
+              context: FormFieldContext,
+            },
+          };
+          expect(res).toEqual(e);
+        } else {
+          expect(res).toBeNull();
+        }
+      });
+    }
+
+    describe('gte', () => {
+      test('gte', 'should not error on an empty string', '', null, false);
+      test('gte', 'should not error on null', null, 4, false);
+      test('gte', 'should not error when other is empty string', 5, '', false);
+      test('gte', 'should not error when other is null string', 5, null, false);
+      test('gte', 'should not error when different types', 5, '6', false);
+      test('gte', 'should error when other has greater numeric value', 5, 6, true);
+      test('gte', 'should error when other has greater string value', 'A', 'B', true);
+      test('gte', 'should error when other has greater date value', new Date(2000, 0, 1), new Date(2000, 0, 2), true);
+      test('gte', 'should not error when other has same numeric value', 5, 5, false);
+      test('gte', 'should not error when other has same string value', 'A', 'A', false);
+      test('gte', 'should not error when other has same date value', new Date(2000, 0, 1), new Date(2000, 0, 1), false);
+      test('gte', 'should not error when other has smaller numeric value', 5, 4, false);
+      test('gte', 'should not error when other has smaller string value', 'B', 'a', false);
+      test('gte', 'should not error when other has smaller date value', new Date(2000, 0, 1), new Date(1999, 0, 1), false);
+    });
+
+    describe('gt', () => {
+      test('gt', 'should not error on an empty string', '', null, false);
+      test('gt', 'should not error on null', null, 4, false);
+      test('gt', 'should not error when other is empty string', 5, '', false);
+      test('gt', 'should not error when other is null string', 5, null, false);
+      test('gt', 'should not error when different types', 5, '6', false);
+      test('gt', 'should error when other has greater numeric value', 5, 6, true);
+      test('gt', 'should error when other has greater string value', 'A', 'B', true);
+      test('gt', 'should error when other has greater date value', new Date(2000, 0, 1), new Date(2000, 0, 2), true);
+      test('gt', 'should error when other has same numeric value', 5, 5, true);
+      test('gt', 'should error when other has same string value', 'A', 'A', true);
+      test('gt', 'should error when other has same date value', new Date(2000, 0, 1), new Date(2000, 0, 1), true);
+      test('gt', 'should not error when other has smaller numeric value', 5, 4, false);
+      test('gt', 'should not error when other has smaller string value', 'B', 'a', false);
+      test('gt', 'should not error when other has smaller date value', new Date(2000, 0, 1), new Date(1999, 0, 1), false);
+    });
+
+    describe('lte', () => {
+      test('lte', 'should not error on an empty string', '', null, false);
+      test('lte', 'should not error on null', null, 4, false);
+      test('lte', 'should not error when other is empty string', 5, '', false);
+      test('lte', 'should not error when other is null string', 5, null, false);
+      test('lte', 'should not error when different types', 5, '6', false);
+      test('lte', 'should not error when other has greater numeric value', 5, 6, false);
+      test('lte', 'should not error when other has greater string value', 'A', 'B', false);
+      test('lte', 'should not error when other has greater date value', new Date(2000, 0, 1), new Date(2000, 0, 2), false);
+      test('lte', 'should not error when other has same numeric value', 5, 5, false);
+      test('lte', 'should not error when other has same string value', 'A', 'A', false);
+      test('lte', 'should not error when other has same date value', new Date(2000, 0, 1), new Date(2000, 0, 1), false);
+      test('lte', 'should error when other has smaller numeric value', 5, 4, true);
+      test('lte', 'should error when other has smaller string value', 'B', 'a', true);
+      test('lte', 'should error when other has smaller date value', new Date(2000, 0, 1), new Date(1999, 0, 1), true);
+    });
+
+    describe('lt', () => {
+      test('lt', 'should not error on an empty string', '', null, false);
+      test('lt', 'should not error on null', null, 4, false);
+      test('lt', 'should not error when other is empty string', 5, '', false);
+      test('lt', 'should not error when other is null string', 5, null, false);
+      test('lt', 'should not error when different types', 5, '6', false);
+      test('lt', 'should not error when other has greater numeric value', 5, 6, false);
+      test('lt', 'should not error when other has greater string value', 'A', 'B', false);
+      test('lt', 'should not error when other has greater date value', new Date(2000, 0, 1), new Date(2000, 0, 2), false);
+      test('lt', 'should error when other has same numeric value', 5, 5, true);
+      test('lt', 'should error when other has same string value', 'A', 'A', true);
+      test('lt', 'should error when other has same date value', new Date(2000, 0, 1), new Date(2000, 0, 1), true);
+      test('lt', 'should error when other has smaller numeric value', 5, 4, true);
+      test('lt', 'should error when other has smaller string value', 'B', 'a', true);
+      test('lt', 'should error when other has smaller date value', new Date(2000, 0, 1), new Date(1999, 0, 1), true);
+    });
+
+    describe('eq', () => {
+      test('eq', 'should not error on an empty string', '', null, false);
+      test('eq', 'should not error on null', null, 4, false);
+      test('eq', 'should not error when other is empty string', 5, '', false);
+      test('eq', 'should not error when other is null string', 5, null, false);
+      test('eq', 'should not error when different types', 5, '6', false);
+      test('eq', 'should error when other has greater numeric value', 5, 6, true);
+      test('eq', 'should error when other has greater string value', 'A', 'B', true);
+      test('eq', 'should error when other has greater date value', new Date(2000, 0, 1), new Date(2000, 0, 2), true);
+      test('eq', 'should not error when other has same numeric value', 5, 5, false);
+      test('eq', 'should not error when other has same string value', 'A', 'A', false);
+      test('eq', 'should not error when other has same date value', new Date(2000, 0, 1), new Date(2000, 0, 1), false);
+      test('eq', 'should error when other has smaller numeric value', 5, 4, true);
+      test('eq', 'should error when other has smaller string value', 'B', 'a', true);
+      test('eq', 'should error when other has smaller date value', new Date(2000, 0, 1), new Date(1999, 0, 1), true);
+    });
+
+    describe('neq', () => {
+      test('neq', 'should not error on an empty string', '', null, false);
+      test('neq', 'should not error on null', null, 4, false);
+      test('neq', 'should not error when other is empty string', 5, '', false);
+      test('neq', 'should not error when other is null string', 5, null, false);
+      test('neq', 'should not error when different types', 5, '6', false);
+      test('neq', 'should not error when other has greater numeric value', 5, 6, false);
+      test('neq', 'should not error when other has greater string value', 'A', 'B', false);
+      test('neq', 'should not error when other has greater date value', new Date(2000, 0, 1), new Date(2000, 0, 2), false);
+      test('neq', 'should error when other has same numeric value', 5, 5, true);
+      test('neq', 'should error when other has same string value', 'A', 'A', true);
+      test('neq', 'should error when other has same date value', new Date(2000, 0, 1), new Date(2000, 0, 1), true);
+      test('neq', 'should not error when other has smaller numeric value', 5, 4, false);
+      test('neq', 'should not error when other has smaller string value', 'B', 'a', false);
+      test('neq', 'should not error when other has smaller date value', new Date(2000, 0, 1), new Date(1999, 0, 1), false);
+    });
   });
 });
+
