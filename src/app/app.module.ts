@@ -10,8 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'globalize/currency';
 import 'globalize/date';
 import 'globalize/number';
-import { loadGlobalizeData } from 'projects/ng-form-helpers/src/test/globalize-data-loader';
-import { NgFormHelpersModule } from '@code-art/ng-form-helpers';
+import { loadGlobalizeData } from 'projects/ng-form-helpers/test/globalize-data-loader';
+import { NgFormHelpersModule, NgFormHelpersBootstrap4Module } from '@code-art/ng-form-helpers';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { NgFormHelpersModule } from '@code-art/ng-form-helpers';
     FormsModule,
     ReactiveFormsModule,
     NgFormHelpersModule,
+    NgFormHelpersBootstrap4Module,
   ],
   providers: [{
       provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'de', 'ar-EG']

@@ -2,13 +2,14 @@ import { InjectionToken } from '@angular/core';
 import { StringDictionary } from '../form-models';
 
 export const DEFAULT_VALIDATION_MESSAGES: StringDictionary = {
+  'validationSummary': 'One of more form fields need your attention',
   'min': 'Value of {key} must be greater than or equal to {min}.',
   'max': 'Value of {key} must be less than or equal to {max}.',
   'required': '{key} is required.',
   'requiredTrue': '{key} must be checked.',
   'email': '{key} must be valid email address.',
-  'minLength': 'The length of {key} must be greater than or equal to {minLength}.',
-  'maxLength': 'The length of {key} must be less than or equal to {maxLength}.',
+  'minlength': 'The length of {key} must be greater than or equal to {requiredLength}.',
+  'maxlength': 'The length of {key} must be less than or equal to {requiredLength}.',
   'pattern': 'The value of {key} is invalid.',
   'personName': 'The value of {key} must be a valid name.',
   'phone': 'The value of {key} must be a valid phone number.',

@@ -22,10 +22,10 @@
     ],
     "paths": {
       "@code-art/ng-form-helpers": [
-        "dist/ng-form-helpers"
+        "projects/ng-form-helpers/src/lib"
       ],
       "@code-art/ng-form-helpers/*": [
-        "dist/ng-form-helpers/*"
+        "projects/ng-form-helpers/src/lib"
       ],
       "globalize": [
         "node_modules/globalize/dist/globalize"

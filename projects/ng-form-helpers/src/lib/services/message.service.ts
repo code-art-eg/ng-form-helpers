@@ -19,6 +19,10 @@ export class MessageService {
   ) {
   }
 
+  public getAllControlErrors(ctl: AbstractControl): Array<Observable<string>> {
+    return this.getAllControlErrorsInternal(ctl, []);
+  }
+
   public getControlErrors(ctl: AbstractControl): Array<Observable<string>> {
     const errors: Array<Observable<string>> = [];
     if (!ctl) {
@@ -86,6 +90,14 @@ export class MessageService {
     return this.cultureService.cultureObservable.pipe(
       switchMap((l) => this.getMessageWithLanguage(l, messageInfo)),
     );
+  }
+
+  private getAllControlErrorsInternal(ctl: AbstractControl, errors: Array<Observable<string>>): Array<Observable<string>> {
+    FormHelpers.actionRecursive(ctl, (c) => {
+      const e = this.getControlErrors(c);
+      errors.push(...e);
+    });
+    return errors;
   }
 
   private formatMessage(format: string, lang: string, params: Dictionary<any>): string {

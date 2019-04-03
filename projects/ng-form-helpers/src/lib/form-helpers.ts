@@ -63,7 +63,7 @@ export class FormHelpers {
     return null;
   }
 
-  private static actionRecursive(ctl: AbstractControl, action: (c: AbstractControl) => void): void {
+  public static actionRecursive(ctl: AbstractControl, action: (c: AbstractControl) => void): void {
     action(ctl);
     if (ctl instanceof FormGroup) {
       for (const key in ctl.controls) {
