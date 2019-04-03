@@ -11,6 +11,8 @@ import {
   DEFAULT_VALIDATION_MESSAGES,
 } from '../../src/public_api';
 import { loadGlobalizeData } from '../globalize-data-loader';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { combineLatest } from 'rxjs';
 
 describe('MessageService', () => {
   let service: MessageService;
@@ -46,6 +48,34 @@ describe('MessageService', () => {
       messageKey: 'email',
       context: FormValidationContext,
     }).pipe(first()).toPromise()).toBe(DEFAULT_VALIDATION_MESSAGES.email);
+  });
+
+  it('returns control errors', async () => {
+    const ctl = new FormControl(10, [Validators.min(11), Validators.max(9)]);
+    const group = new FormGroup({
+      testNumber: ctl,
+    });
+    const res = service.getControlErrors(ctl);
+    combineLatest(...res).pipe(first()).subscribe((s) => {
+      expect(s.length).toBe(2);
+      const m1 = getMessage('min', sentenceCase('testNumber'), 11);
+      const m2 = getMessage('max', sentenceCase('testNumber'), 9);
+      expect(s).toContain(m1);
+      expect(s).toContain(m2);
+    });
+  });
+
+  it('returns control with boolean errors', async () => {
+    const ctl = new FormControl('aaaa', [Validators.email]);
+    const group = new FormGroup({
+      testEmail: ctl,
+    });
+    const res = service.getControlErrors(ctl);
+    combineLatest(...res).pipe(first()).subscribe((s) => {
+      expect(s.length).toBe(1);
+      const m1 = getMessage('email', sentenceCase('testEmail'), undefined);
+      expect(s).toContain(m1);
+    });
   });
 
   it('returns formatted message with context', async () => {

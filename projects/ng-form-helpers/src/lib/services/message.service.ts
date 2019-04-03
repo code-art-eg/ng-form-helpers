@@ -4,7 +4,9 @@ import { Observable, isObservable, of, combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { TranslationServiceInjectionToken, ITranslationService } from './translation.service';
-import { ParameterizedMessage, Dictionary } from '../form-models';
+import { ParameterizedMessage, Dictionary, FormValidationContext, FormFieldContext } from '../form-models';
+import { AbstractControl, NgControl } from '@angular/forms';
+import { FormHelpers } from '../form-helpers';
 const formatMatchRx = /(?<!\{)(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,51 @@ export class MessageService {
     private readonly cultureService: CurrentCultureService,
     @Inject(TranslationServiceInjectionToken) private readonly translationService: ITranslationService,
   ) {
+  }
+
+  public getControlErrors(ctl: AbstractControl): Array<Observable<string>> {
+    const errors: Array<Observable<string>> = [];
+    if (!ctl) {
+      return errors;
+    }
+    const controlErrors = ctl.errors;
+    if (!controlErrors) {
+      return errors;
+    }
+    const controlKey = FormHelpers.getControlKey(ctl);
+    for (const key in controlErrors) {
+      if (!controlErrors.hasOwnProperty(key)) {
+        continue;
+      }
+      const errorVal = controlErrors[key];
+      if (typeof errorVal === 'string') {
+        errors.push(of(errorVal));
+      } if (errorVal && typeof errorVal === 'object') {
+        errors.push(this.getMessage({
+          messageKey: key,
+          context: FormValidationContext,
+          parameters: {
+            key: {
+              messageKey: controlKey,
+              context: FormFieldContext,
+            },
+            ...errorVal
+          },
+        }));
+      } else {
+        errors.push(this.getMessage({
+          messageKey: key,
+          context: FormValidationContext,
+          parameters: {
+            key: {
+              messageKey: controlKey,
+              context: FormFieldContext,
+            },
+          }
+        }));
+      }
+    }
+    return errors;
   }
 
   public getMessageWithLanguage(lang: string, messageInfo: ParameterizedMessage): Observable<string> {
