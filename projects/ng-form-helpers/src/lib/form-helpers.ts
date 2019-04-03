@@ -23,6 +23,14 @@ export class FormHelpers {
     this.actionRecursive(ctl, (c) => c.markAsPending());
   }
 
+  public static computeControlId(ctl: AbstractControl): string | null {
+    if (!ctl.parent) {
+      return null;
+    }
+    const parentId = this.computeControlId(ctl.parent);
+    return (parentId ? parentId + '_' : '') + this.getControlKey(ctl);
+  }
+
   public static getControlKey(ctl: AbstractControl): string | number | null {
     if (!ctl.parent) {
       return null;
@@ -63,8 +71,11 @@ export class FormHelpers {
     return null;
   }
 
-  public static actionRecursive(ctl: AbstractControl, action: (c: AbstractControl) => void): void {
-    action(ctl);
+  public static actionRecursive(ctl: AbstractControl, action: (c: AbstractControl) => any): void {
+    const res = action(ctl);
+    if (res === false) {
+      return;
+    }
     if (ctl instanceof FormGroup) {
       for (const key in ctl.controls) {
         if (ctl.controls.hasOwnProperty(key)) {

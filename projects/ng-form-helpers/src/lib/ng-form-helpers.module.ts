@@ -5,7 +5,13 @@ import { FormsModule } from '@angular/forms';
 
 import { ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
 import { TranslationServiceInjectionToken, DefaultTranslationService } from './services/translation.service';
-import { ToNullDirective, ToNumberDirective, ToIntegerDirective, RemoveHostDirective, ToDateDirective } from './directives';
+import {
+  ToNullDirective,
+  ToNumberDirective,
+  ToIntegerDirective,
+  RemoveHostDirective,
+  ToDateDirective, ControlAutoStyleDirective,
+} from './directives';
 import { ValidationErrorsComponent, ValidationSummaryComponent } from './components';
 
 @NgModule({
@@ -14,8 +20,9 @@ import { ValidationErrorsComponent, ValidationSummaryComponent } from './compone
     ToNumberDirective,
     ToIntegerDirective,
     ToDateDirective,
-// tslint:disable-next-line: deprecation
+    // tslint:disable-next-line: deprecation
     RemoveHostDirective,
+    ControlAutoStyleDirective,
     ValidationErrorsComponent,
     ValidationSummaryComponent,
   ],
@@ -28,8 +35,9 @@ import { ValidationErrorsComponent, ValidationSummaryComponent } from './compone
     ToNumberDirective,
     ToIntegerDirective,
     ToDateDirective,
-// tslint:disable-next-line: deprecation
+    // tslint:disable-next-line: deprecation
     RemoveHostDirective,
+    ControlAutoStyleDirective,
     ValidationErrorsComponent,
     ValidationSummaryComponent,
   ],

@@ -6,7 +6,7 @@ import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule } from '@code-art/angul
 import { loadGlobalizeData } from '../globalize-data-loader';
 
 import { ValidationSummaryComponent } from '../../src/lib/components';
-import { CommonValidators, TranslationServiceInjectionToken, DefaultTranslationService } from '../../src/lib';
+import { CommonValidators, TranslationServiceInjectionToken, DefaultTranslationService, FormHelpers } from '../../src/lib';
 
 @Component({
   template: `
@@ -79,7 +79,7 @@ describe('ValidationSummaryComponent', () => {
 
   it('shows errros when invalid and not touched', async () => {
     component.name.setValue('1');
-    component.name.markAsTouched();
+    FormHelpers.markAsTouchedRecursive(component.form);
     fixture.detectChanges();
     await fixture.whenStable();
 

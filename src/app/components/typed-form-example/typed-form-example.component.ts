@@ -12,6 +12,7 @@ export class TypedFormExampleComponent implements OnInit {
   constructor() {
     this.form = new TypedFormGroup<ProductList>({
       name: new TypedFormControl<string>(null, [Validators.required, Validators.maxLength(10)]),
+      accept: new TypedFormControl<boolean>(false, [Validators.requiredTrue]),
       products: new TypedFormArray<Product>([], () => new TypedFormGroup<Product>({
         name: new TypedFormControl<string>(null, [Validators.required, Validators.maxLength(20)]),
         price: new TypedFormControl<number>(null, [Validators.required]),

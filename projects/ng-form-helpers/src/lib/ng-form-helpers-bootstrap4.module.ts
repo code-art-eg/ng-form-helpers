@@ -7,12 +7,14 @@ import {
   ValidationSummaryContainerCssClassToken,
   ValidationSummaryHeaderCssClassToken,
   ValidationSummaryErrorCssClassToken,
+  FormControlCheckCssClassToken,
 } from './css-constants';
 
 @NgModule({
   providers: [
     { provide: ValidationErrorCssClassToken, useValue: 'invalid-feedback' },
     { provide: FormControlCssClassToken, useValue: 'form-control' },
+    { provide: FormControlCheckCssClassToken, useValue: 'form-check-input' },
     { provide: FormControlValidCssClassToken, useValue: 'is-valid' },
     { provide: FormControlInvalidCssClassToken, useValue: 'is-invalid' },
     { provide: ValidationSummaryContainerCssClassToken, useValue: 'alert alert-danger my-3' },

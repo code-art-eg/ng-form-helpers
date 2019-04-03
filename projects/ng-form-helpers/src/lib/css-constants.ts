@@ -7,6 +7,7 @@ export const ValidationSummaryErrorCssClassToken = new InjectionToken<string>('V
 
 
 export const FormControlCssClassToken = new InjectionToken<string>('FormControlCssClass');
+export const FormControlCheckCssClassToken = new InjectionToken<string>('FormControlCheckCssClass');
 export const FormControlValidCssClassToken = new InjectionToken<string>('FormControlValidCssClass');
 export const FormControlInvalidCssClassToken = new InjectionToken<string>('FormControlInvalidCssClass');
 

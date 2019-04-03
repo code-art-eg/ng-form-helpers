@@ -7,5 +7,6 @@ export interface Product {
 
 export interface ProductList {
     name: string|null;
+    accept: boolean;
     products: Product[];
 }
