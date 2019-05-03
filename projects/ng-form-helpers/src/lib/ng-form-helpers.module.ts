@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
-import { ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
-import { TranslationServiceInjectionToken, DefaultTranslationService } from './services/translation.service';
 import {
   ToNullDirective,
   ToNumberDirective,
@@ -13,6 +10,22 @@ import {
   ToDateDirective, ControlAutoStyleDirective,
 } from './directives';
 import { ValidationErrorsComponent, ValidationSummaryComponent } from './components';
+import {
+  ValidatorFactoryToken,
+  FormControlFactoryToken,
+  DefaultFormControlFactoryPriority,
+  DefaultFormControlFactoryPriorityToken,
+  DefaultValidatorFactoryPriority,
+  DefaultValidatorFactoryPriorityToken
+} from './form-generation.utils';
+import {
+  ValidationMessagesInjectionToken,
+  TranslationServiceInjectionToken,
+  DefaultTranslationService,
+  DEFAULT_VALIDATION_MESSAGES,
+  DefaultValidatorFactoryService,
+  DefaultFormControlFactoryService,
+} from './services';
 
 @NgModule({
   declarations: [
@@ -43,7 +56,11 @@ import { ValidationErrorsComponent, ValidationSummaryComponent } from './compone
   ],
   providers: [
     { provide: ValidationMessagesInjectionToken, useValue: DEFAULT_VALIDATION_MESSAGES, multi: true },
-    { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService, }
+    { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService, },
+    { provide: ValidatorFactoryToken, useExisting: DefaultValidatorFactoryService, multi: true },
+    { provide: FormControlFactoryToken, useExisting: DefaultFormControlFactoryService, multi: true },
+    { provide: DefaultFormControlFactoryPriorityToken, useValue: DefaultFormControlFactoryPriority },
+    { provide: DefaultValidatorFactoryPriorityToken, useValue: DefaultValidatorFactoryPriority },
   ]
 })
 export class NgFormHelpersModule { }
