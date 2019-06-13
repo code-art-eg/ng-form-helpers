@@ -5,7 +5,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { TranslationServiceInjectionToken, ITranslationService } from './translation.service';
 import { ParameterizedMessage, Dictionary, FormValidationContext, FormFieldContext } from '../form-models';
-import { AbstractControl, NgControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { FormHelpers } from '../form-helpers';
 const formatMatchRx = /(?<!\{)(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
 @Injectable({

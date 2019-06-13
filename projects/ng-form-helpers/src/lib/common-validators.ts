@@ -11,6 +11,7 @@ function isEmptyValue(value: any): boolean {
   return value === null || value === undefined || value === '' || typeof value === 'string' && /^\s+$/.test(value);
 }
 
+// @dynamic
 export class CommonValidators {
 
   public static personName(c: AbstractControl): ValidationErrors | null {

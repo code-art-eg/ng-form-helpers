@@ -20,7 +20,7 @@ class TestComponent implements AfterViewInit {
   public form: FormGroup;
   public name: FormControl;
   public initialized = false;
-  @ViewChild(ValidationErrorsComponent) public validationErrors?: ValidationErrorsComponent;
+  @ViewChild(ValidationErrorsComponent, { static: false }) public validationErrors?: ValidationErrorsComponent;
 
   constructor(formBuilder: FormBuilder) {
     this.name = formBuilder.control(null, [

@@ -1,8 +1,8 @@
 {
   "name": "@code-art/ng-form-helpers",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "private": false,
-  "description": "Directives and classes to for Angular 6 to make creating forms easier.",
+  "description": "Directives and classes to for Angular 6/7/8 to make creating forms easier.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sherif-elmetainy/ng-form-helpers.git"
@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/sherif-elmetainy/ng-form-helpers#readme",
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0 || ^7.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0 || ^7.0.0",
-    "@angular/forms": "^6.0.0-rc.0 || ^6.0.0 || ^7.0.0",
-    "@code-art/angular-globalize": "^3.0.0",
-    "@code-art/rx-helpers": "^1.1.1"
+    "@angular/common": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@angular/core": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@angular/forms": "^6.0.0 || ^7.0.0 || ^8.0.0",
+    "@code-art/angular-globalize": "^3.2.0",
+    "@code-art/rx-helpers": "^1.2.0"
   },
   "dependencies": {
     "change-case": "^3.1.0",
