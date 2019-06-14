@@ -5,8 +5,8 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, F
 import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule } from '@code-art/angular-globalize';
 import { loadGlobalizeData } from '../globalize-data-loader';
 
-import { ValidationSummaryComponent } from '../../src/lib/components';
 import { CommonValidators, TranslationServiceInjectionToken, DefaultTranslationService, FormHelpers } from '../../src/lib';
+import { ValidationSummaryComponent } from '../../src/lib/components/validation-summary/validation-summary.component';
 
 @Component({
   template: `

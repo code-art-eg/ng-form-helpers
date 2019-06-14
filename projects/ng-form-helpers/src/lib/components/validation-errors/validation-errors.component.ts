@@ -5,10 +5,10 @@ import {
   FormControlValidCssClassToken,
   FormControlInvalidCssClassToken,
 } from '../../css-constants';
-import { MessageService } from '../../services';
 import { AbstractControl, FormGroupDirective } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Dictionary } from '../../form-models';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'frm-validation-errors',

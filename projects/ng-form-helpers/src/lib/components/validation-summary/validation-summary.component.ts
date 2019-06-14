@@ -6,8 +6,8 @@ import {
   ValidationSummaryErrorCssClassToken,
 } from '../../css-constants';
 import { Observable } from 'rxjs';
-import { MessageService } from '../../services';
 import { FormValidationContext } from '../../form-models';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'frm-validation-summary',

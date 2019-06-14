@@ -7,9 +7,9 @@ import {
   FormControlCheckCssClassToken,
 } from '../css-constants';
 import { FormHelpers } from '../form-helpers';
-import { MessageService } from '../services';
 import { FormFieldContext } from '../form-models';
 import { takeUntilDestroyed } from '@code-art/rx-helpers';
+import { MessageService } from '../services/message.service';
 
 @Directive({
   selector: '[frmControlAutoStyle]',

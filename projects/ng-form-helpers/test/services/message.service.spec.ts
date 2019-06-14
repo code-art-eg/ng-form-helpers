@@ -7,12 +7,12 @@ import {
   NgFormHelpersModule,
   FormValidationContext,
   FormFieldContext,
-  MessageService,
   DEFAULT_VALIDATION_MESSAGES,
 } from '../../src/public_api';
 import { loadGlobalizeData } from '../globalize-data-loader';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { combineLatest } from 'rxjs';
+import { MessageService } from '../../src/lib/services/message.service';
 
 describe('MessageService', () => {
   let service: MessageService;
