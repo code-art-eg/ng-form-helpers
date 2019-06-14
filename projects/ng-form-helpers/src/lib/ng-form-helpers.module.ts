@@ -8,8 +8,8 @@ import {
   ToIntegerDirective,
   RemoveHostDirective,
   ToDateDirective, ControlAutoStyleDirective,
-} from './directives';
-import { ValidationErrorsComponent, ValidationSummaryComponent } from './components';
+} from './directives/index';
+import { ValidationErrorsComponent, ValidationSummaryComponent } from './components/index';
 import {
   ValidatorFactoryToken,
   FormControlFactoryToken,
@@ -25,7 +25,7 @@ import {
   DEFAULT_VALIDATION_MESSAGES,
   DefaultValidatorFactoryService,
   DefaultFormControlFactoryService,
-} from './services';
+} from './services/index';
 
 @NgModule({
   declarations: [

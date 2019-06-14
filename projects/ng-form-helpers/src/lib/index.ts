@@ -1,5 +1,5 @@
-export * from './directives';
-export * from './services';
+export * from './directives/index';
+export * from './services/index';
 export * from './common-validators';
 export * from './form-helpers';
 export * from './form-models';
