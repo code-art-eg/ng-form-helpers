@@ -1,6 +1,6 @@
 {
   "name": "@code-art/ng-form-helpers",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "private": false,
   "description": "Directives and classes to for Angular 8 to make creating forms easier.",
   "repository": {
