@@ -1,7 +1,8 @@
 
 export * from './services/validation-messages';
-export * from './services/translation.service';
 export * from './services/form-generation.service';
+export * from './services/message.service';
+export * from './services/translation.service';
 
 export * from './directives/base-converter-directive';
 export * from './directives/control-auto-style.directive';
