@@ -11,7 +11,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ToNullDirective extends BaseConverterDirective<any>  {
 
-  protected coerceValue(v: any): string|null|undefined {
+  protected coerceValue(v: any): string | null | undefined {
     if (v === null || v === undefined) {
       return null;
     } else if (typeof v === 'string') {

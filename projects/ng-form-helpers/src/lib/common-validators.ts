@@ -66,8 +66,8 @@ export class CommonValidators {
     return { date: true };
   }
 
-  public static minDate(minDate: Date|string): ValidatorFn {
-    if (typeof(minDate) === 'string') {
+  public static minDate(minDate: Date | string): ValidatorFn {
+    if (typeof (minDate) === 'string') {
       minDate = new Date(minDate);
     }
     return (c: AbstractControl): ValidationErrors | null => {
@@ -82,8 +82,8 @@ export class CommonValidators {
     };
   }
 
-  public static maxDate(maxDate: Date|string): ValidatorFn {
-    if (typeof(maxDate) === 'string') {
+  public static maxDate(maxDate: Date | string): ValidatorFn {
+    if (typeof (maxDate) === 'string') {
       maxDate = new Date(maxDate);
     }
     return (c: AbstractControl): ValidationErrors | null => {
@@ -104,7 +104,7 @@ export class CommonValidators {
       return null;
     }
     if (v instanceof Date) {
-      return v.valueOf() < new Date().valueOf() ? null : { past: true};
+      return v.valueOf() < new Date().valueOf() ? null : { past: true };
     }
     return null;
   }
@@ -115,7 +115,7 @@ export class CommonValidators {
       return null;
     }
     if (v instanceof Date) {
-      return v.valueOf() > new Date().valueOf() ? null : { future: true};
+      return v.valueOf() > new Date().valueOf() ? null : { future: true };
     }
     return null;
   }

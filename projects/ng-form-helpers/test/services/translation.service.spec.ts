@@ -27,7 +27,7 @@ describe('DefaultTranslationService', () => {
         provide: ValidationMessagesInjectionToken, useValue: customMessages, multi: true,
       }],
     });
-    service = TestBed.get(DefaultTranslationService) as DefaultTranslationService;
+    service = TestBed.get<DefaultTranslationService>(DefaultTranslationService);
   });
 
   for (const key in DEFAULT_VALIDATION_MESSAGES) {

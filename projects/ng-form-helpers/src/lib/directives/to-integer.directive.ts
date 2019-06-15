@@ -6,7 +6,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [{
     multi: true,
     provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ToIntegerDirective),
-}],
+  }],
   selector: '[frmToInteger]'
 })
 export class ToIntegerDirective extends ToNumberDirective {

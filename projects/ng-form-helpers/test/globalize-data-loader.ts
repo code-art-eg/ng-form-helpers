@@ -27,28 +27,28 @@ import posixAr from 'cldr-data/main/ar-EG/posix.json';
 
 export function loadGlobalizeData() {
 
-    Globalize.load(likelySubtags);
-    Globalize.load(numberingSystems);
-    Globalize.load(currencyData);
-    Globalize.load(metaZones);
-    Globalize.load(timeData);
-    Globalize.load(weekData);
+  Globalize.load(likelySubtags);
+  Globalize.load(numberingSystems);
+  Globalize.load(currencyData);
+  Globalize.load(metaZones);
+  Globalize.load(timeData);
+  Globalize.load(weekData);
 
-    Globalize.load(calendarDe);
-    Globalize.load(numbersDe);
-    Globalize.load(currencyDe);
-    Globalize.load(timeZonesDe);
-    Globalize.load(posixDe);
+  Globalize.load(calendarDe);
+  Globalize.load(numbersDe);
+  Globalize.load(currencyDe);
+  Globalize.load(timeZonesDe);
+  Globalize.load(posixDe);
 
-    Globalize.load(calendarEn);
-    Globalize.load(numbersEn);
-    Globalize.load(currencyEn);
-    Globalize.load(timeZonesEn);
-    Globalize.load(posixEn);
+  Globalize.load(calendarEn);
+  Globalize.load(numbersEn);
+  Globalize.load(currencyEn);
+  Globalize.load(timeZonesEn);
+  Globalize.load(posixEn);
 
-    Globalize.load(calendarAr);
-    Globalize.load(numbersAr);
-    Globalize.load(currencyAr);
-    Globalize.load(timeZonesAr);
-    Globalize.load(posixAr);
+  Globalize.load(calendarAr);
+  Globalize.load(numbersAr);
+  Globalize.load(currencyAr);
+  Globalize.load(timeZonesAr);
+  Globalize.load(posixAr);
 }

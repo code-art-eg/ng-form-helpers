@@ -46,7 +46,7 @@ export class FormHelpers {
     return null;
   }
 
-  public static getSibling(ctl: AbstractControl, key: string|number): AbstractControl|null {
+  public static getSibling(ctl: AbstractControl, key: string | number): AbstractControl | null {
     if (!ctl.parent) {
       return null;
     }

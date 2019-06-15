@@ -6,49 +6,49 @@ import { TypedFormControl } from './typed-form-control';
 import { TypedFormGroup } from './typed-form-group';
 
 export interface FormState<T> {
-    value: T|null;
-    disabled: boolean;
+  value: T | null;
+  disabled: boolean;
 }
 
 export type ValueOrFormState<T> = FormState<T> | T | null;
 export type FormArrayState<T> = Array<ValueOrFormState<T>>;
 export type FormGroupState<T extends object> = {
-    [P in keyof T]: FormState<T[P]>;
+  [P in keyof T]: FormState<T[P]>;
 };
 
 export interface SetValueOptions {
-    onlySelf?: boolean;
-    emitEvent?: boolean;
+  onlySelf?: boolean;
+  emitEvent?: boolean;
 }
 
 export interface SetFormControlValueOptions extends SetValueOptions {
-    emitModelToViewChange?: boolean;
-    emitViewToModelChange?: boolean;
+  emitModelToViewChange?: boolean;
+  emitViewToModelChange?: boolean;
 }
 
 export type FormGroupConfig<T> = {
-    [P in keyof T]: FormControlType<T[P]>;
+  [P in keyof T]: FormControlType<T[P]>;
 };
 
 export interface ControlType {
-    _control?: undefined;
+  _control?: undefined;
 }
 
 export type FormControlType<T> =
-    T extends number ? TypedFormControl<number> :
-    T extends string ? TypedFormControl<string> :
-    T extends boolean ? TypedFormControl<boolean> :
-    T extends Date ? TypedFormControl<Date> :
-    T extends any[] ? TypedFormArray<T[number]> :
-    T extends ControlType ? TypedFormControl<T> :
-    T extends object ? TypedFormGroup<T> :
-    never;
+  T extends number ? TypedFormControl<number> :
+  T extends string ? TypedFormControl<string> :
+  T extends boolean ? TypedFormControl<boolean> :
+  T extends Date ? TypedFormControl<Date> :
+  T extends any[] ? TypedFormArray<T[number]> :
+  T extends ControlType ? TypedFormControl<T> :
+  T extends object ? TypedFormGroup<T> :
+  never;
 
 export type FormControlFactory<T> = (v?: ValueOrFormState<T>) => FormControlType<T>;
 
 export type TypedValidatorFn<T> = (c: FormControlType<T>) => ValidationErrors | null;
 export type TypedAsyncValidatorFn<T> = (c: FormControlType<T>) =>
-        Promise<ValidationErrors | null> | Observable<ValidationErrors | null>;
+  Promise<ValidationErrors | null> | Observable<ValidationErrors | null>;
 export type TypedValidators<T> = TypedValidatorFn<T> | Array<TypedValidatorFn<T>> | AbstractControlOptions | null;
 export type TypedAsyncValidators<T> = TypedAsyncValidatorFn<T> | Array<TypedAsyncValidatorFn<T>> | null;
 

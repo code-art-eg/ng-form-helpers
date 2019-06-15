@@ -10,4 +10,3 @@ export const FormControlCssClassToken = new InjectionToken<string>('FormControlC
 export const FormControlCheckCssClassToken = new InjectionToken<string>('FormControlCheckCssClass');
 export const FormControlValidCssClassToken = new InjectionToken<string>('FormControlValidCssClass');
 export const FormControlInvalidCssClassToken = new InjectionToken<string>('FormControlInvalidCssClass');
-

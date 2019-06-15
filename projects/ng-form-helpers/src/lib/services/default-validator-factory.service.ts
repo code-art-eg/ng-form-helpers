@@ -38,7 +38,6 @@ const ValidatorsConfig: Dictionary<ValidatorConfig> = {
   neq: { isFunction: true, type: CommonValidators.neq },
 };
 
-
 @Injectable({
   providedIn: 'root'
 })

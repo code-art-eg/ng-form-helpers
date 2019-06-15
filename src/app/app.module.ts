@@ -28,8 +28,8 @@ import { NgFormHelpersModule, NgFormHelpersBootstrap4Module } from '@code-art/ng
     NgFormHelpersBootstrap4Module,
   ],
   providers: [{
-      provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'de', 'ar-EG']
-    },
+    provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'de', 'ar-EG']
+  },
   ],
   bootstrap: [AppComponent]
 })

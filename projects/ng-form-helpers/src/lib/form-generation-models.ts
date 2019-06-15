@@ -2,22 +2,22 @@ import { FormArray } from '@angular/forms';
 
 export interface ValidatorInfo {
   name: string;
-  parameters?: any[]|null;
+  parameters?: any[] | null;
 }
 
 export interface AsyncValidatorInfo {
-  name?: string|null;
-  path?: string|null;
-  parameters?: any[]|null;
+  name?: string | null;
+  path?: string | null;
+  parameters?: any[] | null;
 }
 
 export interface FormControlInfo {
   name: string;
-  label?: string|null;
+  label?: string | null;
   initialValue?: any;
-  disabled?: boolean|null;
-  validators?: ValidatorInfo[]|null;
-  asyncValidators?: AsyncValidatorInfo[]|null;
+  disabled?: boolean | null;
+  validators?: ValidatorInfo[] | null;
+  asyncValidators?: AsyncValidatorInfo[] | null;
 }
 
 export interface InputGroupText {
@@ -31,8 +31,8 @@ export interface InputGroupIcon {
 export type InputGroupItem = InputGroupText | InputGroupIcon | FormControlInfo;
 
 export interface InputGroupInfo {
-  id?: string|null;
-  label?: string|null;
+  id?: string | null;
+  label?: string | null;
   content: InputGroupItem[];
 }
 
@@ -40,8 +40,8 @@ export type FormGroupItem = InputGroupInfo | FormGroupInfo | FormControlInfo | F
 
 export interface FormGroupInfo {
   name: string;
-  validators?: ValidatorInfo[]|null;
-  asyncValidators?: AsyncValidatorInfo[]|null;
+  validators?: ValidatorInfo[] | null;
+  asyncValidators?: AsyncValidatorInfo[] | null;
   items: FormGroupItem[];
 }
 
@@ -51,8 +51,8 @@ export type FormArrayPredicate = (formArray?: FormArray, info?: FormArrayInfo, i
 export interface FormArrayInfo {
   name: string;
   itemType: FormArrayItem;
-  validators?: ValidatorInfo[]|null;
-  asyncValidators?: AsyncValidatorInfo[]|null;
-  allowAdd?: boolean | FormArrayPredicate|null;
-  allowDelete?:  boolean | FormArrayPredicate|null;
+  validators?: ValidatorInfo[] | null;
+  asyncValidators?: AsyncValidatorInfo[] | null;
+  allowAdd?: boolean | FormArrayPredicate | null;
+  allowDelete?: boolean | FormArrayPredicate | null;
 }

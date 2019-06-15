@@ -173,8 +173,8 @@ describe('CommonValidators', () => {
     it('should error if past date',
       () => {
         expect(CommonValidators.future(new FormControl(new Date(2000, 0, 1)))).toEqual({
-            future: true,
-          }
+          future: true,
+        }
         );
       });
     it('should not error if future date',
@@ -197,7 +197,7 @@ describe('CommonValidators', () => {
       () => {
         expect(CommonValidators.past(new FormControl(new Date(3999, 0, 1)))).toEqual({
           past: true,
-          }
+        }
         );
       });
     it('should not error if past date',

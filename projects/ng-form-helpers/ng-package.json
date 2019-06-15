@@ -1,7 +1,10 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ng-form-helpers",
-  "whitelistedNonPeerDependencies": ["xregexp", "change-case"],
+  "whitelistedNonPeerDependencies": [
+    "xregexp",
+    "change-case"
+  ],
   "lib": {
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {

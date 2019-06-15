@@ -2,6 +2,6 @@
   <h6 [ngClass]="headingCssClass">{{ header | async }}</h6>
   <hr />
   <div *ngFor="let error$ of errors" [ngClass]="errorCssClass">
-      {{ error$ | async }}
+    {{ error$ | async }}
   </div>
 </div>

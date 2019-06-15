@@ -14,11 +14,11 @@ export const DefaultFormControlFactoryPriority = 1000;
 
 export interface IValidatorFactory {
   priority: number;
-  createValidator(info: ValidatorInfo): ValidatorFn|null;
-  createAsyncValidator(info: AsyncValidatorInfo): AsyncValidatorFn|null;
+  createValidator(info: ValidatorInfo): ValidatorFn | null;
+  createAsyncValidator(info: AsyncValidatorInfo): AsyncValidatorFn | null;
 }
 
 export interface IFormControlFactory {
   priority: number;
-  createFormControl(info: FormControlInfo): TypedFormControl<any>|null;
+  createFormControl(info: FormControlInfo): TypedFormControl<any> | null;
 }

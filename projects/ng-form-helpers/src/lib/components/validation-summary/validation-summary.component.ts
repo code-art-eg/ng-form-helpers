@@ -39,11 +39,11 @@ export class ValidationSummaryComponent implements AfterViewInit {
     });
   }
 
-  @Input() public set form(val: FormGroup|undefined) {
+  @Input() public set form(val: FormGroup | undefined) {
     this._formGroup = val;
   }
 
-  public get form(): FormGroup|undefined {
+  public get form(): FormGroup | undefined {
     return this._formGroup || this._formGroupDirective && this._formGroupDirective.form;
   }
 
@@ -68,7 +68,7 @@ export class ValidationSummaryComponent implements AfterViewInit {
   }
 
   get errors(): Array<Observable<string>> {
-    return  this.form ? this.messageService.getAllControlErrors(this.form) : [];
+    return this.form ? this.messageService.getAllControlErrors(this.form) : [];
   }
 
   public ngAfterViewInit(): void {

@@ -43,7 +43,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   @HostBinding('attr.aria-label') public get ariaLabel(): string | null {
-    const el = this.htmlElement as HTMLInputElement|HTMLTextAreaElement;
+    const el = this.htmlElement as HTMLInputElement | HTMLTextAreaElement;
     if (el.getAttribute('aria-label')) {
       return el.getAttribute('aria-label');
     }
@@ -51,7 +51,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   @HostBinding('attr.placeholder') public get placeholder(): string | null {
-    const el = this.htmlElement as HTMLInputElement|HTMLTextAreaElement;
+    const el = this.htmlElement as HTMLInputElement | HTMLTextAreaElement;
     if (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA') {
       return null;
     }
@@ -134,8 +134,8 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
         messageKey: key,
         context: FormFieldContext,
       })
-      .pipe(takeUntilDestroyed(this))
-      .subscribe((l) => this._label = l);
+        .pipe(takeUntilDestroyed(this))
+        .subscribe((l) => this._label = l);
     }
   }
 

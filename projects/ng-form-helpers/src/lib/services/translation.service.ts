@@ -8,7 +8,7 @@ import { FormValidationContext, StringDictionary } from '../form-models';
 
 
 export interface ITranslationService {
-  getMessageString(lang: string|null|undefined, key: string, context: string | undefined): Observable<string>;
+  getMessageString(lang: string | null | undefined, key: string, context: string | undefined): Observable<string>;
 }
 
 export const TranslationServiceInjectionToken = new InjectionToken<ITranslationService>('ITranslationService');
@@ -35,7 +35,7 @@ export class DefaultTranslationService implements ITranslationService {
     }
   }
 
-  public getMessageString(_lang: string|null|undefined, key: string, context: string | undefined): Observable<string> {
+  public getMessageString(_lang: string | null | undefined, key: string, context: string | undefined): Observable<string> {
     if (context === FormValidationContext) {
       const res = this._validationMessages[key];
       if (res) {

@@ -25,7 +25,7 @@ describe('MessageService', () => {
         { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'ar', 'de'] }
       ],
     });
-    service = TestBed.get(MessageService) as MessageService;
+    service = TestBed.get<MessageService>(MessageService);
   });
 
   function toString(p: any): string {
@@ -93,8 +93,8 @@ describe('MessageService', () => {
         },
       },
     });
-    const cultureService = TestBed.get(CurrentCultureService) as CurrentCultureService;
-    const globalizationService = TestBed.get(GlobalizationService) as GlobalizationService;
+    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const globalizationService = TestBed.get<GlobalizationService>(GlobalizationService);
     cultureService.currentCulture = 'en-GB';
     let res: string | undefined;
     const sub = ob$.subscribe((v) => res = v);

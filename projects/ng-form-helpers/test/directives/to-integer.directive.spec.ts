@@ -59,7 +59,7 @@ describe('ToIntegerDirective', () => {
     });
 
     it('updates input format when culture changes', async () => {
-        const cultureService = TestBed.get(CurrentCultureService) as CurrentCultureService;
+        const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
         cultureService.currentCulture = 'en-GB';
         expect(component.formControl.value).toBe(1);
         const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -78,7 +78,7 @@ describe('ToIntegerDirective', () => {
     });
 
     it('updates model with string values when input has invalid number', async () => {
-        const cultureService = TestBed.get(CurrentCultureService) as CurrentCultureService;
+        const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
         cultureService.currentCulture = 'en-GB';
         expect(component.formControl.value).toBe(1);
         const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;

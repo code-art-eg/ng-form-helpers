@@ -41,7 +41,7 @@ describe('ToDateDirective', () => {
 
         fixture = TestBed.createComponent<TestComponent>(TestComponent);
         component = fixture.componentInstance;
-        const converter = TestBed.get(GlobalizationService) as GlobalizationService;
+        const converter = TestBed.get<GlobalizationService>(GlobalizationService);
         testDate1En = converter.formatDate(testDate1, 'en-GB', {
           datetime: 'short',
         });
@@ -77,7 +77,7 @@ describe('ToDateDirective', () => {
     });
 
     it('updates input format when culture changes', async () => {
-        const cultureService = TestBed.get(CurrentCultureService) as CurrentCultureService;
+        const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
         cultureService.currentCulture = 'en-GB';
         expect(component.formControl.value).toBe(testDate1);
         const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -96,7 +96,7 @@ describe('ToDateDirective', () => {
     });
 
     it('updates model with string values when input has invalid date', async () => {
-        const cultureService = TestBed.get(CurrentCultureService) as CurrentCultureService;
+        const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
         cultureService.currentCulture = 'en-GB';
         expect(component.formControl.value).toBe(testDate1);
         const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;

@@ -13,7 +13,9 @@
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": false,
-    "types": ["globalize"],
+    "types": [
+      "globalize"
+    ],
     "lib": [
       "dom",
       "es2018"
