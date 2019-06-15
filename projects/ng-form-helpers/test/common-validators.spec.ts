@@ -221,6 +221,36 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.email(new FormControl('test@gmail.com'))).toBeNull());
   });
 
+  describe('url', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.url(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.url(new FormControl(null))).toBeNull());
+
+    it('should error on invalid url',
+      () => expect(CommonValidators.url(new FormControl('text'))).toEqual({ 'url': true }));
+    it('should error on invalid url with space',
+      () => expect(CommonValidators.url(new FormControl('test text'))).toEqual({ 'url': true }));
+    it('should not error on valid url',
+      () => expect(CommonValidators.url(new FormControl('https://www.exampl.com'))).toBeNull());
+  });
+
+  describe('color', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.color(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.color(new FormControl(null))).toBeNull());
+
+    it('should error on invalid color',
+      () => expect(CommonValidators.color(new FormControl('text'))).toEqual({ 'color': true }));
+    it('should error on invalid color with space',
+      () => expect(CommonValidators.color(new FormControl('test text'))).toEqual({ 'color': true }));
+    it('should not error on valid color',
+      () => expect(CommonValidators.color(new FormControl('#44ddaaee'))).toBeNull());
+  });
+
   describe('phone', () => {
     it('should not error on an empty string',
       () => expect(CommonValidators.phone(new FormControl(''))).toBeNull());

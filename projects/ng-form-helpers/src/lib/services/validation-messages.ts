@@ -8,6 +8,8 @@ export const DEFAULT_VALIDATION_MESSAGES: StringDictionary = {
   'required': '{key} is required.',
   'requiredTrue': '{key} must be checked.',
   'email': '{key} must be valid email address.',
+  'url': '{key} must be valid url value.',
+  'color': '{key} must be valid color value.',
   'minlength': 'The length of {key} must be greater than or equal to {requiredLength}.',
   'maxlength': 'The length of {key} must be less than or equal to {requiredLength}.',
   'pattern': 'The value of {key} is invalid.',
