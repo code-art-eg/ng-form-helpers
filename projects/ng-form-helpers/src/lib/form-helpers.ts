@@ -23,7 +23,10 @@ export class FormHelpers {
     this.actionRecursive(ctl, (c) => c.markAsPending());
   }
 
-  public static computeControlId(ctl: AbstractControl): string | null {
+  public static computeControlId(ctl: AbstractControl | null | undefined): string | null {
+    if (!ctl) {
+      return null;
+    }
     if (!ctl.parent) {
       return null;
     }

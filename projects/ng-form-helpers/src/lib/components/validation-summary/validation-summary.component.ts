@@ -64,7 +64,7 @@ export class ValidationSummaryComponent implements AfterViewInit {
   }
 
   public get showError(): boolean {
-    return this.invalid && this.touched && !this.disabled;
+    return this.invalid && this.touched && !this.disabled && this.errors.length > 0;
   }
 
   get errors(): Array<Observable<string>> {

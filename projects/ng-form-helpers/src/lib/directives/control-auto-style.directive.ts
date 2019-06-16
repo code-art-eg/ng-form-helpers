@@ -1,5 +1,5 @@
-import { Directive, HostBinding, Optional, Inject, ElementRef, Input, OnDestroy, OnInit, DoCheck } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { Directive, HostBinding, Optional, Inject, ElementRef, Input, OnDestroy, OnInit, DoCheck, Renderer2 } from '@angular/core';
+import { NgControl, FormControl } from '@angular/forms';
 import {
   FormControlCssClassToken,
   FormControlValidCssClassToken,
@@ -16,14 +16,19 @@ import { MessageService } from '../services/message.service';
 })
 export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
 
-  @Input() public cssClass?: string;
-  @Input() public checkCssClass?: string;
-  @Input() public validCssClass?: string;
-  @Input() public invalidCssClass?: string;
+  private _cssClass?: string | undefined;
+  private _checkCssClass?: string | undefined;
+  private _validCssClass?: string | undefined;
+  private _invalidCssClass?: string;
+
   @Input() public showValidStatus = true;
   @Input() public setId = true;
   @Input() public setPlaceHolder = true;
   @Input() public setAriaLabel = true;
+
+  private _ariaLabelSet = false;
+  private _idSet = false;
+  private _placeHolderSet = false;
 
   private _label?: string;
 
@@ -31,6 +36,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
     private readonly messageService: MessageService,
     private readonly ngControl: NgControl,
     private readonly hostElement: ElementRef,
+    private readonly renderer2: Renderer2,
     @Optional() @Inject(FormControlCssClassToken) formControlCssClass?: string,
     @Optional() @Inject(FormControlCheckCssClassToken) formControlCheckCssClass?: string,
     @Optional() @Inject(FormControlValidCssClassToken) formControlValidCssClass?: string,
@@ -42,54 +48,48 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
     this.checkCssClass = formControlCheckCssClass;
   }
 
-  @HostBinding('attr.aria-label') public get ariaLabel(): string | null {
-    const el = this.htmlElement as HTMLInputElement | HTMLTextAreaElement;
-    if (el.getAttribute('aria-label')) {
-      return el.getAttribute('aria-label');
-    }
-    return this.setAriaLabel && this._label ? this._label : null;
+  public get checkCssClass(): string | undefined {
+    return this._checkCssClass;
   }
 
-  @HostBinding('attr.placeholder') public get placeholder(): string | null {
-    const el = this.htmlElement as HTMLInputElement | HTMLTextAreaElement;
-    if (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA') {
-      return null;
+  @Input() public set checkCssClass(value: string | undefined) {
+    if (this._checkCssClass && value !== this._checkCssClass && this.hostElement && this.hostElement.nativeElement) {
+      this.renderer2.removeClass(this.hostElement.nativeElement, this._checkCssClass);
     }
-    if (this.isCheckbox || this.isRadio) {
-      return null;
-    }
-    if (el.placeholder) {
-      return el.placeholder;
-    }
-    return this.setPlaceHolder && this._label ? this._label : null;
+    this._checkCssClass = value;
   }
 
-  @HostBinding('attr.id') public get id(): string | null {
-    if (this.htmlElement.id) {
-      return this.htmlElement.id;
-    }
-    return this.setId && this.ngControl.control ? FormHelpers.computeControlId(this.ngControl.control) : null;
+  public get cssClass(): string | undefined {
+    return this._cssClass;
   }
 
-  @HostBinding('class') public get classNames(): string | null {
-    let list = '';
-    if (this.isCheckbox || this.isRadio) {
-      if (this.checkCssClass) {
-        list += ' ' + this.checkCssClass;
-      }
-    } else {
-      if (this.cssClass) {
-        list += ' ' + this.cssClass;
-      }
-      if (this.valid && this.validCssClass && this.showValidStatus && this.touched) {
-        list += ' ' + this.validCssClass;
-      }
-      if (this.invalid && this.invalidCssClass && this.touched) {
-        list += ' ' + this.invalidCssClass;
-      }
+  @Input() public set cssClass(value: string | undefined) {
+    if (this._cssClass && value !== this._cssClass && this.hostElement && this.hostElement.nativeElement) {
+      this.renderer2.removeClass(this.hostElement.nativeElement, this._cssClass);
     }
+    this._cssClass = value;
+  }
 
-    return list === '' ? null : list.trim();
+  public get validCssClass(): string | undefined {
+    return this._validCssClass;
+  }
+
+  @Input() public set validCssClass(value: string | undefined) {
+    if (this._validCssClass && value !== this._validCssClass && this.hostElement && this.hostElement.nativeElement) {
+      this.renderer2.removeClass(this.hostElement.nativeElement, this._validCssClass);
+    }
+    this._validCssClass = value;
+  }
+
+  public get invalidCssClass(): string | undefined {
+    return this._invalidCssClass;
+  }
+
+  @Input() public set invalidCssClass(value: string | undefined) {
+    if (this._invalidCssClass && value !== this._invalidCssClass && this.hostElement && this.hostElement.nativeElement) {
+      this.renderer2.removeClass(this.hostElement.nativeElement, this._invalidCssClass);
+    }
+    this._invalidCssClass = value;
   }
 
   public get key(): string | null | number {
@@ -143,5 +143,63 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   public ngDoCheck(): void {
+    if (!this.hostElement || !this.hostElement.nativeElement) {
+      return;
+    }
+    const el = this.htmlElement as HTMLInputElement | HTMLTextAreaElement;
+    const isInputOrTextArea = el.tagName === 'INPUT' || el.tagName === 'TEXTAREA';
+    const isRadioOrCheck = isInputOrTextArea && this.isCheckbox || this.isRadio;
+    this._idSet = this.setAttrInternal(this.setId, this._idSet, 'id',
+      !this.ngControl || !this.ngControl.control, () => FormHelpers.computeControlId(this.ngControl.control));
+    this._placeHolderSet = this.setAttrInternal(this.setPlaceHolder, this._placeHolderSet, 'placeholder',
+      !isInputOrTextArea || isRadioOrCheck, () => this._label);
+    this._ariaLabelSet = this.setAttrInternal(this.setAriaLabel, this._ariaLabelSet, 'area-label',
+      !isInputOrTextArea, () => this._label);
+    this.setClass(this.checkCssClass, isRadioOrCheck);
+    this.setClass(this.cssClass, !isRadioOrCheck);
+    this.setClass(this.validCssClass, this.valid && this.showValidStatus && this.touched);
+    this.setClass(this.invalidCssClass, this.invalid && this.touched);
+  }
+
+  private setClass(clsName: string|null|undefined, condition: boolean): void {
+    if (!clsName) {
+      return;
+    }
+    if (condition) {
+      this.renderer2.addClass(this.hostElement.nativeElement, clsName);
+    } else {
+      this.renderer2.removeClass(this.hostElement.nativeElement, clsName);
+    }
+  }
+
+  private setAttrInternal(
+    shouldSet: boolean,
+    isSet: boolean,
+    attrName: string,
+    ignore: boolean,
+    computeAttr: () => string | undefined | null,
+  ): boolean {
+    if (ignore) {
+      return isSet;
+    }
+    if (!shouldSet) {
+      if (isSet) {
+        this.renderer2.removeAttribute(this.hostElement.nativeElement, attrName);
+      }
+      return false;
+    } else {
+      if (!isSet) {
+        if (this.hostElement.nativeElement[attrName]) {
+          return false;
+        }
+      }
+      const val = computeAttr();
+      if (val) {
+        this.renderer2.setAttribute(this.hostElement.nativeElement, attrName, val);
+      } else {
+        this.renderer2.removeAttribute(this.hostElement.nativeElement, attrName);
+      }
+      return true;
+    }
   }
 }
