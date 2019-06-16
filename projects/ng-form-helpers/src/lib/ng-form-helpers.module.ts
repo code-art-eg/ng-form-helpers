@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -52,13 +52,19 @@ import { DefaultTranslationService, TranslationServiceInjectionToken } from './s
     ValidationErrorsComponent,
     ValidationSummaryComponent,
   ],
-  providers: [
-    { provide: ValidationMessagesInjectionToken, useValue: DEFAULT_VALIDATION_MESSAGES, multi: true },
-    { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService, },
-    { provide: ValidatorFactoryToken, useExisting: DefaultValidatorFactoryService, multi: true },
-    { provide: FormControlFactoryToken, useExisting: DefaultFormControlFactoryService, multi: true },
-    { provide: DefaultFormControlFactoryPriorityToken, useValue: DefaultFormControlFactoryPriority },
-    { provide: DefaultValidatorFactoryPriorityToken, useValue: DefaultValidatorFactoryPriority },
-  ]
 })
-export class NgFormHelpersModule { }
+export class NgFormHelpersModule {
+  public static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: NgFormHelpersModule,
+      providers: [
+        { provide: ValidationMessagesInjectionToken, useValue: DEFAULT_VALIDATION_MESSAGES, multi: true },
+        { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService, },
+        { provide: ValidatorFactoryToken, useExisting: DefaultValidatorFactoryService, multi: true },
+        { provide: FormControlFactoryToken, useExisting: DefaultFormControlFactoryService, multi: true },
+        { provide: DefaultFormControlFactoryPriorityToken, useValue: DefaultFormControlFactoryPriority },
+        { provide: DefaultValidatorFactoryPriorityToken, useValue: DefaultValidatorFactoryPriority },
+      ],
+    };
+  }
+}

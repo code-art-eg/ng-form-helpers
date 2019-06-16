@@ -127,7 +127,7 @@ describe('FormGeneratorService', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [CommonModule, ReactiveFormsModule, FormsModule, NgFormHelpersModule],
+      imports: [CommonModule, ReactiveFormsModule, FormsModule, NgFormHelpersModule, NgFormHelpersModule.forRoot()],
     });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;

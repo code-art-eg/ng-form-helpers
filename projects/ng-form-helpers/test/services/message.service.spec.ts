@@ -20,7 +20,7 @@ describe('MessageService', () => {
   beforeEach(() => {
     loadGlobalizeData();
     TestBed.configureTestingModule({
-      imports: [NgFormHelpersModule, AngularGlobalizeModule.forRoot()],
+      imports: [NgFormHelpersModule, NgFormHelpersModule.forRoot(), AngularGlobalizeModule.forRoot()],
       providers: [
         { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'ar', 'de'] }
       ],

@@ -37,6 +37,7 @@ import { NgFormHelpersModule } from '@code-art/ng-form-helpers';
     AngularGlobalizeModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    NgFormHelpersModule.forRoot(),
     NgFormHelpersModule,
   ],
   bootstrap: [AppComponent]

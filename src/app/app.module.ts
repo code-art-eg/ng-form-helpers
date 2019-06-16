@@ -25,6 +25,7 @@ import { NgFormHelpersModule, NgFormHelpersBootstrap4Module } from '@code-art/ng
     FormsModule,
     ReactiveFormsModule,
     NgFormHelpersModule,
+    NgFormHelpersModule.forRoot(),
     NgFormHelpersBootstrap4Module,
   ],
   providers: [{

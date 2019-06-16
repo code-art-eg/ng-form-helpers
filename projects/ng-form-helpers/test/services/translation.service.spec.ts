@@ -21,7 +21,8 @@ describe('DefaultTranslationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        NgFormHelpersModule
+        NgFormHelpersModule,
+        NgFormHelpersModule.forRoot(),
       ],
       providers: [{
         provide: ValidationMessagesInjectionToken, useValue: customMessages, multi: true,
