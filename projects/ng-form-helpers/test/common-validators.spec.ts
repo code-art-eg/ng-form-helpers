@@ -234,6 +234,12 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.url(new FormControl('test text'))).toEqual({ 'url': true }));
     it('should not error on valid url',
       () => expect(CommonValidators.url(new FormControl('https://www.exampl.com'))).toBeNull());
+    it('should not error on valid url with / path',
+      () => expect(CommonValidators.url(new FormControl('https://www.exampl.com/'))).toBeNull());
+    it('should not error on valid url with path',
+      () => expect(CommonValidators.url(new FormControl('https://www.example.com/test/AAB-CccD-8aaaa_VGGGG/abcde'))).toBeNull());
+    it('should not error on valid url with query',
+      () => expect(CommonValidators.url(new FormControl('https://www.exampl.com/test/reew_eee/dds-ddd?test=aaa%20bb&x=111'))).toBeNull());
   });
 
   describe('color', () => {
