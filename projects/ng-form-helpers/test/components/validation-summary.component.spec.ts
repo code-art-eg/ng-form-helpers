@@ -74,10 +74,11 @@ describe('ValidationSummaryComponent', () => {
     expect(component.validationSummary && component.validationSummary.valid).toBe(false);
     expect(component.validationSummary && component.validationSummary.touched).toBe(false);
     expect(component.validationSummary && component.validationSummary.showError).toBe(false);
-    expect(component.validationSummary && component.validationSummary.errors.length).toBe(1);
+
+    expect(component.validationSummary && component.validationSummary.errors.length).toBe(0);
   });
 
-  it('shows errros when invalid and not touched', async () => {
+  it('shows errros when invalid and touched', async () => {
     component.name.setValue('1');
     FormHelpers.markAsTouchedRecursive(component.form);
     fixture.detectChanges();
@@ -92,7 +93,7 @@ describe('ValidationSummaryComponent', () => {
 
   it('does not show errors when valid', async () => {
     component.name.setValue('Test');
-    component.name.markAsTouched();
+    FormHelpers.markAsTouchedRecursive(component.form);
     fixture.detectChanges();
     await fixture.whenStable();
 

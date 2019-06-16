@@ -96,7 +96,9 @@ export class MessageService {
   private getAllControlErrorsInternal(ctl: AbstractControl, errors: Array<Observable<string>>): Array<Observable<string>> {
     FormHelpers.actionRecursive(ctl, (c) => {
       const e = this.getControlErrors(c);
-      errors.push(...e);
+      if (c.touched) {
+        errors.push(...e);
+      }
     });
     return errors;
   }
