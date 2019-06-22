@@ -7,7 +7,7 @@ import { TranslationServiceInjectionToken, ITranslationService } from './transla
 import { ParameterizedMessage, Dictionary, FormValidationContext, FormFieldContext } from '../form-models';
 import { AbstractControl } from '@angular/forms';
 import { FormHelpers } from '../form-helpers';
-const formatMatchRx = /(?<!\{)(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
+const formatMatchRx = /(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
 
 @Injectable({
   providedIn: 'root',
