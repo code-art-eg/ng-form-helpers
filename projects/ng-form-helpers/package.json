@@ -1,6 +1,6 @@
 {
   "name": "@code-art/ng-form-helpers",
-  "version": "8.0.9",
+  "version": "8.1.0",
   "private": false,
   "description": "Directives and classes to for Angular 8 to make creating forms easier.",
   "repository": {
@@ -21,8 +21,8 @@
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
     "@angular/forms": "^8.0.0",
-    "@code-art/angular-globalize": "^3.2.0",
-    "@code-art/rx-helpers": "^1.2.0"
+    "@code-art/angular-globalize": "^8.0.1",
+    "@code-art/rx-helpers": "^8.0.0"
   },
   "dependencies": {
     "change-case": "^3.1.0",

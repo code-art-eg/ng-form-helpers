@@ -309,17 +309,17 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@code-art/angular-globalize@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@code-art/angular-globalize/-/angular-globalize-3.2.0.tgz#5a4a79d814e5aa7ec4180789d9b88153708bc41b"
-  integrity sha512-R+9DXOyefFYZx5/G8l0+zD0QdEtg0wzg6qhs2ihYTOuMgL9/eVvQ/EPMGHDMQcCDOMLjVm6AtpZj6LxikYTuUQ==
+"@code-art/angular-globalize@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@code-art/angular-globalize/-/angular-globalize-8.0.1.tgz#5695149d1998925008846db0b958f58b36b60250"
+  integrity sha512-2dyYuVEuT44TKda6ccyHTrljAGynBdG8JoxEjyx7Dehrmt1BKfOKMkYCSdIaUN6yXdXA2sRreg4p60Be7mO2oQ==
   dependencies:
     tslib "^1.9.0"
 
-"@code-art/rx-helpers@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@code-art/rx-helpers/-/rx-helpers-1.2.0.tgz#0e251f914299a273e9c225cc10ec6177b68ef831"
-  integrity sha512-pjiX0yQ+OJtUf+y74XW/F7BvpIMKzqc20eB27nUL7GtKIhi2VB02/EkollQzDxqA5GQhwsOabnFCjIfoCC/XIA==
+"@code-art/rx-helpers@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@code-art/rx-helpers/-/rx-helpers-8.0.0.tgz#64c1b2e2969c74ad078db5394cde8e137ef5c01e"
+  integrity sha512-Pa/5Hgfb+7rRxSx7ofmohhnpy4foyRAfX6Z5Aeby3Tf63MNpWqbKT47pusrcfeKUiP0TvOwwkkqBijQFBJCrwQ==
   dependencies:
     tslib "^1.9.0"
 
