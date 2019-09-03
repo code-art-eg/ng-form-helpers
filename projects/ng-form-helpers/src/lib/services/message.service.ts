@@ -81,7 +81,7 @@ export class MessageService {
       );
     }
     const ps$ = this.toDictionaryObservable(params, lang);
-    const ob$ = combineLatest(messageFormat$, ps$);
+    const ob$ = combineLatest([messageFormat$, ps$]);
     return ob$.pipe(
       map(([f, p]) => this.formatMessage(f, lang, p)),
     );
@@ -122,7 +122,7 @@ export class MessageService {
     const allKeys = Object.getOwnPropertyNames(params);
     const keys = allKeys.filter((k) => this.isObservableOrParameterizedMessage(params[k]));
     const obsAr = keys.map((k) => this.toObservable(params[k], lang));
-    const obs$ = combineLatest(...obsAr)
+    const obs$ = combineLatest(obsAr)
       .pipe(map((res) => {
         const out: Dictionary<any> = {};
         for (const key of allKeys) {

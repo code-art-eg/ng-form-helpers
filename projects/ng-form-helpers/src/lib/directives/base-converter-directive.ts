@@ -129,7 +129,7 @@ export abstract class BaseConverterDirective<T>
       }
     }
 
-    combineLatest(this.cultureService.cultureObservable, this._valueSubject)
+    combineLatest([this.cultureService.cultureObservable, this._valueSubject])
       .pipe(takeUntilDestroyed(this))
       .subscribe((v) => {
         if (!this._controlValueAccessor) {
