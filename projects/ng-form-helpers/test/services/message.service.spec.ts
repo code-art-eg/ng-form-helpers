@@ -55,8 +55,8 @@ describe('MessageService', () => {
     const res = service.getControlErrors(ctl);
     combineLatest(res).pipe(first()).subscribe((s) => {
       expect(s.length).toBe(2);
-      const m1 = getMessage('min', sentenceCase('testNumber'), 11);
-      const m2 = getMessage('max', sentenceCase('testNumber'), 9);
+      const m1 = getMessage('min', sentenceCase('field'), 11);
+      const m2 = getMessage('max', sentenceCase('field'), 9);
       expect(s).toContain(m1);
       expect(s).toContain(m2);
     });
@@ -67,7 +67,7 @@ describe('MessageService', () => {
     const res = service.getControlErrors(ctl);
     combineLatest(res).pipe(first()).subscribe((s) => {
       expect(s.length).toBe(1);
-      const m1 = getMessage('email', sentenceCase('testEmail'), undefined);
+      const m1 = getMessage('email', sentenceCase('field'), undefined);
       expect(s).toContain(m1);
     });
   });

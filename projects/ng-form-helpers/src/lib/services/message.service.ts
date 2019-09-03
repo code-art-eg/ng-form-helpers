@@ -33,7 +33,7 @@ export class MessageService {
     if (!controlErrors) {
       return errors;
     }
-    const controlKey = FormHelpers.getControlKey(ctl);
+    const controlKey = FormHelpers.getControlKey(ctl) || 'field';
     for (const key in controlErrors) {
       if (!controlErrors.hasOwnProperty(key)) {
         continue;
