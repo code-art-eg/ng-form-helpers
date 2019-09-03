@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
 import { By } from '@angular/platform-browser';
 import { ToNumberDirective } from '../../src/lib/directives/to-number.directive';
 import { loadGlobalizeData } from '../../test/globalize-data-loader';
@@ -17,6 +17,32 @@ class TestComponent {
 
   constructor(formBuilder: FormBuilder) {
     this.formControl = formBuilder.control(1);
+  }
+}
+
+@Component({
+  template: `
+  <input type="text" frmToNumber [frmNumberFormat]="{ useGrouping: false }" [formControl]="formControl" />
+`
+})
+class TestFormatComponent {
+  public formControl: FormControl;
+
+  constructor(formBuilder: FormBuilder) {
+    this.formControl = formBuilder.control(1);
+  }
+}
+
+@Component({
+  template: `
+  <input type="text" frmToNumber frmNumberFormat="percent" [formControl]="formControl" />
+`
+})
+class TestPercentComponent {
+  public formControl: FormControl;
+
+  constructor(formBuilder: FormBuilder) {
+    this.formControl = formBuilder.control(0.25);
   }
 }
 
@@ -39,7 +65,7 @@ describe('ToNumberDirective', () => {
   beforeEach(() => {
     loadGlobalizeData();
     TestBed.configureTestingModule({
-      declarations: [ToNumberDirective, TestComponent, TestDigitsComponent],
+      declarations: [ToNumberDirective, TestComponent, TestDigitsComponent, TestFormatComponent, TestPercentComponent],
       imports: [FormsModule, ReactiveFormsModule, AngularGlobalizeModule.forRoot()],
       providers: [
         { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'ar', 'de'] }
@@ -88,6 +114,49 @@ describe('ToNumberDirective', () => {
 
     cultureService.currentCulture = 'en-GB';
     expect(input.value).toBe('2.144444444');
+  });
+
+  it('updates input format custom format', async () => {
+    fixture = TestBed.createComponent<TestFormatComponent>(TestFormatComponent);
+    component = fixture.componentInstance;
+    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    cultureService.currentCulture = 'en-GB';
+    expect(component.formControl.value).toBe(1);
+    const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
+    fixture.detectChanges();
+    expect(input.value).toBe('1');
+    input.value = '2144444444';
+    input.dispatchEvent(new Event('input'));
+    expect(component.formControl.value).toBe(2144444444);
+
+    cultureService.currentCulture = 'de-DE';
+    expect(input.value).toBe('2144444444');
+
+    cultureService.currentCulture = 'en-GB';
+    expect(input.value).toBe('2144444444');
+  });
+
+  it('updates input format percent', async () => {
+    fixture = TestBed.createComponent<TestPercentComponent>(TestPercentComponent);
+    component = fixture.componentInstance;
+    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    cultureService.currentCulture = 'en-GB';
+    expect(component.formControl.value).toBe(0.25);
+    const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
+    fixture.detectChanges();
+    expect(input.value).toBe('25%');
+    input.value = '46%';
+    input.dispatchEvent(new Event('input'));
+    expect(component.formControl.value).toBe(0.46);
+
+    cultureService.currentCulture = 'de-DE';
+    expect(input.value).toBe(
+      TestBed.get<GlobalizationService>(GlobalizationService)
+        .formatNumber(0.46, 'de-DE', { style: 'percent'})
+    );
+
+    cultureService.currentCulture = 'en-GB';
+    expect(input.value).toBe('46%');
   });
 
   it('updates input format when culture changes', async () => {

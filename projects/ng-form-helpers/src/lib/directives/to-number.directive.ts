@@ -2,6 +2,7 @@ import { Directive, forwardRef, Input, Injector } from '@angular/core';
 import { BaseConverterDirective } from './base-converter-directive';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TypeConverterService, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { NumberFormatterOptions } from 'globalize';
 
 @Directive({
   providers: [{
@@ -14,6 +15,7 @@ import { TypeConverterService, CurrentCultureService, GlobalizationService } fro
 export class ToNumberDirective extends BaseConverterDirective<number> {
 
   @Input('frmToNumber') public digits: number | undefined = undefined;
+  @Input() public frmNumberFormat: 'decimal' | 'percent' | NumberFormatterOptions | undefined = undefined;
 
   constructor(
     injector: Injector,
@@ -30,12 +32,32 @@ export class ToNumberDirective extends BaseConverterDirective<number> {
     } else if (typeof v === 'string' && /^\s*$/.test(v)) {
       return null;
     }
-    const val = this.typeConverter.convertToNumber(v);
+    let val: number | null;
+    if (this.frmNumberFormat) {
+      if (typeof this.frmNumberFormat === 'string') {
+        val = this.globalizationService.parseNumber(v, {
+          style: this.frmNumberFormat,
+        });
+      } else {
+        val =  this.globalizationService.parseNumber(v, this.frmNumberFormat);
+      }
+    } else {
+      val = this.typeConverter.convertToNumber(v);
+    }
     const valid = typeof val === 'number' && !isNaN(val) && val !== Infinity && val !== -Infinity;
     return valid ? val : undefined;
   }
 
   protected formatValue(v: number): string {
+    if (this.frmNumberFormat) {
+      if (typeof this.frmNumberFormat === 'string') {
+        return this.globalizationService.formatNumber(v, {
+          style: this.frmNumberFormat,
+        });
+      } else {
+        return this.globalizationService.formatNumber(v, this.frmNumberFormat);
+      }
+    }
     if (typeof this.digits === 'number' && !isNaN(this.digits) && this.digits > 0) {
       return this.globalizationService.formatNumber(v, {
         maximumFractionDigits: this.digits,

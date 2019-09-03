@@ -16,9 +16,11 @@ export abstract class BaseConverterDirective<T>
   private _disabled = false;
   private _valueSubject: BehaviorSubject<T | null | string> = new BehaviorSubject<T | null | string>(null);
 
-  constructor(private readonly injector: Injector,
+  constructor(
+    protected readonly injector: Injector,
     protected readonly typeConverter: TypeConverterService,
-    private readonly cultureService: CurrentCultureService) {
+    private readonly cultureService: CurrentCultureService,
+  ) {
   }
 
   public writeValue(val: any): void {
