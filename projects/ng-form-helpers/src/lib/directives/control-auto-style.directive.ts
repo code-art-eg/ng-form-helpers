@@ -153,7 +153,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
       !this.ngControl || !this.ngControl.control, () => FormHelpers.computeControlId(this.ngControl.control));
     this._placeHolderSet = this.setAttrInternal(this.setPlaceHolder, this._placeHolderSet, 'placeholder',
       !isInputOrTextArea || isRadioOrCheck, () => this._label);
-    this._ariaLabelSet = this.setAttrInternal(this.setAriaLabel, this._ariaLabelSet, 'area-label',
+    this._ariaLabelSet = this.setAttrInternal(this.setAriaLabel, this._ariaLabelSet, 'aria-label',
       !isInputOrTextArea, () => this._label);
     this.setClass(this.checkCssClass, isRadioOrCheck);
     this.setClass(this.cssClass, !isRadioOrCheck);
