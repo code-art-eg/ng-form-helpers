@@ -32,7 +32,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   private _placeHolderSet = false;
 
   private _label?: string;
-
+  private readonly _isIE: boolean;
   constructor(
     private readonly messageService: MessageService,
     private readonly ngControl: NgControl,
@@ -44,6 +44,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
     @Optional() @Inject(FormControlValidCssClassToken) formControlValidCssClass?: string,
     @Optional() @Inject(FormControlInvalidCssClassToken) formControlInvalidCssClass?: string,
   ) {
+    const d = document as any;
+    const w = window as any;
+    this._isIE = !!w.MSInputMethodContext && !!(d.documentMode);
     this.cssClass = formControlCssClass;
     this.invalidCssClass = formControlInvalidCssClass;
     this.validCssClass = formControlValidCssClass;
@@ -55,6 +58,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   @Input() public set checkCssClass(value: string | undefined) {
+    if (this._isIE) {
+      return;
+    }
     if (this._checkCssClass && value !== this._checkCssClass && this.hostElement && this.hostElement.nativeElement) {
       this.renderer2.removeClass(this.hostElement.nativeElement, this._checkCssClass);
     }
@@ -66,6 +72,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   @Input() public set cssClass(value: string | undefined) {
+    if (this._isIE) {
+      return;
+    }
     if (this._cssClass && value !== this._cssClass && this.hostElement && this.hostElement.nativeElement) {
       this.renderer2.removeClass(this.hostElement.nativeElement, this._cssClass);
     }
@@ -77,6 +86,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   @Input() public set validCssClass(value: string | undefined) {
+    if (this._isIE) {
+      return;
+    }
     if (this._validCssClass && value !== this._validCssClass && this.hostElement && this.hostElement.nativeElement) {
       this.renderer2.removeClass(this.hostElement.nativeElement, this._validCssClass);
     }
@@ -88,6 +100,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   @Input() public set invalidCssClass(value: string | undefined) {
+    if (this._isIE) {
+      return;
+    }
     if (this._invalidCssClass && value !== this._invalidCssClass && this.hostElement && this.hostElement.nativeElement) {
       this.renderer2.removeClass(this.hostElement.nativeElement, this._invalidCssClass);
     }
@@ -137,6 +152,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   public ngOnInit(): void {
+    if (this._isIE) {
+      return;
+    }
     const key = this.key;
     if (typeof key === 'string') {
       this.messageService.getMessage({
@@ -152,6 +170,9 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   public ngDoCheck(): void {
+    if (this._isIE) {
+      return;
+    }
     if (!this.hostElement || !this.hostElement.nativeElement) {
       return;
     }
