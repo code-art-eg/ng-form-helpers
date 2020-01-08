@@ -20,11 +20,11 @@ export class MessageService {
   ) {
   }
 
-  public getAllControlErrors(ctl: AbstractControl): Array<Observable<string>> {
-    return this.getAllControlErrorsInternal(ctl, []);
+  public getAllControlErrors(ctl: AbstractControl, prefix?: string): Array<Observable<string>> {
+    return this.getAllControlErrorsInternal(ctl, [], prefix);
   }
 
-  public getControlErrors(ctl: AbstractControl): Array<Observable<string>> {
+  public getControlErrors(ctl: AbstractControl, prefix?: string): Array<Observable<string>> {
     const errors: Array<Observable<string>> = [];
     if (!ctl) {
       return errors;
@@ -33,7 +33,12 @@ export class MessageService {
     if (!controlErrors) {
       return errors;
     }
-    const controlKey = FormHelpers.getControlKey(ctl) || 'field';
+    let controlKey = FormHelpers.getControlKey(ctl);
+    if (!controlKey) {
+      controlKey = 'field';
+    } else if (prefix) {
+      controlKey = `${prefix}.${controlKey}`;
+    }
     for (const key in controlErrors) {
       if (!controlErrors.hasOwnProperty(key)) {
         continue;
@@ -93,9 +98,13 @@ export class MessageService {
     );
   }
 
-  private getAllControlErrorsInternal(ctl: AbstractControl, errors: Array<Observable<string>>): Array<Observable<string>> {
+  private getAllControlErrorsInternal(
+    ctl: AbstractControl,
+    errors: Array<Observable<string>>,
+    prefix: string | undefined,
+  ): Array<Observable<string>> {
     FormHelpers.actionRecursive(ctl, (c) => {
-      const e = this.getControlErrors(c);
+      const e = this.getControlErrors(c, prefix);
       if (c.touched) {
         errors.push(...e);
       }

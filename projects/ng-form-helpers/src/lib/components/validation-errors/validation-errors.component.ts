@@ -9,6 +9,7 @@ import { AbstractControl, FormGroupDirective } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Dictionary } from '../../form-models';
 import { MessageService } from '../../services/message.service';
+import { TranslationKeyPrefixDirective } from '../../directives/translation-key-prefix.directive';
 
 @Component({
   selector: 'frm-validation-errors',
@@ -29,6 +30,7 @@ export class ValidationErrorsComponent implements OnInit {
     @Optional() @Inject(FormControlCssClassToken) formControlCssClass?: string,
     @Optional() @Inject(FormControlValidCssClassToken) formControlValidCssClass?: string,
     @Optional() @Inject(FormControlInvalidCssClassToken) formControlInvalidCssClass?: string,
+    @Optional() private readonly translationKeyPrefix?: TranslationKeyPrefixDirective,
     @Optional() private readonly _formGroup?: FormGroupDirective,
   ) {
     this.validationErrorCssClass = validationErrorCssClass;
@@ -95,7 +97,9 @@ export class ValidationErrorsComponent implements OnInit {
   }
 
   public get errors(): Array<Observable<string>> {
-    return this.control ? this.messageService.getControlErrors(this.control) : [];
+    return this.control ? this.messageService.getControlErrors(this.control,
+      this.translationKeyPrefix && this.translationKeyPrefix.frmTrnKeyPrefix
+    ) : [];
   }
 
   public ngOnInit(): void {

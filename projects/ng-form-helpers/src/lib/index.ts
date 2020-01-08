@@ -11,6 +11,7 @@ export * from './directives/to-date.directive';
 export * from './directives/to-integer.directive';
 export * from './directives/to-null.directive';
 export * from './directives/to-number.directive';
+export * from './directives/translation-key-prefix.directive';
 
 export * from './common-validators';
 export * from './form-helpers';

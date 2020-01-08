@@ -1,5 +1,5 @@
-import { Directive, HostBinding, Optional, Inject, ElementRef, Input, OnDestroy, OnInit, DoCheck, Renderer2 } from '@angular/core';
-import { NgControl, FormControl } from '@angular/forms';
+import { Directive, Optional, Inject, ElementRef, Input, OnDestroy, OnInit, DoCheck, Renderer2 } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import {
   FormControlCssClassToken,
   FormControlValidCssClassToken,
@@ -10,6 +10,7 @@ import { FormHelpers } from '../form-helpers';
 import { FormFieldContext } from '../form-models';
 import { takeUntilDestroyed } from '@code-art/rx-helpers';
 import { MessageService } from '../services/message.service';
+import { TranslationKeyPrefixDirective } from './translation-key-prefix.directive';
 
 @Directive({
   selector: '[frmControlAutoStyle]',
@@ -37,6 +38,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
     private readonly ngControl: NgControl,
     private readonly hostElement: ElementRef,
     private readonly renderer2: Renderer2,
+    @Optional() private readonly translationKeyPrefix?: TranslationKeyPrefixDirective,
     @Optional() @Inject(FormControlCssClassToken) formControlCssClass?: string,
     @Optional() @Inject(FormControlCheckCssClassToken) formControlCheckCssClass?: string,
     @Optional() @Inject(FormControlValidCssClassToken) formControlValidCssClass?: string,
@@ -93,7 +95,14 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
   }
 
   public get key(): string | null | number {
-    return this.ngControl.control ? FormHelpers.getControlKey(this.ngControl.control) : null;
+    if (!this.ngControl.control) {
+      return null;
+    }
+    const key = FormHelpers.getControlKey(this.ngControl.control);
+    if (this.translationKeyPrefix && this.translationKeyPrefix.frmTrnKeyPrefix) {
+      return `${this.translationKeyPrefix.frmTrnKeyPrefix}.${key}`;
+    }
+    return key;
   }
 
   public get isPassword(): boolean {

@@ -6,6 +6,7 @@ import {
   NgFormHelpersBootstrap4Module,
   TranslationServiceInjectionToken,
   DefaultTranslationService,
+  TranslationKeyPrefixDirective,
 } from '../../src/lib';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularGlobalizeModule } from '@code-art/angular-globalize';
@@ -13,7 +14,8 @@ import { AngularGlobalizeModule } from '@code-art/angular-globalize';
 @Component({
   template: `
     <form [formGroup]="form">
-      <input type="text" formControlName="firstName" frmControlAutoStyle #inputControl/>
+      <input type="text" formControlName="firstName" frmControlAutoStyle #inputControl />
+      <input type="text" formControlName="lastName" frmControlAutoStyle #prefixInputControl frmTrnKeyPrefix="customer" />
       <input type="checkbox" formControlName="accept" frmControlAutoStyle #inputCheck />
       <textarea formControlName="address" frmControlAutoStyle #areaControl></textarea>
       <select formControlName="country" frmControlAutoStyle #selectControl>
@@ -25,10 +27,12 @@ import { AngularGlobalizeModule } from '@code-art/angular-globalize';
 class TestComponent {
   public readonly form: FormGroup;
   public readonly firstName: FormControl;
+  public readonly lastName: FormControl;
   public readonly address: FormControl;
   public readonly country: FormControl;
   public readonly accept: FormControl;
   @ViewChild('inputControl', { static: false }) public inputControl?: ElementRef<HTMLInputElement>;
+  @ViewChild('prefixInputControl', { static: false }) public prefixInputControl?: ElementRef<HTMLInputElement>;
   @ViewChild('inputCheck', { static: false }) public inputCheck?: ElementRef<HTMLInputElement>;
   @ViewChild('areaControl', { static: false }) public areaControl?: ElementRef<HTMLTextAreaElement>;
   @ViewChild('selectControl', { static: false }) public selectControl?: ElementRef<HTMLSelectElement>;
@@ -43,8 +47,15 @@ class TestComponent {
       Validators.minLength(2),
       Validators.maxLength(10),
     ]);
+    this.lastName = formBuilder.control(null, [
+      Validators.required,
+      CommonValidators.personName,
+      Validators.minLength(2),
+      Validators.maxLength(10),
+    ]);
     this.form = formBuilder.group({
       firstName: this.firstName,
+      lastName: this.lastName,
       accept: this.accept,
       address: this.address,
       country: this.country,
@@ -57,7 +68,7 @@ describe('ControlAutoStyleDirective', () => {
   let component: TestComponent;
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent, ControlAutoStyleDirective],
+      declarations: [TestComponent, ControlAutoStyleDirective, TranslationKeyPrefixDirective],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -128,6 +139,51 @@ describe('ControlAutoStyleDirective', () => {
       return;
     }
     expect(el.nativeElement.placeholder).toBe('First name');
+  });
+
+  it('sets input aria-label', () => {
+    const el = component.inputControl;
+    expect(el).toBeTruthy();
+    if (!el) {
+      return;
+    }
+    expect(el.nativeElement.getAttribute('aria-label')).toBe('First name');
+  });
+
+  it('sets input prefixed placeholder', () => {
+    const el = component.prefixInputControl;
+    expect(el).toBeTruthy();
+    if (!el) {
+      return;
+    }
+    expect(el.nativeElement.placeholder).toBe('Customer last name');
+  });
+
+  it('sets input prefixed aria-label', () => {
+    const el = component.prefixInputControl;
+    expect(el).toBeTruthy();
+    if (!el) {
+      return;
+    }
+    expect(el.nativeElement.getAttribute('aria-label')).toBe('Customer last name');
+  });
+
+  it('sets textarea placeholder', () => {
+    const el = component.areaControl;
+    expect(el).toBeTruthy();
+    if (!el) {
+      return;
+    }
+    expect(el.nativeElement.placeholder).toBe('Address');
+  });
+
+  it('sets textarea aria-label', () => {
+    const el = component.areaControl;
+    expect(el).toBeTruthy();
+    if (!el) {
+      return;
+    }
+    expect(el.nativeElement.getAttribute('aria-label')).toBe('Address');
   });
 
   it('sets textarea default class', () => {

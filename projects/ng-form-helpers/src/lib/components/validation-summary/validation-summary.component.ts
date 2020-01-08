@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { FormValidationContext } from '../../form-models';
 import { MessageService } from '../../services/message.service';
+import { TranslationKeyPrefixDirective } from '../../directives/translation-key-prefix.directive';
 
 @Component({
   selector: 'frm-validation-summary',
@@ -28,6 +29,7 @@ export class ValidationSummaryComponent implements AfterViewInit {
     @Inject(ValidationSummaryContainerCssClassToken) @Optional() containerCssClass?: string,
     @Inject(ValidationSummaryHeaderCssClassToken) @Optional() headingCssClass?: string,
     @Inject(ValidationSummaryErrorCssClassToken) @Optional() errorCssClass?: string,
+    @Optional() private readonly translationKeyPrefix?: TranslationKeyPrefixDirective,
   ) {
     this._formGroupDirective = formGroupDirective;
     this.containerCssClass = containerCssClass || '';
@@ -68,7 +70,8 @@ export class ValidationSummaryComponent implements AfterViewInit {
   }
 
   get errors(): Array<Observable<string>> {
-    return this.form ? this.messageService.getAllControlErrors(this.form) : [];
+    return this.form ? this.messageService.getAllControlErrors(this.form,
+      this.translationKeyPrefix && this.translationKeyPrefix.frmTrnKeyPrefix) : [];
   }
 
   public ngAfterViewInit(): void {

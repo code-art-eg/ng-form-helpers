@@ -24,6 +24,7 @@ import { RemoveHostDirective } from './directives/remove-host.directive';
 import { ControlAutoStyleDirective } from './directives/control-auto-style.directive';
 import { ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
 import { DefaultTranslationService, TranslationServiceInjectionToken } from './services/translation.service';
+import { TranslationKeyPrefixDirective } from './directives/translation-key-prefix.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { DefaultTranslationService, TranslationServiceInjectionToken } from './s
     ToNumberDirective,
     ToIntegerDirective,
     ToDateDirective,
+    TranslationKeyPrefixDirective,
     // tslint:disable-next-line: deprecation
     RemoveHostDirective,
     ControlAutoStyleDirective,
@@ -48,6 +50,7 @@ import { DefaultTranslationService, TranslationServiceInjectionToken } from './s
     ToDateDirective,
     // tslint:disable-next-line: deprecation
     RemoveHostDirective,
+    TranslationKeyPrefixDirective,
     ControlAutoStyleDirective,
     ValidationErrorsComponent,
     ValidationSummaryComponent,
