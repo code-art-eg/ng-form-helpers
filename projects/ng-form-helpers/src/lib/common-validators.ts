@@ -199,11 +199,12 @@ export class CommonValidators {
       if (compareResult === null || oper(compareResult)) {
         return null;
       }
+      let n = name;
       if (c.value instanceof Date) {
-        name += 'Date';
+        n += 'Date';
       }
       const res: Dictionary<any> = {};
-      res[name] = {
+      res[n] = {
         otherKey: {
           messageKey: otherKey,
           context: FormFieldContext,

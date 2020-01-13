@@ -16,7 +16,7 @@ export const DEFAULT_VALIDATION_MESSAGES: StringDictionary = {
   'personName': 'The value of {key} must be a valid name.',
   'phone': 'The value of {key} must be a valid phone number.',
   'integer': 'The value of {key} must be an integer.',
-  'number': 'The value of {key} must be a number.',
+  'numeric': 'The value of {key} must be a number.',
   'date': '{key} must be a valid date.',
   'minDate': '{key} must be at or after {minDate}.',
   'maxDate': '{key} must be at or before {maxDate}.',
