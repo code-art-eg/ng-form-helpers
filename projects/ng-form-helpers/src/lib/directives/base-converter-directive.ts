@@ -1,10 +1,11 @@
-import { OnDestroy, OnInit, Injector, Injectable } from '@angular/core';
+import { OnDestroy, OnInit, Injector, Injectable, Directive } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { combineLatest, BehaviorSubject } from 'rxjs';
 
 import { takeUntilDestroyed } from '@code-art/rx-helpers';
 import { CurrentCultureService, TypeConverterService } from '@code-art/angular-globalize';
 
+@Directive()
 @Injectable()
 export abstract class BaseConverterDirective<T>
   implements OnDestroy, OnInit, ControlValueAccessor {

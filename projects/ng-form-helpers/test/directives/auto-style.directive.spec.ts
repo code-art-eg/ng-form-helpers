@@ -31,11 +31,11 @@ class TestComponent {
   public readonly address: FormControl;
   public readonly country: FormControl;
   public readonly accept: FormControl;
-  @ViewChild('inputControl', { static: false }) public inputControl?: ElementRef<HTMLInputElement>;
-  @ViewChild('prefixInputControl', { static: false }) public prefixInputControl?: ElementRef<HTMLInputElement>;
-  @ViewChild('inputCheck', { static: false }) public inputCheck?: ElementRef<HTMLInputElement>;
-  @ViewChild('areaControl', { static: false }) public areaControl?: ElementRef<HTMLTextAreaElement>;
-  @ViewChild('selectControl', { static: false }) public selectControl?: ElementRef<HTMLSelectElement>;
+  @ViewChild('inputControl') public inputControl?: ElementRef<HTMLInputElement>;
+  @ViewChild('prefixInputControl') public prefixInputControl?: ElementRef<HTMLInputElement>;
+  @ViewChild('inputCheck') public inputCheck?: ElementRef<HTMLInputElement>;
+  @ViewChild('areaControl') public areaControl?: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('selectControl') public selectControl?: ElementRef<HTMLSelectElement>;
 
   constructor(formBuilder: FormBuilder) {
     this.accept = formBuilder.control(false, [Validators.requiredTrue]);

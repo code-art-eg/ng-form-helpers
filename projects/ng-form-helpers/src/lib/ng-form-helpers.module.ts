@@ -57,7 +57,7 @@ import { TranslationKeyPrefixDirective } from './directives/translation-key-pref
   ],
 })
 export class NgFormHelpersModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<NgFormHelpersModule> {
     return {
       ngModule: NgFormHelpersModule,
       providers: [
