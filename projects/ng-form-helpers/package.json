@@ -5,7 +5,7 @@
   "description": "Directives and classes to for Angular 9 to make creating forms easier.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/code-art-egy/ng-form-helpers.git"
+    "url": "git+https://github.com/code-art-eg/ng-form-helpers.git"
   },
   "keywords": [
     "angular",
