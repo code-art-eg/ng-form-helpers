@@ -8,10 +8,11 @@ import {
 } from '../css-constants';
 import { FormHelpers } from '../form-helpers';
 import { FormFieldContext } from '../form-models';
-import { takeUntilDestroyed } from '@code-art/rx-helpers';
+import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
 import { MessageService } from '../services/message.service';
 import { TranslationKeyPrefixDirective } from './translation-key-prefix.directive';
 
+@TakeUntilDestroyed()
 @Directive({
   selector: '[frmControlAutoStyle]',
 })

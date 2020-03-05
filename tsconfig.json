@@ -39,6 +39,7 @@
       "cldr/*": [
         "node_modules/cldrjs/dist/cldr/*"
       ]
-    }
+    },
+    "importHelpers": true
   }
 }

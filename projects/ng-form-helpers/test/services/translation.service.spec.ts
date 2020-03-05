@@ -28,7 +28,7 @@ describe('DefaultTranslationService', () => {
         provide: ValidationMessagesInjectionToken, useValue: customMessages, multi: true,
       }],
     });
-    service = TestBed.get<DefaultTranslationService>(DefaultTranslationService);
+    service = TestBed.inject<DefaultTranslationService>(DefaultTranslationService);
   });
 
   for (const key in DEFAULT_VALIDATION_MESSAGES) {
@@ -50,7 +50,7 @@ describe('DefaultTranslationService', () => {
   }
 
   it('is provided via injection token', () => {
-    expect(TestBed.get(TranslationServiceInjectionToken)).toBe(service);
+    expect(TestBed.inject(TranslationServiceInjectionToken)).toBe(service);
   });
 
   it('returns sentence case', async () => {

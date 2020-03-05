@@ -23,6 +23,9 @@ export class ValidationErrorsComponent implements OnInit {
   @Input() public formControlInvalidCssClass?: string;
 
   private _control: AbstractControl | null = null;
+  private _name: Array<string | number> | string | null = null;
+  private _controlName: Array<string | number> | string |null = null;
+  private _controlSet = false;
 
   constructor(
     private readonly messageService: MessageService,
@@ -42,9 +45,24 @@ export class ValidationErrorsComponent implements OnInit {
   @Input()
   public set control(val: AbstractControl | null) {
     this._control = val;
+    this._controlName = null;
+    this._name = null;
+    this._controlSet = true;
   }
 
   public get control(): AbstractControl | null {
+    if (!this._control || this._controlName !== this._name) {
+      this._controlName = this._name;
+      if (!this._controlSet && this._name) {
+        if (this._formGroup) {
+          this._control = this._formGroup.control.get(this._name);
+        } else {
+          this._control = null;
+        }
+      } else {
+        this._control = null;
+      }
+    }
     return this._control;
   }
 
@@ -54,12 +72,9 @@ export class ValidationErrorsComponent implements OnInit {
       throw new Error(`Cannot set name property on ValidationErrorsComponent without a formGroup.
       Please use the frmControl property or use a component withing a container having [FormGroup] directive.`);
     }
-    const control = this._formGroup.control.get(val);
-    if (!control) {
-      throw new Error(`Cannot set name property on ValidationErrorsComponent.
-      The form group doesn't contain a control with path ${JSON.stringify(val)}.`);
-    }
-    this._control = control;
+    this._name = val;
+    this._control = null;
+    this._controlSet = false;
   }
 
   public get dummyControlClass(): Dictionary<boolean> {
@@ -103,7 +118,7 @@ export class ValidationErrorsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (!this._control) {
+    if (!this.control) {
       const error = `Control for ValidationErrorsComponent was not initialized.
        You can either set it by setting the control property
        or by including it in a container with [FormGroup] directive and setting the name property.`;

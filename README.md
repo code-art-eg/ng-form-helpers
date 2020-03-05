@@ -2,7 +2,7 @@
 
 ## About the library
 
-This library contains directives and classes to help make creating forms easier with [Angular 6 and 7](https://angular.io).
+This library contains directives and classes to help make creating forms easier with [Angular 9](https://angular.io).
 
 ## Consuming the library
 

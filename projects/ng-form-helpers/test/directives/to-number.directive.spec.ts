@@ -5,7 +5,10 @@ import { Component } from '@angular/core';
 import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
 import { By } from '@angular/platform-browser';
 import { ToNumberDirective } from '../../src/lib/directives/to-number.directive';
-import { loadGlobalizeData } from '../../test/globalize-data-loader';
+import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-en-gb.module';
+import { GlobalizeDataDeModule } from 'src/app/globalize-data/globalize-data-de.module';
+import { GlobalizeDataArEGModule } from 'src/app/globalize-data/globalize-data-ar-eg.module';
+import { GlobalizeDataModule } from 'src/app/globalize-data/globalize-data.module';
 
 @Component({
   template: `
@@ -63,13 +66,17 @@ describe('ToNumberDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   beforeEach(() => {
-    loadGlobalizeData();
     TestBed.configureTestingModule({
       declarations: [ToNumberDirective, TestComponent, TestDigitsComponent, TestFormatComponent, TestPercentComponent],
-      imports: [FormsModule, ReactiveFormsModule, AngularGlobalizeModule.forRoot()],
-      providers: [
-        { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'ar', 'de'] }
-      ]
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        AngularGlobalizeModule.forRoot(['en-GB', 'de', 'ar-EG']),
+        GlobalizeDataEnGBModule,
+        GlobalizeDataDeModule,
+        GlobalizeDataArEGModule,
+        GlobalizeDataModule,
+      ],
     });
 
     fixture = TestBed.createComponent<TestComponent>(TestComponent);
@@ -99,7 +106,7 @@ describe('ToNumberDirective', () => {
   it('updates input format with more than default digits', async () => {
     fixture = TestBed.createComponent<TestDigitsComponent>(TestDigitsComponent);
     component = fixture.componentInstance;
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(1);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -119,7 +126,7 @@ describe('ToNumberDirective', () => {
   it('updates input format custom format', async () => {
     fixture = TestBed.createComponent<TestFormatComponent>(TestFormatComponent);
     component = fixture.componentInstance;
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(1);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -139,7 +146,7 @@ describe('ToNumberDirective', () => {
   it('updates input format percent', async () => {
     fixture = TestBed.createComponent<TestPercentComponent>(TestPercentComponent);
     component = fixture.componentInstance;
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(0.25);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -151,8 +158,8 @@ describe('ToNumberDirective', () => {
 
     cultureService.currentCulture = 'de-DE';
     expect(input.value).toBe(
-      TestBed.get<GlobalizationService>(GlobalizationService)
-        .formatNumber(0.46, 'de-DE', { style: 'percent'})
+      TestBed.inject<GlobalizationService>(GlobalizationService)
+        .formatNumber(0.46, 'de-DE', { style: 'percent' })
     );
 
     cultureService.currentCulture = 'en-GB';
@@ -160,7 +167,7 @@ describe('ToNumberDirective', () => {
   });
 
   it('updates input format when culture changes', async () => {
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(1);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -179,7 +186,7 @@ describe('ToNumberDirective', () => {
   });
 
   it('updates model with string values when input has invalid number', async () => {
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(1);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;

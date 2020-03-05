@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { sentenceCase } from 'change-case';
 import { first } from 'rxjs/operators';
-import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
 
 import {
   NgFormHelpersModule,
@@ -9,23 +9,29 @@ import {
   FormFieldContext,
   DEFAULT_VALIDATION_MESSAGES,
 } from '../../src/public_api';
-import { loadGlobalizeData } from '../globalize-data-loader';
 import { FormControl, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { MessageService } from '../../src/lib/services/message.service';
+import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-en-gb.module';
+import { GlobalizeDataDeModule } from 'src/app/globalize-data/globalize-data-de.module';
+import { GlobalizeDataArEGModule } from 'src/app/globalize-data/globalize-data-ar-eg.module';
+import { GlobalizeDataModule } from 'src/app/globalize-data/globalize-data.module';
 
 describe('MessageService', () => {
   let service: MessageService;
 
   beforeEach(() => {
-    loadGlobalizeData();
     TestBed.configureTestingModule({
-      imports: [NgFormHelpersModule, NgFormHelpersModule.forRoot(), AngularGlobalizeModule.forRoot()],
-      providers: [
-        { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'ar', 'de'] }
+      imports: [
+        NgFormHelpersModule, NgFormHelpersModule.forRoot(),
+        AngularGlobalizeModule.forRoot(['en-GB', 'de', 'ar-EG']),
+        GlobalizeDataEnGBModule,
+        GlobalizeDataDeModule,
+        GlobalizeDataArEGModule,
+        GlobalizeDataModule,
       ],
     });
-    service = TestBed.get<MessageService>(MessageService);
+    service = TestBed.inject<MessageService>(MessageService);
   });
 
   function toString(p: any): string {
@@ -87,8 +93,8 @@ describe('MessageService', () => {
         },
       },
     });
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
-    const globalizationService = TestBed.get<GlobalizationService>(GlobalizationService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
+    const globalizationService = TestBed.inject<GlobalizationService>(GlobalizationService);
     cultureService.currentCulture = 'en-GB';
     let res: string | undefined;
     const sub = ob$.subscribe((v) => res = v);

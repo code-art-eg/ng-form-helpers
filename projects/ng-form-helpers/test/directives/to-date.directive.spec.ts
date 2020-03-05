@@ -2,10 +2,13 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
 import { By } from '@angular/platform-browser';
 import { ToDateDirective } from '../../src/lib';
-import { loadGlobalizeData } from '../globalize-data-loader';
+import { GlobalizeDataModule } from 'src/app/globalize-data/globalize-data.module';
+import { GlobalizeDataArEGModule } from 'src/app/globalize-data/globalize-data-ar-eg.module';
+import { GlobalizeDataDeModule } from 'src/app/globalize-data/globalize-data-de.module';
+import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-en-gb.module';
 
 const testDate1 = new Date(2001, 0, 1);
 const testDate2 = new Date(1999, 11, 31);
@@ -47,18 +50,22 @@ describe('ToDateDirective', () => {
   let testDate2DeF = '';
   let testDate2ArF = '';
   beforeEach(() => {
-    loadGlobalizeData();
     TestBed.configureTestingModule({
       declarations: [ToDateDirective, TestComponent, TestFormatComponent],
-      imports: [FormsModule, ReactiveFormsModule, AngularGlobalizeModule.forRoot()],
-      providers: [
-        { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB', 'ar', 'de'] }
-      ]
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        AngularGlobalizeModule.forRoot(['en-GB', 'de', 'ar-EG']),
+        GlobalizeDataEnGBModule,
+        GlobalizeDataDeModule,
+        GlobalizeDataArEGModule,
+        GlobalizeDataModule,
+      ],
     });
 
     fixture = TestBed.createComponent<TestComponent>(TestComponent);
     component = fixture.componentInstance;
-    const converter = TestBed.get<GlobalizationService>(GlobalizationService);
+    const converter = TestBed.inject<GlobalizationService>(GlobalizationService);
     testDate1En = converter.formatDate(testDate1, 'en-GB', {
       datetime: 'short',
     });
@@ -107,7 +114,7 @@ describe('ToDateDirective', () => {
   });
 
   it('updates input format when culture changes', async () => {
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(testDate1);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -128,7 +135,7 @@ describe('ToDateDirective', () => {
   it('updates input format with custom format when culture changes', async () => {
     const formatFixture: ComponentFixture<TestFormatComponent> = TestBed.createComponent<TestFormatComponent>(TestFormatComponent);
     const formatComponent: TestFormatComponent = formatFixture.componentInstance;
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(formatComponent.formControl.value).toBe(testDate1);
     const input = formatFixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
@@ -147,7 +154,7 @@ describe('ToDateDirective', () => {
   });
 
   it('updates model with string values when input has invalid date', async () => {
-    const cultureService = TestBed.get<CurrentCultureService>(CurrentCultureService);
+    const cultureService = TestBed.inject<CurrentCultureService>(CurrentCultureService);
     cultureService.currentCulture = 'en-GB';
     expect(component.formControl.value).toBe(testDate1);
     const input = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;

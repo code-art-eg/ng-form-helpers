@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductList, Product } from '../../models/test-models';
 import { TypedFormGroup, TypedFormControl, TypedFormArray } from '@code-art/ng-form-helpers';
 import { Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { takeUntilDestroyed } from '@code-art/rx-helpers';
+import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
 
 function requiredIfField2(ctl: AbstractControl): ValidationErrors | null {
   const form = ctl.parent as TypedFormGroup<ProductList>;
@@ -19,6 +19,7 @@ function requiredIfField2(ctl: AbstractControl): ValidationErrors | null {
   return null;
 }
 
+@TakeUntilDestroyed()
 @Component({
   templateUrl: './typed-form-example.component.html',
   styleUrls: ['./typed-form-example.component.scss']

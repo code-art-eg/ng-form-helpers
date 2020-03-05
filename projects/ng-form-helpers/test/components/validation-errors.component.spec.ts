@@ -1,12 +1,13 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component, ViewChild, ComponentRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule } from '@code-art/angular-globalize';
-import { loadGlobalizeData } from '../globalize-data-loader';
 
 import { CommonValidators, TranslationServiceInjectionToken, DefaultTranslationService } from '../../src/lib';
 import { ValidationErrorsComponent } from '../../src/lib/components/validation-errors/validation-errors.component';
+import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-en-gb.module';
+import { GlobalizeDataModule } from 'src/app/globalize-data/globalize-data.module';
 
 @Component({
   template: `
@@ -44,12 +45,16 @@ describe('ValidationErrorsComponent', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   beforeEach(() => {
-    loadGlobalizeData();
     TestBed.configureTestingModule({
       declarations: [ValidationErrorsComponent, TestComponent],
-      imports: [FormsModule, ReactiveFormsModule, AngularGlobalizeModule.forRoot()],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        AngularGlobalizeModule.forRoot(['en-GB']),
+        GlobalizeDataEnGBModule,
+        GlobalizeDataModule,
+      ],
       providers: [
-        { provide: CANG_SUPPORTED_CULTURES, useValue: ['en-GB'] },
         { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService },
       ]
     });
