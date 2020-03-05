@@ -7,7 +7,7 @@ This library contains directives and classes to help make creating forms easier 
 ## Consuming the library
 
 ### 1. Installing the library
-The library depends on [@code-art/angular-globalize](https://github.com/sherif-elmetainy/angular-globalize) library. Please refer to that project page for information about how to setup this library as this information is not covered here.
+The library depends on [@code-art/angular-globalize](https://github.com/code-art-eg/angular-globalize) library. Please refer to that project page for information about how to setup this library as this information is not covered here.
 
 To install the library in your Angular application you need to run the following commands:
 
