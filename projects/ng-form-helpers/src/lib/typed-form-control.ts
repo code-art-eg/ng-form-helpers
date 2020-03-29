@@ -11,8 +11,8 @@ export class TypedFormControl<T> extends FormControl {
   public readonly value!: T;
   public readonly valueChanges!: Observable<T>;
   constructor(state: ValueOrFormState<T>,
-    validatorOrOpts?: TypedValidators<T>,
-    asyncValidator?: TypedAsyncValidators<T>,
+              validatorOrOpts?: TypedValidators<T>,
+              asyncValidator?: TypedAsyncValidators<T>,
   ) {
     super(state,
       validatorOrOpts as ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,

@@ -58,8 +58,7 @@ describe('FormHelpers', () => {
   const checkstatus = (p: (c: AbstractControl) => boolean) => {
     expect(p(component.form.controls.name)).toBe(true);
     expect(p(component.form.controls.children)).toBe(true);
-    for (let i = 0; i < component.form.controls.children.controls.length; i++) {
-      const child = component.form.controls.children.controls[i];
+    for (const child of component.form.controls.children.controls) {
       expect(p(child.controls.name)).toBe(true);
       expect(p(child.controls.age)).toBe(true);
     }

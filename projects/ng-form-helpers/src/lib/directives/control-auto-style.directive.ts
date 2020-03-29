@@ -1,4 +1,6 @@
-import { Directive, Optional, Inject, ElementRef, Input, OnDestroy, OnInit, DoCheck, Renderer2 } from '@angular/core';
+import { Directive, Optional, Inject, ElementRef, Input, Renderer2 } from '@angular/core';
+import type { OnDestroy, OnInit, DoCheck } from '@angular/core';
+
 import { NgControl } from '@angular/forms';
 import {
   FormControlCssClassToken,

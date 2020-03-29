@@ -1,11 +1,13 @@
-import { Component, Optional, Inject, Input, OnInit } from '@angular/core';
+import { Component, Optional, Inject, Input } from '@angular/core';
+import type { OnInit } from '@angular/core';
 import {
   ValidationErrorCssClassToken,
   FormControlCssClassToken,
   FormControlValidCssClassToken,
   FormControlInvalidCssClassToken,
 } from '../../css-constants';
-import { AbstractControl, FormGroupDirective } from '@angular/forms';
+import type { AbstractControl } from '@angular/forms';
+import { FormGroupDirective } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Dictionary } from '../../form-models';
 import { MessageService } from '../../services/message.service';
@@ -24,7 +26,7 @@ export class ValidationErrorsComponent implements OnInit {
 
   private _control: AbstractControl | null = null;
   private _name: Array<string | number> | string | null = null;
-  private _controlName: Array<string | number> | string |null = null;
+  private _controlName: Array<string | number> | string | null = null;
   private _controlSet = false;
 
   constructor(

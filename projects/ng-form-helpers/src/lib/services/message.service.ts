@@ -5,7 +5,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { TranslationServiceInjectionToken, ITranslationService } from './translation.service';
 import { ParameterizedMessage, Dictionary, FormValidationContext, FormFieldContext } from '../form-models';
-import { AbstractControl } from '@angular/forms';
+import type { AbstractControl } from '@angular/forms';
 import { FormHelpers } from '../form-helpers';
 const formatMatchRx = /(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
 
@@ -46,7 +46,7 @@ export class MessageService {
       const errorVal = controlErrors[key];
       if (typeof errorVal === 'string') {
         errors.push(of(errorVal));
-      } if (errorVal && typeof errorVal === 'object') {
+      } else if (errorVal && typeof errorVal === 'object') {
         errors.push(this.getMessage({
           messageKey: key,
           context: FormValidationContext,

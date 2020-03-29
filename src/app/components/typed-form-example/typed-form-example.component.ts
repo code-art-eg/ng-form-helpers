@@ -3,6 +3,7 @@ import { ProductList, Product } from '../../models/test-models';
 import { TypedFormGroup, TypedFormControl, TypedFormArray } from '@code-art/ng-form-helpers';
 import { Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
+import { CommonValidators } from '../../../../projects/ng-form-helpers/src/lib';
 
 function requiredIfField2(ctl: AbstractControl): ValidationErrors | null {
   const form = ctl.parent as TypedFormGroup<ProductList>;
@@ -34,8 +35,8 @@ export class TypedFormExampleComponent implements OnInit, OnDestroy {
       accept: new TypedFormControl<boolean>(false, [Validators.requiredTrue]),
       products: new TypedFormArray<Product>([], () => new TypedFormGroup<Product>({
         name: new TypedFormControl<string>(null, [Validators.required, Validators.maxLength(20)]),
-        price: new TypedFormControl<number>(null, [Validators.required]),
-        quantity: new TypedFormControl<number>(null, [Validators.required, Validators.maxLength(20)]),
+        price: new TypedFormControl<number>(null, [Validators.required, CommonValidators.numeric]),
+        quantity: new TypedFormControl<number>(null, [Validators.required, CommonValidators.integer]),
       })),
     });
 

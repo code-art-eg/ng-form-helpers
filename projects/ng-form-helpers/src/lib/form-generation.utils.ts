@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ValidatorFn, AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import type { ValidatorFn, AbstractControl, AsyncValidatorFn } from '@angular/forms';
 
 import { ValidatorInfo, FormControlInfo, AsyncValidatorInfo } from './form-generation-models';
 import { TypedFormControl } from './typed-form-control';

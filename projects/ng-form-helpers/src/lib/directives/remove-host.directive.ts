@@ -1,4 +1,6 @@
-import { Directive, ElementRef, OnInit } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
+import type { OnInit } from '@angular/core';
+
 
 /**
  * @deprecated Should not use except in very special cases, prefer to use component with attribute selector.

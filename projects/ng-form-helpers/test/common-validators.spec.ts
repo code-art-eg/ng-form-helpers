@@ -1,5 +1,5 @@
 import { CommonValidators, FormFieldContext } from '../src/public_api';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Dictionary } from '@code-art/angular-globalize/lib/models';
 
 describe('CommonValidators', () => {
@@ -15,9 +15,9 @@ describe('CommonValidators', () => {
       () => { expect(CommonValidators.personName(new FormControl(undefined))).toBeNull(); });
 
     it('should error if not a string',
-      () => { expect(CommonValidators.personName(new FormControl(4))).toEqual({ 'personName': true }); });
+      () => { expect(CommonValidators.personName(new FormControl(4))).toEqual({ personName: true }); });
     it('should error if non letter',
-      () => { expect(CommonValidators.personName(new FormControl('a45'))).toEqual({ 'personName': true }); });
+      () => { expect(CommonValidators.personName(new FormControl('a45'))).toEqual({ personName: true }); });
     it('should not error for english names',
       () => { expect(CommonValidators.personName(new FormControl('Robert'))).toBeNull(); });
     it('should not error for western european names',
@@ -45,15 +45,15 @@ describe('CommonValidators', () => {
       () => { expect(CommonValidators.numeric(new FormControl(undefined))).toBeNull(); });
 
     it('should error if not a number',
-      () => { expect(CommonValidators.numeric(new FormControl('aa'))).toEqual({ 'numeric': true }); });
+      () => { expect(CommonValidators.numeric(new FormControl('aa'))).toEqual({ numeric: true }); });
     it('should error if a string contains a number',
-      () => { expect(CommonValidators.numeric(new FormControl('5'))).toEqual({ 'numeric': true }); });
+      () => { expect(CommonValidators.numeric(new FormControl('5'))).toEqual({ numeric: true }); });
     it('should error if NaN',
-      () => { expect(CommonValidators.numeric(new FormControl(NaN))).toEqual({ 'numeric': true }); });
+      () => { expect(CommonValidators.numeric(new FormControl(NaN))).toEqual({ numeric: true }); });
     it('should error if infinity',
-      () => { expect(CommonValidators.numeric(new FormControl(Infinity))).toEqual({ 'numeric': true }); });
+      () => { expect(CommonValidators.numeric(new FormControl(Infinity))).toEqual({ numeric: true }); });
     it('should error if -infinity',
-      () => { expect(CommonValidators.numeric(new FormControl(-Infinity))).toEqual({ 'numeric': true }); });
+      () => { expect(CommonValidators.numeric(new FormControl(-Infinity))).toEqual({ numeric: true }); });
     it('should not error for numbers',
       () => { expect(CommonValidators.numeric(new FormControl(-5.5))).toBeNull(); });
   });
@@ -66,17 +66,17 @@ describe('CommonValidators', () => {
       () => { expect(CommonValidators.integer(new FormControl(undefined))).toBeNull(); });
 
     it('should error if not a number',
-      () => { expect(CommonValidators.integer(new FormControl('aa'))).toEqual({ 'integer': true }); });
+      () => { expect(CommonValidators.integer(new FormControl('aa'))).toEqual({ integer: true }); });
     it('should error if a string contains a number',
-      () => { expect(CommonValidators.integer(new FormControl('5'))).toEqual({ 'integer': true }); });
+      () => { expect(CommonValidators.integer(new FormControl('5'))).toEqual({ integer: true }); });
     it('should error if NaN',
-      () => { expect(CommonValidators.integer(new FormControl(NaN))).toEqual({ 'integer': true }); });
+      () => { expect(CommonValidators.integer(new FormControl(NaN))).toEqual({ integer: true }); });
     it('should error if infinity',
-      () => { expect(CommonValidators.integer(new FormControl(Infinity))).toEqual({ 'integer': true }); });
+      () => { expect(CommonValidators.integer(new FormControl(Infinity))).toEqual({ integer: true }); });
     it('should error if -infinity',
-      () => { expect(CommonValidators.integer(new FormControl(-Infinity))).toEqual({ 'integer': true }); });
+      () => { expect(CommonValidators.integer(new FormControl(-Infinity))).toEqual({ integer: true }); });
     it('should not error for non-integers',
-      () => { expect(CommonValidators.integer(new FormControl(-5.5))).toEqual({ 'integer': true }); });
+      () => { expect(CommonValidators.integer(new FormControl(-5.5))).toEqual({ integer: true }); });
     it('should not error for integers',
       () => { expect(CommonValidators.integer(new FormControl(-5))).toBeNull(); });
   });
@@ -90,7 +90,7 @@ describe('CommonValidators', () => {
       () => { expect(CommonValidators.date(new FormControl(undefined))).toBeNull(); });
 
     it('should error if not a date',
-      () => { expect(CommonValidators.date(new FormControl('aa'))).toEqual({ 'date': true }); });
+      () => { expect(CommonValidators.date(new FormControl('aa'))).toEqual({ date: true }); });
     it('should not error if a date',
       () => {
         expect(CommonValidators.date(new FormControl(new Date()))).toBeNull();
@@ -214,9 +214,9 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.email(new FormControl(null))).toBeNull());
 
     it('should error on invalid email',
-      () => expect(CommonValidators.email(new FormControl('text'))).toEqual({ 'email': true }));
+      () => expect(CommonValidators.email(new FormControl('text'))).toEqual({ email: true }));
     it('should error on invalid email with space',
-      () => expect(CommonValidators.email(new FormControl('test text'))).toEqual({ 'email': true }));
+      () => expect(CommonValidators.email(new FormControl('test text'))).toEqual({ email: true }));
     it('should not error on valid email',
       () => expect(CommonValidators.email(new FormControl('test@gmail.com'))).toBeNull());
   });
@@ -229,9 +229,9 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.url(new FormControl(null))).toBeNull());
 
     it('should error on invalid url',
-      () => expect(CommonValidators.url(new FormControl('text'))).toEqual({ 'url': true }));
+      () => expect(CommonValidators.url(new FormControl('text'))).toEqual({ url: true }));
     it('should error on invalid url with space',
-      () => expect(CommonValidators.url(new FormControl('test text'))).toEqual({ 'url': true }));
+      () => expect(CommonValidators.url(new FormControl('test text'))).toEqual({ url: true }));
     it('should not error on valid url',
       () => expect(CommonValidators.url(new FormControl('https://www.exampl.com'))).toBeNull());
     it('should not error on valid url with / path',
@@ -250,9 +250,9 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.color(new FormControl(null))).toBeNull());
 
     it('should error on invalid color',
-      () => expect(CommonValidators.color(new FormControl('text'))).toEqual({ 'color': true }));
+      () => expect(CommonValidators.color(new FormControl('text'))).toEqual({ color: true }));
     it('should error on invalid color with space',
-      () => expect(CommonValidators.color(new FormControl('test text'))).toEqual({ 'color': true }));
+      () => expect(CommonValidators.color(new FormControl('test text'))).toEqual({ color: true }));
     it('should not error on valid color',
       () => expect(CommonValidators.color(new FormControl('#44ddaaee'))).toBeNull());
   });
@@ -265,7 +265,7 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.phone(new FormControl(null))).toBeNull());
 
     it('should error on invalid phone',
-      () => expect(CommonValidators.phone(new FormControl('test text'))).toEqual({ 'phone': true }));
+      () => expect(CommonValidators.phone(new FormControl('test text'))).toEqual({ phone: true }));
     it('should not error on valid phone',
       () => expect(CommonValidators.phone(new FormControl('+1 800 555 5555'))).toBeNull());
   });
@@ -279,12 +279,12 @@ describe('CommonValidators', () => {
 
     it('should error on non date',
       () => expect(CommonValidators.ageRange(1, 100)(new FormControl(88))).toEqual(
-        { 'ageRange': { minAge: 1, maxAge: 100, actual: 88 } }));
+        { ageRange: { minAge: 1, maxAge: 100, actual: 88 } }));
     it('should not error on valid age',
       () => expect(CommonValidators.ageRange(20, 30)(new FormControl(new Date(new Date().getFullYear() - 25, 1, 1)))).toBeNull());
     it('should error on invalid age',
       () => expect(CommonValidators.ageRange(20, 30)(new FormControl(new Date(new Date().getFullYear()
-        - 31, new Date().getMonth(), new Date().getDate())))).toEqual({ 'ageRange': { minAge: 20, maxAge: 30, actual: 31 } }));
+        - 31, new Date().getMonth(), new Date().getDate())))).toEqual({ ageRange: { minAge: 20, maxAge: 30, actual: 31 } }));
   });
 
   describe('compareValidators', () => {
@@ -292,19 +292,19 @@ describe('CommonValidators', () => {
       a: new FormControl(),
       b: new FormControl(),
     });
-    const a = form.controls['a'];
-    const b = form.controls['b'];
+    const a = form.controls.a;
+    const b = form.controls.b;
     function test(name: string, desc: string, aVal: any, bVal: any, error: boolean) {
       it(desc, () => {
         a.setValue(aVal);
         b.setValue(bVal);
-        let f = (CommonValidators as any)[name] as Function;
+        let f = (CommonValidators as any)[name] as (other: string) => ValidatorFn;
         f = f.bind(CommonValidators);
         const res = f('b')(a);
         if (error) {
           const e: Dictionary<any> = {};
           e[name + (aVal instanceof Date ? 'Date' : '')] = {
-            'otherKey': {
+            otherKey: {
               messageKey: 'b',
               context: FormFieldContext,
             },

@@ -1,5 +1,8 @@
-import { OnDestroy, OnInit, Injector, Injectable, Directive } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Injector, Directive } from '@angular/core';
+import type { OnDestroy, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
+
 import { combineLatest, BehaviorSubject } from 'rxjs';
 
 import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';

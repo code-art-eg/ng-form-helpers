@@ -12,8 +12,10 @@ export class TypedFormArray<T> extends FormArray {
   public readonly valueChanges!: Observable<T[]>;
   public controls!: Array<FormControlType<T>>;
 
-  private static initFormControls<T>(states: FormArrayState<T>,
-    factory: FormControlFactory<T>): Array<FormControlType<T>> {
+  private static initFormControls<T>(
+    states: FormArrayState<T>,
+    factory: FormControlFactory<T>,
+  ): Array<FormControlType<T>> {
     const result = [] as Array<FormControlType<T>>;
     if (states) {
       for (const state of states) {
@@ -24,8 +26,8 @@ export class TypedFormArray<T> extends FormArray {
   }
 
   constructor(states: FormArrayState<T>, private readonly factory: FormControlFactory<T>,
-    validatorOrOpts?: TypedValidators<T>,
-    asyncValidator?: TypedAsyncValidators<T>) {
+              validatorOrOpts?: TypedValidators<T>,
+              asyncValidator?: TypedAsyncValidators<T>) {
     super(TypedFormArray.initFormControls<T>(states, factory),
       validatorOrOpts as ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
       asyncValidator as AsyncValidatorFn | AsyncValidatorFn[] | null);

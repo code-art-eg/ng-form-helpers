@@ -14,9 +14,9 @@ describe('DefaultTranslationService', () => {
   let service: DefaultTranslationService;
 
   const customMessages: StringDictionary = {
-    'email': '1',
-    'test': '2',
-    'bla': '3',
+    email: '1',
+    test: '2',
+    bla: '3',
   };
   beforeEach(() => {
     TestBed.configureTestingModule({

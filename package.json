@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4204 --open",
-    "build": "ng build ng-form-helpers --prod && cp-cli README.md dist/ng-form-helpers/README.md && cp-cli LICENSE dist/ng-form-helpers/LICENSE && cd dist/ng-form-helpers && tar -czf ../ng-form-helpers.tgz *",
+    "build": "ng build ng-form-helpers --prod && cp-cli README.md dist/ng-form-helpers/README.md && cp-cli LICENSE dist/ng-form-helpers/LICENSE",
     "test": "ng test ng-form-helpers",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -42,7 +42,7 @@
     "@types/node": "^12.11.1",
     "@types/xregexp": "^3.0.29",
     "bootstrap": "^4.3.1",
-    "codelyzer": "5.1.2",
+    "codelyzer": "~5.2.2",
     "cp-cli": "^1.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -50,14 +50,13 @@
     "karma": "~4.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~2.1.0",
-    "karma-jasmine": "~2.0.1",
+    "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "1.4.2",
-    "ng-packagr": "^9.0.0",
+    "ng-packagr": "9.1.0",
     "popper.js": "^1.15.0",
     "protractor": "~5.4.3",
-    "tar": "^4.4.7",
     "ts-node": "~8.3.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.7.5"
+    "tslint": "~6.1.0",
+    "typescript": "~3.8.3"
   }
 }

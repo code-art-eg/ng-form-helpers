@@ -3,7 +3,7 @@ import { ValidatorFactoryToken, IFormControlFactory, IValidatorFactory, FormCont
 import { FormGroupInfo, FormControlInfo, FormArrayInfo } from '../form-generation-models';
 import { TypedFormGroup } from '../typed-form-group';
 import { Dictionary, FormGroupConfig } from '../form-models';
-import { AbstractControl } from '@angular/forms';
+import type { AbstractControl } from '@angular/forms';
 import {
   isInputGroupInfo,
   isFormControlInfo,

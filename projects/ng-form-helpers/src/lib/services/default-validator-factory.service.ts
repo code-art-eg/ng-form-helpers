@@ -5,10 +5,10 @@ import { IValidatorFactory, DefaultFormControlFactoryPriorityToken, DefaultValid
 import { ValidatorInfo, AsyncValidatorInfo } from '../form-generation-models';
 import { CommonValidators } from '../common-validators';
 import { Dictionary } from '../form-models';
-
+type ValidatorFactory = (...a: any[]) => ValidatorFn;
 interface ValidatorConfig {
   isFunction: boolean;
-  type: Function;
+  type: ValidatorFn | ValidatorFactory;
 }
 
 const ValidatorsConfig: Dictionary<ValidatorConfig> = {
@@ -54,7 +54,7 @@ export class DefaultValidatorFactoryService implements IValidatorFactory {
       return null;
     }
     if (valConfig.isFunction) {
-      return valConfig.type.apply(null, info.parameters);
+      return (valConfig.type as ValidatorFactory).apply(null, info.parameters || []);
     } else {
       return valConfig.type as ValidatorFn;
     }

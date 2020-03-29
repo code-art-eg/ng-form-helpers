@@ -13,8 +13,8 @@ export class TypedFormGroup<T extends object> extends FormGroup {
   public readonly controls!: FormGroupConfig<T>;
 
   constructor(controls: FormGroupConfig<T>,
-    validatorOrOpts?: TypedValidators<T>,
-    asyncValidator?: TypedAsyncValidators<T>) {
+              validatorOrOpts?: TypedValidators<T>,
+              asyncValidator?: TypedAsyncValidators<T>) {
     super(controls,
       validatorOrOpts as ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
       asyncValidator as AsyncValidatorFn | AsyncValidatorFn[] | null
@@ -22,12 +22,12 @@ export class TypedFormGroup<T extends object> extends FormGroup {
   }
 
   public setValue(value: T,
-    options?: SetValueOptions): void {
+                  options?: SetValueOptions): void {
     super.setValue(value, options);
   }
 
   public patchValue(value: Partial<T>,
-    options?: SetValueOptions): void {
+                    options?: SetValueOptions): void {
     super.patchValue(value, options);
   }
 

@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import type { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import XRegExp from 'xregexp';
 import { FormHelpers } from './form-helpers';
 import { Dictionary } from '@code-art/angular-globalize/lib/models';
@@ -97,7 +97,7 @@ export class CommonValidators {
         return null;
       }
       if (v instanceof Date) {
-        return v.valueOf() >= minDate.valueOf() ? null : { minDate: { minDate: minDate, actual: v } };
+        return v.valueOf() >= minDate.valueOf() ? null : { minDate: { minDate, actual: v } };
       }
       return null;
     };
@@ -113,7 +113,7 @@ export class CommonValidators {
         return null;
       }
       if (v instanceof Date) {
-        return v.valueOf() <= maxDate.valueOf() ? null : { maxDate: { maxDate: maxDate, actual: v } };
+        return v.valueOf() <= maxDate.valueOf() ? null : { maxDate: { maxDate, actual: v } };
       }
       return null;
     };
@@ -160,10 +160,10 @@ export class CommonValidators {
       if (c.value instanceof Date) {
         const diff = Math.floor((new Date().valueOf() - c.value.valueOf()) / 1000 / 3600 / 24 / 365);
         if (diff < minAge || diff > maxAge) {
-          return { ageRange: { minAge: minAge, maxAge: maxAge, actual: diff } };
+          return { ageRange: { minAge, maxAge, actual: diff } };
         }
       } else {
-        return { ageRange: { minAge: minAge, maxAge: maxAge, actual: c.value } };
+        return { ageRange: { minAge, maxAge, actual: c.value } };
       }
       return null;
     };

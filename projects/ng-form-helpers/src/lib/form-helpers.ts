@@ -1,4 +1,5 @@
-import { AbstractControl, FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
+import type { AbstractControl } from '@angular/forms';
 
 export class FormHelpers {
   public static markAsTouchedRecursive(ctl: AbstractControl) {

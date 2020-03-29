@@ -1,4 +1,5 @@
-import { Component, Optional, Inject, Input, AfterViewInit } from '@angular/core';
+import { Component, Optional, Inject, Input } from '@angular/core';
+import type { AfterViewInit } from '@angular/core';
 import { FormGroupDirective, FormGroup } from '@angular/forms';
 import {
   ValidationSummaryContainerCssClassToken,
