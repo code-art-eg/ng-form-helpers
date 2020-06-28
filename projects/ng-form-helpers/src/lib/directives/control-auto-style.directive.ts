@@ -1,18 +1,25 @@
-import { Directive, Optional, Inject, ElementRef, Input, Renderer2 } from '@angular/core';
-import type { OnDestroy, OnInit, DoCheck } from '@angular/core';
-
-import { NgControl } from '@angular/forms';
 import {
-  FormControlCssClassToken,
-  FormControlValidCssClassToken,
-  FormControlInvalidCssClassToken,
-  FormControlCheckCssClassToken,
-} from '../css-constants';
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  Optional,
+  Renderer2,
+  } from '@angular/core';
+import type { DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { NgControl } from '@angular/forms';
+import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
 import { FormHelpers } from '../form-helpers';
 import { FormFieldContext } from '../form-models';
-import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
 import { MessageService } from '../services/message.service';
 import { TranslationKeyPrefixDirective } from './translation-key-prefix.directive';
+
+import {
+  FormControlCheckCssClassToken,
+  FormControlCssClassToken,
+  FormControlInvalidCssClassToken,
+  FormControlValidCssClassToken,
+} from '../css-constants';
 
 @TakeUntilDestroyed()
 @Directive({
@@ -154,6 +161,20 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
     return !!this.ngControl.invalid;
   }
 
+  public get hasValue(): boolean {
+    const val = this.ngControl.value;
+    if (val === undefined && val === null) {
+      return false;
+    }
+    if (typeof val === 'string' && val.length === 0) {
+      return false;
+    }
+    if (Array.isArray(val) && val.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
   public ngOnInit(): void {
     if (this._isIE) {
       return;
@@ -161,8 +182,8 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
     const key = this.key;
     if (typeof key === 'string') {
       this.messageService.getMessage({
-        messageKey: key,
         context: FormFieldContext,
+        messageKey: key,
       })
         .pipe(takeUntilDestroyed(this))
         .subscribe((l) => this._label = l);
@@ -190,7 +211,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
       !isInputOrTextArea, () => this._label);
     this.setClass(this.checkCssClass, isRadioOrCheck);
     this.setClass(this.cssClass, !isRadioOrCheck);
-    this.setClass(this.validCssClass, this.valid && this.showValidStatus && this.touched);
+    this.setClass(this.validCssClass, this.valid && this.showValidStatus && this.touched && this.hasValue);
     this.setClass(this.invalidCssClass, this.invalid && this.touched);
   }
 
