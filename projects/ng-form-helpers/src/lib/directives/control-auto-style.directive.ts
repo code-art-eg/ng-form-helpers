@@ -163,7 +163,7 @@ export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
 
   public get hasValue(): boolean {
     const val = this.ngControl.value;
-    if (val === undefined && val === null) {
+    if (val === undefined || val === null) {
       return false;
     }
     if (typeof val === 'string' && val.length === 0) {
