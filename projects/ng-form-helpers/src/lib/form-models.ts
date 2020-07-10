@@ -39,8 +39,8 @@ export type FormControlType<T> =
   T extends string ? TypedFormControl<string> :
   T extends boolean ? TypedFormControl<boolean> :
   T extends Date ? TypedFormControl<Date> :
-  T extends any[] ? TypedFormArray<T[number]> :
   T extends ControlType ? TypedFormControl<T> :
+  T extends any[] ? TypedFormArray<T[number]> :
   T extends object ? TypedFormGroup<T> :
   never;
 
