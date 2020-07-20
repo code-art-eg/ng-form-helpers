@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule, CANG_SUPPORTED_CULTURES, CurrentCultureService, GlobalizationService } from '@code-art-eg/angular-globalize';
 import { By } from '@angular/platform-browser';
 import { ToNumberDirective } from '../../src/lib/directives/to-number.directive';
 import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-en-gb.module';

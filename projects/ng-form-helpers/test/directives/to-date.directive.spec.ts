@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AngularGlobalizeModule, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule, CurrentCultureService, GlobalizationService } from '@code-art-eg/angular-globalize';
 import { By } from '@angular/platform-browser';
 import { ToDateDirective } from '../../src/lib';
 import { GlobalizeDataModule } from 'src/app/globalize-data/globalize-data.module';

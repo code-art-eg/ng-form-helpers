@@ -5,8 +5,8 @@ import type { ControlValueAccessor } from '@angular/forms';
 
 import { combineLatest, BehaviorSubject } from 'rxjs';
 
-import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
-import { CurrentCultureService, TypeConverterService } from '@code-art/angular-globalize';
+import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art-eg/rx-helpers';
+import { CurrentCultureService, TypeConverterService } from '@code-art-eg/angular-globalize';
 
 @TakeUntilDestroyed()
 @Directive()

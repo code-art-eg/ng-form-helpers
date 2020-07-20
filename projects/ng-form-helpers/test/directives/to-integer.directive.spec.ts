@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule, CurrentCultureService } from '@code-art/angular-globalize';
+import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule, CurrentCultureService } from '@code-art-eg/angular-globalize';
 
 import { ToIntegerDirective } from '../../src/lib/directives/to-integer.directive';
 import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-en-gb.module';

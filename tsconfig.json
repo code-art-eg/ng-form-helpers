@@ -21,10 +21,10 @@
       "dom"
     ],
     "paths": {
-      "@code-art/ng-form-helpers": [
+      "@code-art-eg/ng-form-helpers": [
         "dist/ng-form-helpers"
       ],
-      "@code-art/ng-form-helpers/*": [
+      "@code-art-eg/ng-form-helpers/*": [
         "dist/ng-form-helpers/*"
       ],
       "globalize": [

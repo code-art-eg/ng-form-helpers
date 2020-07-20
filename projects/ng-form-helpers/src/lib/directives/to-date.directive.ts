@@ -2,7 +2,7 @@ import { Directive, forwardRef, Input } from '@angular/core';
 import { BaseConverterDirective } from './base-converter-directive';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateFormatterOptions } from 'globalize';
-import { GlobalizationService } from '@code-art/angular-globalize';
+import { GlobalizationService } from '@code-art-eg/angular-globalize';
 
 @Directive({
   providers: [{

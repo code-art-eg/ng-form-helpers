@@ -9,7 +9,7 @@ import {
   TranslationKeyPrefixDirective,
 } from '../../src/lib';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AngularGlobalizeModule } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule } from '@code-art-eg/angular-globalize';
 
 @Component({
   template: `

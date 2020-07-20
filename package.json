@@ -7,7 +7,8 @@
     "build": "ng build ng-form-helpers --prod && cp-cli README.md dist/ng-form-helpers/README.md && cp-cli LICENSE dist/ng-form-helpers/LICENSE",
     "test": "ng test ng-form-helpers",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "pub": "cd dist/ng-form-helpers && yarn publish"
   },
   "private": true,
   "dependencies": {
@@ -19,8 +20,8 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
-    "@code-art/angular-globalize": "9.0.1",
-    "@code-art/rx-helpers": "~9.0.1",
+    "@code-art-eg/angular-globalize": "^9.0.5",
+    "@code-art-eg/rx-helpers": "^9.0.3",
     "change-case": "^3.1.0",
     "cldr-data": "36.0.0",
     "core-js": "^2.5.4",

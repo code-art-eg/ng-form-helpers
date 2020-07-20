@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductList, Product } from '../../models/test-models';
-import { TypedFormGroup, TypedFormControl, TypedFormArray } from '@code-art/ng-form-helpers';
+import { TypedFormGroup, TypedFormControl, TypedFormArray } from '@code-art-eg/ng-form-helpers';
 import { Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art/rx-helpers';
+import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art-eg/rx-helpers';
 import { CommonValidators } from '../../../../projects/ng-form-helpers/src/lib';
 
 function requiredIfField2(ctl: AbstractControl): ValidationErrors | null {

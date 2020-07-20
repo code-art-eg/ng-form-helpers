@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { sentenceCase } from 'change-case';
-import { Dictionary } from '@code-art/angular-globalize/lib/models';
+import { Dictionary } from '@code-art-eg/angular-globalize/lib/models';
 
 import { ValidationMessagesInjectionToken } from './validation-messages';
 import { FormValidationContext, StringDictionary } from '../form-models';

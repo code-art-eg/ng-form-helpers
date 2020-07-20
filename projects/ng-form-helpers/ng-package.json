@@ -8,12 +8,12 @@
   "lib": {
     "entryFile": "src/public_api.ts",
     "umdModuleIds": {
-      "@code-art/angular-globalize": "codeArt.angularGlobalize",
-      "@code-art/rx-helpers": "codeArt.rxHelpers",
+      "@code-art-eg/angular-globalize": "codeArt.angularGlobalize",
+      "@code-art-eg/rx-helpers": "codeArt.rxHelpers",
       "xregexp": "XRegExp",
       "change-case": "changeCase"
     },
-    "amdId": "@code-art/ng-form-helpers",
+    "amdId": "@code-art-eg/ng-form-helpers",
     "umdId": "codeArt.ngFormHelpers"
   }
 }

@@ -1,7 +1,7 @@
 import { Directive, forwardRef, Input, Injector } from '@angular/core';
 import { BaseConverterDirective } from './base-converter-directive';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TypeConverterService, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { TypeConverterService, CurrentCultureService, GlobalizationService } from '@code-art-eg/angular-globalize';
 import { NumberFormatterOptions } from 'globalize';
 
 @Directive({

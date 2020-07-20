@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { sentenceCase } from 'change-case';
 import { first } from 'rxjs/operators';
-import { AngularGlobalizeModule, CurrentCultureService, GlobalizationService } from '@code-art/angular-globalize';
+import { AngularGlobalizeModule, CurrentCultureService, GlobalizationService } from '@code-art-eg/angular-globalize';
 
 import {
   NgFormHelpersModule,

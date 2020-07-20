@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
-import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule } from '@code-art/angular-globalize';
+import { CANG_SUPPORTED_CULTURES, AngularGlobalizeModule } from '@code-art-eg/angular-globalize';
 
 import { CommonValidators, TranslationServiceInjectionToken, DefaultTranslationService } from '../../src/lib';
 import { ValidationErrorsComponent } from '../../src/lib/components/validation-errors/validation-errors.component';

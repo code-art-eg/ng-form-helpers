@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { CurrentCultureService, StringFormatterService } from '@code-art/angular-globalize';
+import { CurrentCultureService, StringFormatterService } from '@code-art-eg/angular-globalize';
 import { Observable, isObservable, of, combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 

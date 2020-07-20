@@ -1,6 +1,6 @@
 import { CommonValidators, FormFieldContext } from '../src/public_api';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Dictionary } from '@code-art/angular-globalize/lib/models';
+import { Dictionary } from '@code-art-eg/angular-globalize/lib/models';
 
 describe('CommonValidators', () => {
 

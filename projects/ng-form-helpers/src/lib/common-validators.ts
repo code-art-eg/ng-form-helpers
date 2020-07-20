@@ -1,7 +1,7 @@
 import type { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import XRegExp from 'xregexp';
 import { FormHelpers } from './form-helpers';
-import { Dictionary } from '@code-art/angular-globalize/lib/models';
+import { Dictionary } from '@code-art-eg/angular-globalize/lib/models';
 import { FormFieldContext } from './form-models';
 
 const letterExpression = '(?:\\p{M}|\\p{Ll}|\\p{Lu}|\\p{Lt}|\\p{Lo}|\\p{Lm})';
