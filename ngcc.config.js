@@ -5,6 +5,11 @@ module.exports = {
         /\/globalize\/dist\/globalize$/
       ]
     },
+    '@code-art-eg/ng-form-helpers': {
+      ignorableDeepImportMatchers: [
+        /\/globalize\/dist\/globalize$/
+      ]
+    },
     '@code-art-eg/angular-globalize': {
       ignorableDeepImportMatchers: [
         /\/globalize\/dist\/globalize$/

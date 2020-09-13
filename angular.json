@@ -19,6 +19,15 @@
           "options": {
             "aot": true,
             "outputPath": "dist/ng-form-helpers-app",
+            "allowedCommonJsDependencies": [
+              "globalize", 
+              "globalize/number", 
+              "globalize/currency", 
+              "globalize/date", 
+              "globalize/plural", 
+              "change-case",
+              "xregexp"
+            ],
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
