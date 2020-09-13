@@ -1,8 +1,8 @@
 {
   "name": "@code-art-eg/ng-form-helpers",
-  "version": "9.2.1",
+  "version": "10.0.0",
   "private": false,
-  "description": "Directives and classes to for Angular 9 to make creating forms easier.",
+  "description": "Directives and classes to for Angular 10 to make creating forms easier.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/code-art-eg/ng-form-helpers.git"
@@ -18,14 +18,15 @@
   },
   "homepage": "https://github.com/code-art-eg/ng-form-helpers#readme",
   "peerDependencies": {
-    "@angular/common": "^9.0.4",
-    "@angular/core": "^9.0.4",
-    "@angular/forms": "^9.0.4",
-    "@code-art-eg/angular-globalize": "^9.0.0",
-    "@code-art-eg/rx-helpers": "^9.0.1"
+    "@angular/common": ">=10.0.0 < 11",
+    "@angular/core": ">=10.0.0 < 11",
+    "@angular/forms": ">=10.0.0 < 11",
+    "@code-art-eg/angular-globalize": "^10.0.0",
+    "@code-art-eg/rx-helpers": "^10.0.0"
   },
   "dependencies": {
     "change-case": "^3.1.0",
+    "tslib": "^2.0.0",
     "xregexp": "^4.2.4"
   }
 }
