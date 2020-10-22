@@ -240,6 +240,12 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.url(new FormControl('https://www.example.com/test/AAB-CccD-8aaaa_VGGGG/abcde'))).toBeNull());
     it('should not error on valid url with query',
       () => expect(CommonValidators.url(new FormControl('https://www.exampl.com/test/reew_eee/dds-ddd?test=aaa%20bb&x=111'))).toBeNull());
+    it('should not error on valid url port',
+      () => expect(CommonValidators.url(new FormControl('https://www.exampl.com:44233/test/reew_eee/dds-ddd'))).toBeNull());
+    it('should not error on localhost',
+      () => expect(CommonValidators.url(new FormControl('https://localhost/test/reew_eee/'))).toBeNull());
+    it('should not error on localhost with port',
+      () => expect(CommonValidators.url(new FormControl('https://localhost:44233/test/reew_eee/'))).toBeNull());
   });
 
   describe('color', () => {
