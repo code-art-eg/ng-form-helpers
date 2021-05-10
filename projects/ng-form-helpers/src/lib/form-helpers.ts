@@ -28,22 +28,22 @@ export class FormHelpers {
     if (!ctl) {
       return null;
     }
-    if (!ctl.parent) {
+    if (!ctl.parent!) {
       return null;
     }
-    const parentId = this.computeControlId(ctl.parent);
+    const parentId = this.computeControlId(ctl.parent!);
     return (parentId ? parentId + '_' : '') + this.getControlKey(ctl);
   }
 
   public static getControlKey(ctl: AbstractControl): string | number | null {
-    if (!ctl.parent) {
+    if (!ctl.parent!) {
       return null;
     }
     if (ctl.parent instanceof FormArray) {
       return ctl.parent.controls.indexOf(ctl);
     }
-    for (const key in ctl.parent.controls) {
-      if (ctl.parent.controls.hasOwnProperty(key) && ctl.parent.controls[key] === ctl) {
+    for (const key in ctl.parent!.controls) {
+      if (ctl.parent!.controls.hasOwnProperty(key) && ctl.parent!.controls[key] === ctl) {
         return key;
       }
     }
@@ -51,7 +51,7 @@ export class FormHelpers {
   }
 
   public static getSibling(ctl: AbstractControl, key: string | number): AbstractControl | null {
-    if (!ctl.parent) {
+    if (!ctl.parent!) {
       return null;
     }
     if (ctl.parent instanceof FormArray) {
@@ -69,8 +69,8 @@ export class FormHelpers {
     if (typeof key !== 'string') {
       throw new Error(`Invalid key. FormHelpers.getSibling with a parent FormGroup, expected key to be string.`);
     }
-    if (ctl.parent.controls.hasOwnProperty(key)) {
-      return ctl.parent.controls[key];
+    if (ctl.parent!.controls.hasOwnProperty(key)) {
+      return ctl.parent!.controls[key];
     }
     return null;
   }

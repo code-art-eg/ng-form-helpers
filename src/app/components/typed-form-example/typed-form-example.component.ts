@@ -6,7 +6,7 @@ import { takeUntilDestroyed, TakeUntilDestroyed } from '@code-art-eg/rx-helpers'
 import { CommonValidators } from '../../../../projects/ng-form-helpers/src/lib';
 
 function requiredIfField2(ctl: AbstractControl): ValidationErrors | null {
-  const form = ctl.parent as TypedFormGroup<ProductList>;
+  const form = ctl.parent! as TypedFormGroup<ProductList>;
   if (!form) {
     return null;
   }
