@@ -1,9 +1,10 @@
 import { ValidationErrors, AbstractControlOptions } from '@angular/forms';
 import { Observable } from 'rxjs';
-
 import { TypedFormArray } from './typed-form-array';
 import { TypedFormControl } from './typed-form-control';
 import { TypedFormGroup } from './typed-form-group';
+
+export type Typify<T> = { [ K in keyof T ]: T[ K ] };
 
 export interface FormState<T> {
   value: T | null;
@@ -12,7 +13,7 @@ export interface FormState<T> {
 
 export type ValueOrFormState<T> = FormState<T> | T | null;
 export type FormArrayState<T> = Array<ValueOrFormState<T>>;
-export type FormGroupState<T extends object> = {
+export type FormGroupState<T extends Typify<T>> = {
   [P in keyof T]: FormState<T[P]>;
 };
 
@@ -41,7 +42,7 @@ export type FormControlType<T> =
   T extends Date ? TypedFormControl<Date> :
   T extends ControlType ? TypedFormControl<T> :
   T extends any[] ? TypedFormArray<T[number]> :
-  T extends object ? TypedFormGroup<T> :
+  T extends Typify<T> ? TypedFormGroup<T> :
   never;
 
 export type FormControlFactory<T> = (v?: ValueOrFormState<T>) => FormControlType<T>;
@@ -55,13 +56,8 @@ export type TypedAsyncValidators<T> = TypedAsyncValidatorFn<T> | Array<TypedAsyn
 export interface ParameterizedMessage {
   messageKey: string;
   context?: string;
-  parameters?: Dictionary<any>;
+  parameters?: Record<string, any>;
 }
 
 export const FormValidationContext = 'formValidation';
 export const FormFieldContext = 'formField';
-export interface Dictionary<T> {
-  [key: string]: T;
-}
-
-export type StringDictionary = Dictionary<string>;

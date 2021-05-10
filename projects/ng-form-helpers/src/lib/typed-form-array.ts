@@ -1,9 +1,9 @@
 import { FormArray, ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import {
+import type {
   FormArrayState, FormControlFactory, FormControlType,
-  SetValueOptions, TypedAsyncValidators, TypedValidators, ValueOrFormState,
+  SetValueOptions, TypedAsyncValidators, TypedValidators,
 } from './form-models';
 
 export class TypedFormArray<T> extends FormArray {
@@ -12,11 +12,19 @@ export class TypedFormArray<T> extends FormArray {
   public readonly valueChanges!: Observable<T[]>;
   public controls!: Array<FormControlType<T>>;
 
-  private static initFormControls<T>(
-    states: FormArrayState<T>,
-    factory: FormControlFactory<T>,
-  ): Array<FormControlType<T>> {
-    const result = [] as Array<FormControlType<T>>;
+  constructor(states: FormArrayState<T>, private readonly factory: FormControlFactory<T>,
+              validatorOrOpts?: TypedValidators<T>,
+              asyncValidator?: TypedAsyncValidators<T>) {
+    super(TypedFormArray.initFormControls<T>(states, factory),
+      validatorOrOpts as ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
+      asyncValidator as AsyncValidatorFn | AsyncValidatorFn[] | null);
+  }
+
+  private static initFormControls<TForm>(
+    states: FormArrayState<TForm>,
+    factory: FormControlFactory<TForm>,
+  ): Array<FormControlType<TForm>> {
+    const result = [] as Array<FormControlType<TForm>>;
     if (states) {
       for (const state of states) {
         result.push(factory(state));
@@ -25,13 +33,6 @@ export class TypedFormArray<T> extends FormArray {
     return result;
   }
 
-  constructor(states: FormArrayState<T>, private readonly factory: FormControlFactory<T>,
-              validatorOrOpts?: TypedValidators<T>,
-              asyncValidator?: TypedAsyncValidators<T>) {
-    super(TypedFormArray.initFormControls<T>(states, factory),
-      validatorOrOpts as ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
-      asyncValidator as AsyncValidatorFn | AsyncValidatorFn[] | null);
-  }
 
   public setValue(value: T[], options?: SetValueOptions): void {
     this.ensureArrayLength(value ? value.length : 0);

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { ValidatorFactoryToken, IFormControlFactory, IValidatorFactory, FormControlFactoryToken } from '../form-generation.utils';
 import { FormGroupInfo, FormControlInfo, FormArrayInfo } from '../form-generation-models';
 import { TypedFormGroup } from '../typed-form-group';
-import { Dictionary, FormGroupConfig } from '../form-models';
+import { FormGroupConfig, Typify } from '../form-models';
 import type { AbstractControl } from '@angular/forms';
 import {
   isInputGroupInfo,
@@ -26,8 +26,8 @@ export class FormGenerationService {
     _controlFactories = this._controlFactories.slice().sort((a, b) => a.priority - b.priority);
   }
 
-  public createFormGroup<T extends object>(formGroupInfo: FormGroupInfo): TypedFormGroup<T> {
-    const config: Dictionary<AbstractControl> = {};
+  public createFormGroup<T extends Typify<T>>(formGroupInfo: FormGroupInfo): TypedFormGroup<T> {
+    const config: Record<string, AbstractControl> = {};
     const items = this.flattenItems(formGroupInfo);
     for (const item of items) {
       if (isFormGroupInfo(item)) {

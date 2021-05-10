@@ -4,14 +4,13 @@ import { ValidatorFn, Validators, AsyncValidatorFn } from '@angular/forms';
 import { IValidatorFactory, DefaultFormControlFactoryPriorityToken, DefaultValidatorFactoryPriority } from '../form-generation.utils';
 import { ValidatorInfo, AsyncValidatorInfo } from '../form-generation-models';
 import { CommonValidators } from '../common-validators';
-import { Dictionary } from '../form-models';
 type ValidatorFactory = (...a: any[]) => ValidatorFn;
 interface ValidatorConfig {
   isFunction: boolean;
   type: ValidatorFn | ValidatorFactory;
 }
 
-const ValidatorsConfig: Dictionary<ValidatorConfig> = {
+const ValidatorsConfig: Record<string, ValidatorConfig> = {
   min: { isFunction: true, type: Validators.min },
   max: { isFunction: true, type: Validators.max },
   required: { isFunction: false, type: Validators.required },

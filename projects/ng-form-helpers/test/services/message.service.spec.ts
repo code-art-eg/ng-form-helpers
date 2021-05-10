@@ -34,14 +34,12 @@ describe('MessageService', () => {
     service = TestBed.inject<MessageService>(MessageService);
   });
 
-  function toString(p: any): string {
-    return p !== null && p !== undefined ? p + '' : '';
-  }
+  const toString = (p: any): string => p !== null && p !== undefined ? p + '' : '';
 
-  function getMessage(key: string, p1: any, p2: any): string {
+  const getMessage = (key: string, p1: any, p2: any): string => {
     const f = DEFAULT_VALIDATION_MESSAGES[key];
     return f.replace('{key}', toString(p1)).replace(`{${key}}`, toString(p2));
-  }
+  };
 
   it('returns plain message', async () => {
     expect(await service.getMessage({

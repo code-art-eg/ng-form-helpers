@@ -1,15 +1,14 @@
 import type { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import XRegExp from 'xregexp';
 import { FormHelpers } from './form-helpers';
-import { Dictionary } from '@code-art-eg/angular-globalize/lib/models';
 import { FormFieldContext } from './form-models';
 
 const letterExpression = '(?:\\p{M}|\\p{Ll}|\\p{Lu}|\\p{Lt}|\\p{Lo}|\\p{Lm})';
 const nameRx = XRegExp(`^${letterExpression}+(?:-|'| |${letterExpression})*$`);
 
-function isEmptyValue(value: any): boolean {
-  return value === null || value === undefined || value === '' || typeof value === 'string' && /^\s+$/.test(value);
-}
+const isEmptyValue = (value: any): boolean =>
+ value === null || value === undefined || value === '' || typeof value === 'string' && /^\s+$/.test(value);
+
 
 // @dynamic
 export class CommonValidators {
@@ -48,7 +47,7 @@ export class CommonValidators {
     if (isEmptyValue(c.value)) {
       return null;
     }
-// tslint:disable-next-line: max-line-length
+// eslint-disable-next-line max-len
     if (!/^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)*(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(c.value)) {
       return { url: true };
     }
@@ -203,7 +202,7 @@ export class CommonValidators {
       if (c.value instanceof Date) {
         n += 'Date';
       }
-      const res: Dictionary<any> = {};
+      const res: Record<string, any> = {};
       res[n] = {
         otherKey: {
           messageKey: otherKey,

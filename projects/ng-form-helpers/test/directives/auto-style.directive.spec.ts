@@ -25,17 +25,16 @@ import { AngularGlobalizeModule } from '@code-art-eg/angular-globalize';
   `
 })
 class TestComponent {
-  public readonly form: FormGroup;
+  @ViewChild('inputControl') public inputControl?: ElementRef<HTMLInputElement>;
+  @ViewChild('prefixInputControl') public prefixInputControl?: ElementRef<HTMLInputElement>;
+  @ViewChild('inputCheck') public inputCheck?: ElementRef<HTMLInputElement>;
+  @ViewChild('areaControl') public areaControl?: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('selectControl') public selectControl?: ElementRef<HTMLSelectElement>;public readonly form: FormGroup;
   public readonly firstName: FormControl;
   public readonly lastName: FormControl;
   public readonly address: FormControl;
   public readonly country: FormControl;
   public readonly accept: FormControl;
-  @ViewChild('inputControl') public inputControl?: ElementRef<HTMLInputElement>;
-  @ViewChild('prefixInputControl') public prefixInputControl?: ElementRef<HTMLInputElement>;
-  @ViewChild('inputCheck') public inputCheck?: ElementRef<HTMLInputElement>;
-  @ViewChild('areaControl') public areaControl?: ElementRef<HTMLTextAreaElement>;
-  @ViewChild('selectControl') public selectControl?: ElementRef<HTMLSelectElement>;
 
   constructor(formBuilder: FormBuilder) {
     this.accept = formBuilder.control(false, [Validators.requiredTrue]);

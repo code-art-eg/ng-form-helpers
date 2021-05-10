@@ -9,7 +9,6 @@ import {
 import type { AbstractControl } from '@angular/forms';
 import { FormGroupDirective } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Dictionary } from '../../form-models';
 import { MessageService } from '../../services/message.service';
 import { TranslationKeyPrefixDirective } from '../../directives/translation-key-prefix.directive';
 
@@ -79,8 +78,8 @@ export class ValidationErrorsComponent implements OnInit {
     this._controlSet = false;
   }
 
-  public get dummyControlClass(): Dictionary<boolean> {
-    const res: Dictionary<boolean> = {};
+  public get dummyControlClass(): Record<string, boolean> {
+    const res: Record<string, boolean> = {};
     if (this.formControlCssClass) {
       res[this.formControlCssClass] = true;
     }

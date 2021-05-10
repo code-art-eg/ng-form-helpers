@@ -13,11 +13,11 @@ import {
   FormGroupInfo,
 } from '../../form-generation-models';
 
-export function createValidators(
+export const createValidators = (
   service: string,
   validatorFactories: IValidatorFactory[],
   validatorInfos: ValidatorInfo[] | undefined | null,
-): ValidatorFn[] {
+): ValidatorFn[] => {
   const res: ValidatorFn[] = [];
   if (!validatorInfos) {
     return res;
@@ -38,13 +38,13 @@ export function createValidators(
     }
   }
   return res;
-}
+};
 
-export function createAsyncValidators(
+export const createAsyncValidators = (
   service: string,
   validatorFactories: IValidatorFactory[],
   validatorInfos: AsyncValidatorInfo[] | undefined | null,
-): AsyncValidatorFn[] {
+): AsyncValidatorFn[] => {
   const res: AsyncValidatorFn[] = [];
   if (!validatorInfos) {
     return res;
@@ -65,29 +65,15 @@ export function createAsyncValidators(
     }
   }
   return res;
-}
+};
 
-function isStringOrNullOrUndefined(o: any): boolean {
-  return o === null || o === undefined || typeof o === 'string';
-}
+export const isStringOrNullOrUndefined = (o: any): boolean => o === null || o === undefined || typeof o === 'string';
+export const isBooleanOrNullOrUndefined = (o: any): boolean => o === null || o === undefined || typeof o === 'boolean';
+export const isArrayOrNullOrUndefined = (o: any): boolean => o === null || o === undefined || Array.isArray(o);
+export const isInputGroupText = (o: any): o is InputGroupText => o && typeof o === 'object' && typeof o.text === 'string';
+export const isInputGroupIcon = (o: any): o is InputGroupIcon => o && typeof o === 'object' && typeof o.icon === 'string';
 
-function isBooleanOrNullOrUndefined(o: any): boolean {
-  return o === null || o === undefined || typeof o === 'boolean';
-}
-
-function isArrayOrNullOrUndefined(o: any): boolean {
-  return o === null || o === undefined || Array.isArray(o);
-}
-
-export function isInputGroupText(o: any): o is InputGroupText {
-  return o && typeof o === 'object' && typeof o.text === 'string';
-}
-
-export function isInputGroupIcon(o: any): o is InputGroupIcon {
-  return o && typeof o === 'object' && typeof o.icon === 'string';
-}
-
-export function isFormControlInfo(o: any): o is FormControlInfo {
+export const isFormControlInfo = (o: any): o is FormControlInfo => {
   if (!o || typeof o !== 'object') {
     return false;
   }
@@ -97,9 +83,9 @@ export function isFormControlInfo(o: any): o is FormControlInfo {
     && isBooleanOrNullOrUndefined(info.disabled)
     && isArrayOrNullOrUndefined(info.asyncValidators)
     && isArrayOrNullOrUndefined(info.validators);
-}
+};
 
-export function isInputGroupInfo(o: any): o is InputGroupInfo {
+export const isInputGroupInfo = (o: any): o is InputGroupInfo => {
   if (!o || typeof o !== 'object') {
     return false;
   }
@@ -107,9 +93,9 @@ export function isInputGroupInfo(o: any): o is InputGroupInfo {
   return isStringOrNullOrUndefined(info.id)
     && isStringOrNullOrUndefined(info.label)
     && Array.isArray(info.content);
-}
+};
 
-export function isFormArrayInfo(o: any): o is FormArrayInfo {
+export const isFormArrayInfo = (o: any): o is FormArrayInfo => {
   if (!o || typeof o !== 'object') {
     return false;
   }
@@ -121,13 +107,11 @@ export function isFormArrayInfo(o: any): o is FormArrayInfo {
     && (isBooleanOrNullOrUndefined(info.allowAdd) || typeof info.allowAdd === 'function')
     && (isBooleanOrNullOrUndefined(info.allowDelete) || typeof info.allowDelete === 'function')
     ;
-}
+};
 
-export function isFormArrayItem(o: any): o is FormArrayItem {
-  return isFormControlInfo(o) || isFormGroupInfo(o);
-}
+export const isFormArrayItem = (o: any): o is FormArrayItem => isFormControlInfo(o) || isFormGroupInfo(o);
 
-export function isFormGroupInfo(o: any): o is FormGroupInfo {
+export const isFormGroupInfo = (o: any): o is FormGroupInfo => {
   if (!o || typeof o !== 'object') {
     return false;
   }
@@ -136,4 +120,4 @@ export function isFormGroupInfo(o: any): o is FormGroupInfo {
     && isArrayOrNullOrUndefined(info.validators)
     && isArrayOrNullOrUndefined(info.validators)
     && Array.isArray(info.items);
-}
+};

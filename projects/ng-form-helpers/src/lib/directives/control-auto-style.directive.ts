@@ -26,16 +26,15 @@ import {
   selector: '[frmControlAutoStyle]',
 })
 export class ControlAutoStyleDirective implements OnDestroy, OnInit, DoCheck {
+  @Input() public showValidStatus = true;
+  @Input() public setId = true;
+  @Input() public setPlaceHolder = true;
+  @Input() public setAriaLabel = true;
 
   private _cssClass?: string | undefined;
   private _checkCssClass?: string | undefined;
   private _validCssClass?: string | undefined;
   private _invalidCssClass?: string;
-
-  @Input() public showValidStatus = true;
-  @Input() public setId = true;
-  @Input() public setPlaceHolder = true;
-  @Input() public setAriaLabel = true;
 
   private _ariaLabelSet = false;
   private _idSet = false;

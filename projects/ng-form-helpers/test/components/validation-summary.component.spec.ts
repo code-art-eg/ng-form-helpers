@@ -18,10 +18,10 @@ import { GlobalizeDataEnGBModule } from 'src/app/globalize-data/globalize-data-e
 `
 })
 class TestComponent implements AfterViewInit {
+  @ViewChild(ValidationSummaryComponent) public validationSummary?: ValidationSummaryComponent;
   public form: FormGroup;
   public name: FormControl;
   public initialized = false;
-  @ViewChild(ValidationSummaryComponent) public validationSummary?: ValidationSummaryComponent;
 
   constructor(formBuilder: FormBuilder) {
     this.name = formBuilder.control(null, [

@@ -29,7 +29,7 @@ class TestRemovedComponent {
 describe('RemoveHostDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-// tslint:disable-next-line: deprecation
+// eslint-disable-next-line import/no-deprecated
       declarations: [TestRemovedComponent, TestRemoveHostComponent, RemoveHostDirective],
       imports: [],
     });

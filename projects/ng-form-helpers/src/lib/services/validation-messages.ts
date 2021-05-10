@@ -1,7 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { StringDictionary } from '../form-models';
 
-export const DEFAULT_VALIDATION_MESSAGES: StringDictionary = {
+export const DEFAULT_VALIDATION_MESSAGES: Record<string, string> = {
   validationSummary: 'One of more form fields need your attention',
   min: 'Value of {key} must be greater than or equal to {min}.',
   max: 'Value of {key} must be less than or equal to {max}.',
@@ -36,4 +35,4 @@ export const DEFAULT_VALIDATION_MESSAGES: StringDictionary = {
   eqDate: '{key} must be the same {otherKey}.',
 };
 
-export const ValidationMessagesInjectionToken = new InjectionToken<StringDictionary>('ValidationMessages');
+export const ValidationMessagesInjectionToken = new InjectionToken<Record<string, string>>('ValidationMessages');

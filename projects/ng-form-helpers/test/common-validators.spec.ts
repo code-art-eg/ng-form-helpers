@@ -1,6 +1,5 @@
 import { CommonValidators, FormFieldContext } from '../src/public_api';
 import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Dictionary } from '@code-art-eg/angular-globalize/lib/models';
 
 describe('CommonValidators', () => {
 
@@ -300,7 +299,7 @@ describe('CommonValidators', () => {
     });
     const a = form.controls.a;
     const b = form.controls.b;
-    function test(name: string, desc: string, aVal: any, bVal: any, error: boolean) {
+    const test = (name: string, desc: string, aVal: any, bVal: any, error: boolean) => {
       it(desc, () => {
         a.setValue(aVal);
         b.setValue(bVal);
@@ -308,7 +307,7 @@ describe('CommonValidators', () => {
         f = f.bind(CommonValidators);
         const res = f('b')(a);
         if (error) {
-          const e: Dictionary<any> = {};
+          const e: Record<string, any> = {};
           e[name + (aVal instanceof Date ? 'Date' : '')] = {
             otherKey: {
               messageKey: 'b',
@@ -320,7 +319,7 @@ describe('CommonValidators', () => {
           expect(res).toBeNull();
         }
       });
-    }
+    };
 
     describe('gte', () => {
       test('gte', 'should not error on an empty string', '', null, false);

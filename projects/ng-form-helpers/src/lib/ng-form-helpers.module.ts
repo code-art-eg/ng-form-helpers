@@ -33,7 +33,7 @@ import { TranslationKeyPrefixDirective } from './directives/translation-key-pref
     ToIntegerDirective,
     ToDateDirective,
     TranslationKeyPrefixDirective,
-    // tslint:disable-next-line: deprecation
+    // eslint-disable-next-line import/no-deprecated
     RemoveHostDirective,
     ControlAutoStyleDirective,
     ValidationErrorsComponent,
@@ -48,7 +48,7 @@ import { TranslationKeyPrefixDirective } from './directives/translation-key-pref
     ToNumberDirective,
     ToIntegerDirective,
     ToDateDirective,
-    // tslint:disable-next-line: deprecation
+    // eslint-disable-next-line import/no-deprecated
     RemoveHostDirective,
     TranslationKeyPrefixDirective,
     ControlAutoStyleDirective,

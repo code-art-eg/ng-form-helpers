@@ -77,12 +77,6 @@ export abstract class BaseConverterDirective<T>
     this.selectAccessor();
   }
 
-  protected abstract coerceValue(v: any): T | null | undefined;
-
-  protected abstract formatValue(v: T): string;
-
-  protected abstract valuesAreEqual(v1: T | null, v2: T | null): boolean;
-
   private raiseOnChange(val: any): void {
     for (const fn of this._onchange) {
       fn(val);
@@ -165,4 +159,10 @@ export abstract class BaseConverterDirective<T>
         }
       });
   }
+
+  protected abstract coerceValue(v: any): T | null | undefined;
+
+  protected abstract formatValue(v: T): string;
+
+  protected abstract valuesAreEqual(v1: T | null, v2: T | null): boolean;
 }

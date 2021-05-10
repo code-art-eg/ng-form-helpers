@@ -1,10 +1,9 @@
 import { Observable, of } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { sentenceCase } from 'change-case';
-import { Dictionary } from '@code-art-eg/angular-globalize/lib/models';
 
 import { ValidationMessagesInjectionToken } from './validation-messages';
-import { FormValidationContext, StringDictionary } from '../form-models';
+import { FormValidationContext } from '../form-models';
 
 
 export interface ITranslationService {
@@ -17,11 +16,11 @@ export const TranslationServiceInjectionToken = new InjectionToken<ITranslationS
   providedIn: 'root',
 })
 export class DefaultTranslationService implements ITranslationService {
-  private readonly _validationMessages: Dictionary<Observable<string>>;
-  private readonly _messageCache: Dictionary<Observable<string>> = {};
+  private readonly _validationMessages: Record<string, Observable<string>>;
+  private readonly _messageCache: Record<string, Observable<string>> = {};
 
   constructor(
-    @Optional() @Inject(ValidationMessagesInjectionToken) validationMessages?: StringDictionary[],
+    @Optional() @Inject(ValidationMessagesInjectionToken) validationMessages?: Array<Record<string, string>>,
   ) {
     this._validationMessages = {};
     if (validationMessages) {

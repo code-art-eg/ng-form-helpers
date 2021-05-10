@@ -4,7 +4,7 @@ import { Observable, isObservable, of, combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { TranslationServiceInjectionToken, ITranslationService } from './translation.service';
-import { ParameterizedMessage, Dictionary, FormValidationContext, FormFieldContext } from '../form-models';
+import { ParameterizedMessage, FormValidationContext, FormFieldContext } from '../form-models';
 import type { AbstractControl } from '@angular/forms';
 import { FormHelpers } from '../form-helpers';
 const formatMatchRx = /(\{)([a-zA-Z_][a-zA-Z0-9_]*)(\:[^\}]+)?(\})/g;
@@ -79,7 +79,7 @@ export class MessageService {
     if (!messageInfo.parameters || messageInfo.parameters.length === 0) {
       return messageFormat$;
     }
-    const params: Dictionary<any> = messageInfo.parameters;
+    const params: Record<string, any> = messageInfo.parameters;
     if (!this.hasObservable(params)) {
       return messageFormat$.pipe(
         map((f) => this.formatMessage(f, lang, params)),
@@ -112,7 +112,7 @@ export class MessageService {
     return errors;
   }
 
-  private formatMessage(format: string, lang: string, params: Dictionary<any>): string {
+  private formatMessage(format: string, lang: string, params: Record<string, any>): string {
     const keymap: string[] = [];
     const args: any[] = [];
     const newFormat = format.replace(formatMatchRx, (_, p1, p2, p3, p4) => {
@@ -127,13 +127,13 @@ export class MessageService {
     return this.stringFormatterService.formatStringWithLocale(newFormat, lang, ...args);
   }
 
-  private toDictionaryObservable(params: Dictionary<any>, lang: string): Observable<Dictionary<any>> {
+  private toDictionaryObservable(params: Record<string, any>, lang: string): Observable<Record<string, any>> {
     const allKeys = Object.getOwnPropertyNames(params);
     const keys = allKeys.filter((k) => this.isObservableOrParameterizedMessage(params[k]));
     const obsAr = keys.map((k) => this.toObservable(params[k], lang));
     const obs$ = combineLatest(obsAr)
       .pipe(map((res) => {
-        const out: Dictionary<any> = {};
+        const out: Record<string, any> = {};
         for (const key of allKeys) {
           const index = keys.indexOf(key);
           if (index < 0) {
@@ -156,7 +156,7 @@ export class MessageService {
     return o;
   }
 
-  private hasObservable(params: Dictionary<any>): boolean {
+  private hasObservable(params: Record<string, any>): boolean {
     return !!Object.getOwnPropertyNames(params).find((k) => this.isObservableOrParameterizedMessage(params[k]));
   }
 

@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import {
   DefaultTranslationService,
-  StringDictionary,
   NgFormHelpersModule,
   ValidationMessagesInjectionToken,
   DEFAULT_VALIDATION_MESSAGES,
@@ -13,7 +12,7 @@ import {
 describe('DefaultTranslationService', () => {
   let service: DefaultTranslationService;
 
-  const customMessages: StringDictionary = {
+  const customMessages: Record<string, string> = {
     email: '1',
     test: '2',
     bla: '3',

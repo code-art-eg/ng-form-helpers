@@ -1,12 +1,12 @@
 import { FormGroup, ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import {
+import type {
   FormGroupConfig, FormGroupState,
-  SetValueOptions, TypedAsyncValidators, TypedValidators, ValueOrFormState
+  SetValueOptions, TypedAsyncValidators, TypedValidators, Typify,
 } from './form-models';
 
-export class TypedFormGroup<T extends object> extends FormGroup {
+export class TypedFormGroup<T extends Typify<T>> extends FormGroup {
   // The following 2 fields are defined in the base class but redefined here to make them strongly typed.
   public readonly value!: T;
   public readonly valueChanges!: Observable<T>;

@@ -1,7 +1,7 @@
 import { FormControl, AbstractControlOptions, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import {
+import type {
   SetFormControlValueOptions, SetValueOptions, TypedAsyncValidators,
   TypedValidators, ValueOrFormState
 } from './form-models';
