@@ -1342,17 +1342,17 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@code-art-eg/angular-globalize@^10.0.1":
-  version "10.0.1"
-  resolved "https://npm.pkg.github.com/download/@code-art-eg/angular-globalize/10.0.1/5693ce78140d24d4231dd988f6dcc18ddc00beb6a670ec868689e660c42eff59#05ac521c7c9e3edbe7cefacfa8e75bea05b0cfaa"
-  integrity sha512-jHaJg5hpQ5fESC6snqD1eYSLSArnWulLm4hQ6xFwxHl/W6xCPpH118wIEa4umvF1qkrD+hr3Kv0fB6N9j9+EbA==
+"@code-art-eg/angular-globalize@^11.0.1":
+  version "11.0.1"
+  resolved "https://npm.pkg.github.com/download/@code-art-eg/angular-globalize/11.0.1/b8e16b9a0723b7497102ecd4bad35e656d8eb46a713836380d117bd58f85312e#f9a4f5efe948f09495679df6b59fb54907acb3f9"
+  integrity sha512-pg+wGBpLafrE8ZiL1h0TfQ6rDLD0kX9aY5+B5d9Ny25IGw4/BiSFfcVgLo7+oLbonDY5L+p0Rjr74/clz/p+7g==
   dependencies:
     tslib "^2.0.0"
 
-"@code-art-eg/rx-helpers@^10.0.0":
-  version "10.0.0"
-  resolved "https://npm.pkg.github.com/download/@code-art-eg/rx-helpers/10.0.0/3494360cc9411db718f3f1ecd07b0fffed9b1340905e40b6d7fed238c2dce7c5#e370bf0d981b98aa347d7db2454c204da05aa771"
-  integrity sha512-6BTd7SGVYyL12j//OKsRVBqINURxnEb9UZlh0am517CnFZlntdprGFJlsfyq3WZebDBm3vmpVUlue5tmH2cmZQ==
+"@code-art-eg/rx-helpers@^11.0.0":
+  version "11.0.0"
+  resolved "https://npm.pkg.github.com/download/@code-art-eg/rx-helpers/11.0.0/2c588e6927ea60ecba4ce1a5c606a8dd9c2d84981a1dd4f09b2fde54f990b8d8#131de26bd554fccf90596531501831252ce8c94c"
+  integrity sha512-GMD62binkwJfCeoOD1ALJZ+Gh27/pjbp1gRY7l8Jqpg9R8Ji0BGUESvb3pumKk7GcjqWOuOpJwc8j8aU7Dvr8A==
   dependencies:
     tslib "^2.0.0"
 
