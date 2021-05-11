@@ -16,11 +16,11 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
     this._asyncPipe = new AsyncPipe(cd);
   }
 
-  public transform(value: string, context?: string, lang?: string): string | null;
-  public transform(value: any, ...args: any[]): string | null {
+  public transform(value: string, context?: string, lang?: string): string;
+  public transform(value: any, ...args: any[]): string {
     return this._asyncPipe.transform(
       this._translationService.getMessageString(args[1] as string, value as string, args[0] as string)
-    );
+    ) || '';
   }
 
   public ngOnDestroy() {

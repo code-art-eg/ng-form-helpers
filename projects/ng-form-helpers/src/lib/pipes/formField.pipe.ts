@@ -17,11 +17,11 @@ export class FormFieldPipe implements PipeTransform, OnDestroy {
     this._asyncPipe = new AsyncPipe(cd);
   }
 
-  public transform(value: string, lang?: string): string | null;
-  public transform(value: any, ...args: any[]): string | null {
+  public transform(value: string, lang?: string): string;
+  public transform(value: any, ...args: any[]): string {
     return this._asyncPipe.transform(
       this._translationService.getMessageString(args[0] as string, value as string, FormFieldContext)
-    );
+    ) || '';
   }
 
   public ngOnDestroy() {
