@@ -37,7 +37,7 @@ export class ValidationErrorsComponent implements OnInit {
     @Optional() private readonly translationKeyPrefix?: TranslationKeyPrefixDirective,
     @Optional() private readonly _formGroup?: FormGroupDirective,
   ) {
-    this.validationErrorCssClass = validationErrorCssClass;
+    this.validationErrorCssClass = validationErrorCssClass || '';
     this.formControlCssClass = formControlCssClass;
     this.formControlValidCssClass = formControlValidCssClass;
     this.formControlInvalidCssClass = formControlInvalidCssClass;

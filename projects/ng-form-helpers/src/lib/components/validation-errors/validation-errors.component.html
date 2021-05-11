@@ -1,5 +1,5 @@
 <ng-container *ngIf="showError">
-  <div [ngClass]="dummyControlClass" style="display: none;"></div>
+  <div [ngClass]="dummyControlClass" style="display: none !important;"></div>
   <div *ngFor="let error$ of errors" [className]="validationErrorCssClass">
     {{ error$ | async }}
   </div>
