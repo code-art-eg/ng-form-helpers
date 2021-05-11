@@ -21,7 +21,7 @@
     "@angular/common": ">=11.0.0 < 12",
     "@angular/core": ">=11.0.0 < 12",
     "@angular/forms": ">=11.0.0 < 12",
-    "@code-art-eg/angular-globalize": ">=11.0.0 < 12",
+    "@code-art-eg/angular-globalize": ">=11.1.0 < 12",
     "@code-art-eg/rx-helpers": ">=11.0.0 < 12"
   },
   "dependencies": {

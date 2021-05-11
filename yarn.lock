@@ -1160,10 +1160,10 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@code-art-eg/angular-globalize@^11.0.2":
-  version "11.0.2"
-  resolved "https://npm.pkg.github.com/download/@code-art-eg/angular-globalize/11.0.2/fd6f4d30372efb1691b6e9536d18fbf374148e89146ae9a38e01e1711237e9d6#2e54141e900ee36f760f18920b76d5c174a26825"
-  integrity sha512-4yj5gm1KjCM/12Zm+hJ3pK9v868KpXdXgC7y+7oy5rfuJGnIv+okYUMoxgQTvAImhx14QCJqGQtEJj21IxMeMQ==
+"@code-art-eg/angular-globalize@^11.1.0":
+  version "11.1.0"
+  resolved "https://npm.pkg.github.com/download/@code-art-eg/angular-globalize/11.1.0/30a301406f3733f7fada629c1c0f337a9298cbd078267cba8918dedf651acd0c#5ec802bf21513e60a277af4222e46a64c9e01546"
+  integrity sha512-SZ0CpqLSBxcja92Z4PQcX0FIz/+xx6Ua1X22+I/j58AFwT8AoeRobJ+WcC1n3vFHWT79ZpkU8ByKqx7TCKc+yA==
   dependencies:
     tslib "^2.0.0"
 

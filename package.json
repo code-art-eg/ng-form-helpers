@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~11.2.13",
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
-    "@code-art-eg/angular-globalize": "^11.0.2",
+    "@code-art-eg/angular-globalize": "^11.1.0",
     "@code-art-eg/rx-helpers": "^11.0.0",
     "change-case": "^3.1.0",
     "cldr-data": "36.0.0",

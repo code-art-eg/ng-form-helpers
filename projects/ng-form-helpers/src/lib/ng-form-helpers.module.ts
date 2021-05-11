@@ -22,9 +22,11 @@ import { ToIntegerDirective } from './directives/to-integer.directive';
 import { ToDateDirective } from './directives/to-date.directive';
 import { RemoveHostDirective } from './directives/remove-host.directive';
 import { ControlAutoStyleDirective } from './directives/control-auto-style.directive';
-import { ValidationMessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
+import { MessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
 import { DefaultTranslationService, TranslationServiceInjectionToken } from './services/translation.service';
 import { TranslationKeyPrefixDirective } from './directives/translation-key-prefix.directive';
+import { FormFieldPipe } from './pipes/formField.pipe';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { TranslationKeyPrefixDirective } from './directives/translation-key-pref
     ControlAutoStyleDirective,
     ValidationErrorsComponent,
     ValidationSummaryComponent,
+    FormFieldPipe,
+    TranslatePipe,
   ],
   imports: [
     CommonModule,
@@ -54,6 +58,8 @@ import { TranslationKeyPrefixDirective } from './directives/translation-key-pref
     ControlAutoStyleDirective,
     ValidationErrorsComponent,
     ValidationSummaryComponent,
+    FormFieldPipe,
+    TranslatePipe,
   ],
 })
 export class NgFormHelpersModule {
@@ -61,7 +67,7 @@ export class NgFormHelpersModule {
     return {
       ngModule: NgFormHelpersModule,
       providers: [
-        { provide: ValidationMessagesInjectionToken, useValue: DEFAULT_VALIDATION_MESSAGES, multi: true },
+        { provide: MessagesInjectionToken, useValue: DEFAULT_VALIDATION_MESSAGES, multi: true },
         { provide: TranslationServiceInjectionToken, useExisting: DefaultTranslationService, },
         { provide: ValidatorFactoryToken, useExisting: DefaultValidatorFactoryService, multi: true },
         { provide: FormControlFactoryToken, useExisting: DefaultFormControlFactoryService, multi: true },

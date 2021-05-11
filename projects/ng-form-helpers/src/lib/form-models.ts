@@ -61,3 +61,9 @@ export interface ParameterizedMessage {
 
 export const FormValidationContext = 'formValidation';
 export const FormFieldContext = 'formField';
+export const NoContext = 'NoContext';
+export interface MessageCollection {
+  lang: string;
+  messages: Record<string, string>;
+  context?: string;
+}

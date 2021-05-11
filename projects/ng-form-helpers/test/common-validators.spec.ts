@@ -1,5 +1,5 @@
 import { CommonValidators, FormFieldContext } from '../src/public_api';
-import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 describe('CommonValidators', () => {
 

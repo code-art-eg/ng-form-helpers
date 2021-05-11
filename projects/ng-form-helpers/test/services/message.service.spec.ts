@@ -37,7 +37,7 @@ describe('MessageService', () => {
   const toString = (p: any): string => p !== null && p !== undefined ? p + '' : '';
 
   const getMessage = (key: string, p1: any, p2: any): string => {
-    const f = DEFAULT_VALIDATION_MESSAGES[key];
+    const f = DEFAULT_VALIDATION_MESSAGES.messages[key];
     return f.replace('{key}', toString(p1)).replace(`{${key}}`, toString(p2));
   };
 
@@ -51,7 +51,7 @@ describe('MessageService', () => {
     expect(await service.getMessage({
       messageKey: 'email',
       context: FormValidationContext,
-    }).pipe(first()).toPromise()).toBe(DEFAULT_VALIDATION_MESSAGES.email);
+    }).pipe(first()).toPromise()).toBe(DEFAULT_VALIDATION_MESSAGES.messages.email);
   });
 
   it('returns control errors', async () => {
