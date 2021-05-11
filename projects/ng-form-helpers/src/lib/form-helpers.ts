@@ -35,12 +35,17 @@ export class FormHelpers {
     return (parentId ? parentId + '_' : '') + this.getControlKey(ctl);
   }
 
-  public static getControlKey(ctl: AbstractControl): string | number | null {
+  public static getControlKey(ctl: AbstractControl): string | null {
     if (!ctl.parent) {
       return null;
     }
     if (ctl.parent instanceof FormArray) {
-      return ctl.parent.controls.indexOf(ctl);
+      const parentKey = FormHelpers.getControlKey(ctl.parent);
+      const index = ctl.parent.controls.indexOf(ctl);
+      if (parentKey) {
+        return `${parentKey}.${index}`;
+      }
+      return `${index}`;
     }
     for (const key in ctl.parent.controls) {
       if (ctl.parent.controls.hasOwnProperty(key) && ctl.parent.controls[key] === ctl) {

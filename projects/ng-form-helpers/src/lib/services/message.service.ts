@@ -34,10 +34,12 @@ export class MessageService {
       return errors;
     }
     let controlKey = FormHelpers.getControlKey(ctl);
-    if (!controlKey) {
+    if (controlKey === null) {
       controlKey = 'field';
     } else if (prefix) {
       controlKey = `${prefix}.${controlKey}`;
+    } else {
+      controlKey = `${controlKey}`;
     }
     for (const key in controlErrors) {
       if (!controlErrors.hasOwnProperty(key)) {

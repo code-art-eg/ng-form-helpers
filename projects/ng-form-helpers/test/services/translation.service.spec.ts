@@ -13,22 +13,6 @@ const firstValueFrom = <T>(observable: Observable<T>): Promise<T> =>
   });
 
 
-const lastValueFrom = <T>(observable: Observable<T>): Promise<T> =>
-  new Promise<T>((resolve, reject) => {
-    let emitted = false;
-    let result: T | undefined;
-    observable.subscribe((res) => {
-      emitted = true;
-      result = res;
-    }, (err) => {
-      reject(err);
-    }, () => {
-      if (emitted) {
-        resolve(result as T);
-      }
-    });
-  });
-
 import {
   DefaultTranslationService,
   NgFormHelpersModule,

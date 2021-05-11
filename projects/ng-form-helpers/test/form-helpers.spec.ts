@@ -82,7 +82,7 @@ describe('FormHelpers', () => {
     expect(FormHelpers.getControlKey(component.form)).toBeNull();
     expect(FormHelpers.getControlKey(component.form.controls.name)).toBe('name');
     expect(FormHelpers.getControlKey(component.form.controls.children)).toBe('children');
-    expect(FormHelpers.getControlKey(component.form.controls.children.controls[0])).toBe(0);
+    expect(FormHelpers.getControlKey(component.form.controls.children.controls[0])).toBe('children.0');
   });
 
   it('returns sibilings', () => {
