@@ -16,6 +16,9 @@ export * from './directives/translation-key-prefix.directive';
 export * from './components/validation-errors/validation-errors.component';
 export * from './components/validation-summary/validation-summary.component';
 
+export * from './pipes/translate.pipe';
+export * from './pipes/formField.pipe';
+
 export * from './common-validators';
 export * from './form-helpers';
 export * from './form-models';

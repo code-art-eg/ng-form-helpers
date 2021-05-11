@@ -14,7 +14,7 @@ export interface FormState<T> {
 export type ValueOrFormState<T> = FormState<T> | T | null;
 export type FormArrayState<T> = Array<ValueOrFormState<T>>;
 export type FormGroupState<T extends Typify<T>> = {
-  [P in keyof T]: FormState<T[P]>;
+  [P in keyof T]: FormState<Exclude<T[P], null>>;
 };
 
 export interface SetValueOptions {
@@ -28,7 +28,7 @@ export interface SetFormControlValueOptions extends SetValueOptions {
 }
 
 export type FormGroupConfig<T> = {
-  [P in keyof T]: FormControlType<T[P]>;
+  [P in keyof T]: FormControlType<Exclude<T[P], null>>;
 };
 
 export interface ControlType {

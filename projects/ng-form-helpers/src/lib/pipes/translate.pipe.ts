@@ -1,7 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectorRef, Inject, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { ITranslationService } from '../../../../../dist/ng-form-helpers/lib';
-import { TranslationServiceInjectionToken } from '../services/translation.service';
+import { ITranslationService, TranslationServiceInjectionToken } from '../services/translation.service';
 
 @Pipe({
   pure: false,

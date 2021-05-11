@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Inject, OnDestroy, Pipe, PipeTransform } from '@angu
 import { FormFieldContext } from '../form-models';
 import { ITranslationService, TranslationServiceInjectionToken } from '../services/translation.service';
 
-
 @Pipe({
   pure: false,
   name: 'frmField',
