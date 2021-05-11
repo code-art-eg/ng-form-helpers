@@ -262,6 +262,88 @@ describe('CommonValidators', () => {
       () => expect(CommonValidators.color(new FormControl('#44ddaaee'))).toBeNull());
   });
 
+  describe('ip4Address', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.ip4Address(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.ip4Address(new FormControl(null))).toBeNull());
+
+    it('should error on invalid text',
+      () => expect(CommonValidators.ip4Address(new FormControl('test text'))).toEqual({ ip4: true }));
+    it('should error on invalid IP4 Address',
+      () => expect(CommonValidators.ip4Address(new FormControl('225.10.256.1'))).toEqual({ ip4: true }));
+    it('should not error on valid IP4 Address',
+      () => expect(CommonValidators.ip4Address(new FormControl('10.54.225.2'))).toBeNull());
+  });
+
+  describe('subnet', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.ip4SubnetMask(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.ip4SubnetMask(new FormControl(null))).toBeNull());
+
+    it('should error on invalid text',
+      () => expect(CommonValidators.ip4SubnetMask(new FormControl('test text'))).toEqual({ subnet: true }));
+    it('should error on invalid Subnet mask',
+      () => expect(CommonValidators.ip4SubnetMask(new FormControl('225.10.0.1'))).toEqual({ subnet: true }));
+    it('should not error on valid Subnet mask',
+      () => expect(CommonValidators.ip4SubnetMask(new FormControl('255.128.0.0'))).toBeNull());
+  });
+
+  describe('noLeadingSpace', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.noLeadingSpace(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.noLeadingSpace(new FormControl(null))).toBeNull());
+
+    it('should error on invalid text',
+      () => expect(CommonValidators.noLeadingSpace(new FormControl(' xt'))).toEqual({ noLeadingSpace: true }));
+    it('should not error on valid text',
+      () => expect(CommonValidators.noLeadingSpace(new FormControl('xt'))).toBeNull());
+  });
+
+  describe('noTrailingSpace', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.noTrailingSpace(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.noTrailingSpace(new FormControl(null))).toBeNull());
+
+    it('should error on invalid text',
+      () => expect(CommonValidators.noTrailingSpace(new FormControl('xt '))).toEqual({ noTrailingSpace: true }));
+    it('should not error on valid text',
+      () => expect(CommonValidators.noTrailingSpace(new FormControl('xt'))).toBeNull());
+  });
+
+  describe('noConsecutiveSpaces', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.noConsecutiveSpaces(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.noConsecutiveSpaces(new FormControl(null))).toBeNull());
+
+    it('should error on invalid text',
+      () => expect(CommonValidators.noConsecutiveSpaces(new FormControl('xt  '))).toEqual({ noConsecutiveSpaces: true }));
+    it('should not error on valid text',
+      () => expect(CommonValidators.noConsecutiveSpaces(new FormControl('xt'))).toBeNull());
+  });
+
+  describe('noQuotesOrSlashes', () => {
+    it('should not error on an empty string',
+      () => expect(CommonValidators.noQuotesOrSlashes(new FormControl(''))).toBeNull());
+
+    it('should not error on null',
+      () => expect(CommonValidators.noQuotesOrSlashes(new FormControl(null))).toBeNull());
+
+    it('should error on invalid text',
+      () => expect(CommonValidators.noQuotesOrSlashes(new FormControl('/'))).toEqual({ noQuotesOrSlashes: true }));
+    it('should not error on valid text',
+      () => expect(CommonValidators.noQuotesOrSlashes(new FormControl('xt'))).toBeNull());
+  });
+
   describe('phone', () => {
     it('should not error on an empty string',
       () => expect(CommonValidators.phone(new FormControl(''))).toBeNull());

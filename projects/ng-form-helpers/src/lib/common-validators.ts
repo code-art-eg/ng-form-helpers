@@ -9,9 +9,109 @@ const nameRx = XRegExp(`^${letterExpression}+(?:-|'| |${letterExpression})*$`);
 const isEmptyValue = (value: any): boolean =>
  value === null || value === undefined || value === '' || typeof value === 'string' && /^\s+$/.test(value);
 
+const validMasks = [
+  '128.0.0.0',
+  '192.0.0.0',
+  '224.0.0.0',
+  '240.0.0.0',
+  '248.0.0.0',
+  '252.0.0.0',
+  '254.0.0.0',
+  '255.0.0.0',
+  '255.128.0.0',
+  '255.192.0.0',
+  '255.224.0.0',
+  '255.240.0.0',
+  '255.248.0.0',
+  '255.252.0.0',
+  '255.254.0.0',
+  '255.255.0.0',
+  '255.255.128.0',
+  '255.255.192.0',
+  '255.255.224.0',
+  '255.255.240.0',
+  '255.255.248.0',
+  '255.255.252.0',
+  '255.255.254.0',
+  '255.255.255.0',
+  '255.255.255.128',
+  '255.255.255.192',
+  '255.255.255.224',
+  '255.255.255.240',
+  '255.255.255.248',
+  '255.255.255.252',
+  '255.255.255.254',
+  '255.255.255.255',
+];
 
 // @dynamic
 export class CommonValidators {
+
+  public static noLeadingSpace(c: AbstractControl): ValidationErrors | null {
+    if (isEmptyValue(c.value)) {
+      return null;
+    }
+    if (/^\s/.test(c.value)) {
+      return { noLeadingSpace: true };
+    }
+    return null;
+  }
+
+  public static noTrailingSpace(c: AbstractControl): ValidationErrors | null {
+    if (isEmptyValue(c.value)) {
+      return null;
+    }
+    if (/\s$/.test(c.value)) {
+      return { noTrailingSpace: true };
+    }
+    return null;
+  }
+
+  public static noConsecutiveSpaces(c: AbstractControl): ValidationErrors | null {
+    if (isEmptyValue(c.value)) {
+      return null;
+    }
+    if (/\s\s/.test(c.value)) {
+      return { noConsecutiveSpaces: true };
+    }
+    return null;
+  }
+
+  public static noQuotesOrSlashes(c: AbstractControl): ValidationErrors | null {
+    if (isEmptyValue(c.value)) {
+      return null;
+    }
+    if (/['"\/\\]/.test(c.value)) {
+      return { noQuotesOrSlashes: true };
+    }
+    return null;
+  }
+
+  public static ip4Address(c: AbstractControl): ValidationErrors | null {
+    if (isEmptyValue(c.value)) {
+      return null;
+    }
+    if (typeof c.value !== 'string') {
+      return { ip4: true };
+    }
+    const split = c.value.split('.');
+    const segs = split.map(p => parseInt(p, 10));
+    if (segs.findIndex(p => isNaN(p) || p < 0 || p > 255) > -1) {
+      return { ip4: true };
+    }
+    if (segs.length !== 4) {
+      return { ip4: true };
+    }
+    return null;
+  }
+
+  public static ip4SubnetMask(c: AbstractControl): ValidationErrors | null {
+    const value = c.value;
+    if (!value) {
+      return null;
+    }
+    return validMasks.indexOf(value) >= 0 ? null : { subnet: true };
+  }
 
   public static personName(c: AbstractControl): ValidationErrors | null {
     if (isEmptyValue(c.value)) {

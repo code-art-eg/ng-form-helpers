@@ -33,6 +33,12 @@ export const DEFAULT_VALIDATION_MESSAGES: Record<string, string> = {
   ltDate: '{key} must be less than {otherKey}.',
   neqDate: '{key} must be different from {otherKey}.',
   eqDate: '{key} must be the same {otherKey}.',
+  ip4: '{key} must be a valid IPv4 address.',
+  subnet: '{key} must be a valid IPv4 subnet mask.',
+  noLeadingSpace: '{key} must not start with spaces.',
+  noTrailingSpace: '{key} must not end with spaces.',
+  noConsecutiveSpaces: '{key} must not contain consecutive spaces.',
+  noQuotesOrSlashes: '{key} must not contain the characters \', \", \\ or /.',
 };
 
 export const ValidationMessagesInjectionToken = new InjectionToken<Record<string, string>>('ValidationMessages');
