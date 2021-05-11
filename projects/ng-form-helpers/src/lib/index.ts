@@ -17,7 +17,7 @@ export * from './components/validation-errors/validation-errors.component';
 export * from './components/validation-summary/validation-summary.component';
 
 export * from './pipes/translate.pipe';
-export * from './pipes/formField.pipe';
+export * from './pipes/form-field.pipe';
 
 export * from './common-validators';
 export * from './form-helpers';

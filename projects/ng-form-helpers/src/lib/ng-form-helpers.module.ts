@@ -25,7 +25,7 @@ import { ControlAutoStyleDirective } from './directives/control-auto-style.direc
 import { MessagesInjectionToken, DEFAULT_VALIDATION_MESSAGES } from './services/validation-messages';
 import { DefaultTranslationService, TranslationServiceInjectionToken } from './services/translation.service';
 import { TranslationKeyPrefixDirective } from './directives/translation-key-prefix.directive';
-import { FormFieldPipe } from './pipes/formField.pipe';
+import { FormFieldPipe } from './pipes/form-field.pipe';
 import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({

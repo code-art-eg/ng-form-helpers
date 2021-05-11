@@ -13,7 +13,7 @@ import {
   MessagesInjectionToken,
   TranslationServiceInjectionToken
   } from '../../src/lib';
-import { FormFieldPipe } from '../../src/lib/pipes/formField.pipe';
+import { FormFieldPipe } from '../../src/lib/pipes/form-field.pipe';
 
 @Component({
   template: `
